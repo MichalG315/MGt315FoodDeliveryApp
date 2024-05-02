@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+
+    <title>Restaurants page</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <div>
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Restaurant name</th>
+                    <th>Description</th>
+                    <th>Restaurant address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="restaurant : ${availableRestaurantDTOs}">
+                    <td th:text="${restaurant.restaurantName}"></td>
+                    <td th:text="${restaurant.description}"></td>
+                    <td th:text="${restaurant.address}"></td>
+                    <td>
+
+<!--                        <table class="table">-->
+<!--                            <thead class="table-dark">-->
+<!--                            <tr>-->
+<!--                                <th>serviceCode</th>-->
+<!--                                <th>description</th>-->
+<!--                                <th>price</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="service : ${serviceRequest.services}">-->
+<!--                                <td th:text="${service.serviceCode}"></td>-->
+<!--                                <td th:text="${service.description}"></td>-->
+<!--                                <td th:text="${service.price}"></td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
