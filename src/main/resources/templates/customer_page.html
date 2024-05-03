@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+<!--    <link th:href="@{/styles.css}" rel="stylesheet">-->
+
+    <title>Restaurants page</title>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img th:src="@{/images/logo.png}" alt="logo" width="30" height="30" class="d-inline-block align-middle">
+            Food App :)
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage}">Restaurant page</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<p class="text-center">There is a list of restaurants!</p>
+<br>
+    <div class="container">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Restaurant name</th>
+                    <th>Description</th>
+                    <th>Restaurant address</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="restaurant : ${availableRestaurantDTOs}">
+                    <td th:text="${restaurant.restaurantName}"></td>
+                    <td th:text="${restaurant.description}"></td>
+                    <td th:text="${restaurant.address}"></td>
+                    <td>
+                        <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
+                              method="GET">
+                            <button type="submit" class="btn btn-info">Check out our meals</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+
+</body>
+
+</html>

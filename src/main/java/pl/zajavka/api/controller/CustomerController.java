@@ -9,9 +9,8 @@ import pl.zajavka.business.OrderService;
 
 @Controller
 @RequiredArgsConstructor
-public class RestaurantController {
-
-    static final String RESTAURANTS = "/restaurants";
+public class CustomerController {
+    static final String RESTAURANTS = "/customerPage";
 
     private final OrderService orderService;
     private final RestaurantMapper restaurantMapper;
@@ -25,7 +24,6 @@ public class RestaurantController {
         model.addAttribute("availableRestaurantDTOs", availableRestaurants);
 
 
-        return "restaurants";
+        return "customer_page";
     }
-
 }

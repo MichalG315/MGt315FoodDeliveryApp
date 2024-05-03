@@ -1,8 +1,8 @@
 CREATE TABLE menu_item
 (
     menu_item_id        SERIAL          NOT NULL,
-    menu_item_number    VARCHAR(32)     NOT NULL,
-    item_name           VARCHAR(32)     NOT NULL,
+    menu_item_number    VARCHAR(64)     NOT NULL,
+    item_name           VARCHAR(64)     NOT NULL,
     description         TEXT            NOT NULL,
     price               NUMERIC(5,2)    NOT NULL,
     category            VARCHAR(32)     NOT NULL,

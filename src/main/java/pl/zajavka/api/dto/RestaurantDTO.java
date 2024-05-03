@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestaurantDTO {
 
-    String restaurantName;
-    String description;
-    String address;
+    private String restaurantName;
+    private String description;
+    private String address;
 
 }

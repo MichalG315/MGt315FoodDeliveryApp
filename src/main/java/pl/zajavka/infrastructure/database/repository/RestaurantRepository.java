@@ -8,6 +8,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository
 import pl.zajavka.infrastructure.database.repository.mapper.RestaurantEntityMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
@@ -18,9 +19,14 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public List<Restaurant> findAvailable() {
-        List<Restaurant> list = restaurantJpaRepository.findAll().stream()
+        return restaurantJpaRepository.findAll().stream()
                 .map(restaurantEntityMapper::mapFromEntity)
                 .toList();
-        return list;
+    }
+
+    @Override
+    public Optional<Restaurant> findByRestaurantName(String restaurantName) {
+        return restaurantJpaRepository.findByRestaurantName(restaurantName)
+                .map(restaurantEntityMapper::mapFromEntity);
     }
 }

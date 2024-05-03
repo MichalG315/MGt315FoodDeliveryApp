@@ -15,4 +15,6 @@ public interface RestaurantEntityMapper {
     @Mapping(target = "menuItems", ignore = true)
     @Mapping(target = "foodOrders", ignore = true)
     Restaurant mapFromEntity(RestaurantEntity restaurantEntity);
+
+//    RestaurantEntity mapToEntity(Restaurant restaurant);
 }
