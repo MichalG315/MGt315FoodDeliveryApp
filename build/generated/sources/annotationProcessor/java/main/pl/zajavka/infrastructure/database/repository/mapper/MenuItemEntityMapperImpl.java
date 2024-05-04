@@ -25,7 +25,7 @@ import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-04T12:40:01+0200",
+    date = "2024-05-04T18:13:49+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -47,6 +47,7 @@ public class MenuItemEntityMapperImpl implements MenuItemEntityMapper {
         menuItem.category( menuItemEntity.getCategory() );
         menuItem.imagePath( menuItemEntity.getImagePath() );
         menuItem.restaurant( restaurantEntityToRestaurant( menuItemEntity.getRestaurant() ) );
+        menuItem.menuItemFoodOrders( menuItemFoodOrderEntitySetToMenuItemFoodOrderSet( menuItemEntity.getMenuItemFoodOrders() ) );
 
         return menuItem.build();
     }
@@ -79,11 +80,204 @@ public class MenuItemEntityMapperImpl implements MenuItemEntityMapper {
 
         Restaurant.RestaurantBuilder restaurant = Restaurant.builder();
 
-        restaurant.restaurantId( restaurantEntity.getRestaurantId() );
         restaurant.restaurantName( restaurantEntity.getRestaurantName() );
         restaurant.description( restaurantEntity.getDescription() );
+        restaurant.userId( restaurantEntity.getUserId() );
 
         return restaurant.build();
+    }
+
+    protected Set<AddressExtended> addressExtendedEntitySetToAddressExtendedSet(Set<AddressExtendedEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<AddressExtended> set1 = new LinkedHashSet<AddressExtended>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( AddressExtendedEntity addressExtendedEntity : set ) {
+            set1.add( addressExtendedEntityToAddressExtended( addressExtendedEntity ) );
+        }
+
+        return set1;
+    }
+
+    protected RestaurantDeliveryAddress restaurantDeliveryAddressEntityToRestaurantDeliveryAddress(RestaurantDeliveryAddressEntity restaurantDeliveryAddressEntity) {
+        if ( restaurantDeliveryAddressEntity == null ) {
+            return null;
+        }
+
+        RestaurantDeliveryAddress.RestaurantDeliveryAddressBuilder restaurantDeliveryAddress = RestaurantDeliveryAddress.builder();
+
+        restaurantDeliveryAddress.restaurantDeliveryAddressId( restaurantDeliveryAddressEntity.getRestaurantDeliveryAddressId() );
+        restaurantDeliveryAddress.address( addressEntityToAddress( restaurantDeliveryAddressEntity.getAddress() ) );
+        restaurantDeliveryAddress.restaurant( restaurantEntityToRestaurant( restaurantDeliveryAddressEntity.getRestaurant() ) );
+
+        return restaurantDeliveryAddress.build();
+    }
+
+    protected Set<RestaurantDeliveryAddress> restaurantDeliveryAddressEntitySetToRestaurantDeliveryAddressSet(Set<RestaurantDeliveryAddressEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<RestaurantDeliveryAddress> set1 = new LinkedHashSet<RestaurantDeliveryAddress>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( RestaurantDeliveryAddressEntity restaurantDeliveryAddressEntity : set ) {
+            set1.add( restaurantDeliveryAddressEntityToRestaurantDeliveryAddress( restaurantDeliveryAddressEntity ) );
+        }
+
+        return set1;
+    }
+
+    protected Address addressEntityToAddress(AddressEntity addressEntity) {
+        if ( addressEntity == null ) {
+            return null;
+        }
+
+        Address.AddressBuilder address = Address.builder();
+
+        address.addressId( addressEntity.getAddressId() );
+        address.country( addressEntity.getCountry() );
+        address.city( addressEntity.getCity() );
+        address.postalCode( addressEntity.getPostalCode() );
+        address.streetName( addressEntity.getStreetName() );
+        address.addressesExtended( addressExtendedEntitySetToAddressExtendedSet( addressEntity.getAddressesExtended() ) );
+        address.restaurantDeliveryAddresses( restaurantDeliveryAddressEntitySetToRestaurantDeliveryAddressSet( addressEntity.getRestaurantDeliveryAddresses() ) );
+
+        return address.build();
+    }
+
+    protected Set<CustomerAddress> customerAddressEntitySetToCustomerAddressSet(Set<CustomerAddressEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<CustomerAddress> set1 = new LinkedHashSet<CustomerAddress>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( CustomerAddressEntity customerAddressEntity : set ) {
+            set1.add( customerAddressEntityToCustomerAddress( customerAddressEntity ) );
+        }
+
+        return set1;
+    }
+
+    protected AddressExtended addressExtendedEntityToAddressExtended(AddressExtendedEntity addressExtendedEntity) {
+        if ( addressExtendedEntity == null ) {
+            return null;
+        }
+
+        AddressExtended.AddressExtendedBuilder addressExtended = AddressExtended.builder();
+
+        addressExtended.addressExtendedId( addressExtendedEntity.getAddressExtendedId() );
+        addressExtended.streetNumber( addressExtendedEntity.getStreetNumber() );
+        addressExtended.address( addressEntityToAddress( addressExtendedEntity.getAddress() ) );
+        addressExtended.customerAddresses( customerAddressEntitySetToCustomerAddressSet( addressExtendedEntity.getCustomerAddresses() ) );
+
+        return addressExtended.build();
+    }
+
+    protected CustomerAddress customerAddressEntityToCustomerAddress(CustomerAddressEntity customerAddressEntity) {
+        if ( customerAddressEntity == null ) {
+            return null;
+        }
+
+        CustomerAddress.CustomerAddressBuilder customerAddress = CustomerAddress.builder();
+
+        customerAddress.customerAddressId( customerAddressEntity.getCustomerAddressId() );
+        customerAddress.addressExtended( addressExtendedEntityToAddressExtended( customerAddressEntity.getAddressExtended() ) );
+        customerAddress.customer( customerEntityToCustomer( customerAddressEntity.getCustomer() ) );
+
+        return customerAddress.build();
+    }
+
+    protected Set<FoodOrder> foodOrderEntitySetToFoodOrderSet(Set<FoodOrderEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<FoodOrder> set1 = new LinkedHashSet<FoodOrder>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( FoodOrderEntity foodOrderEntity : set ) {
+            set1.add( foodOrderEntityToFoodOrder( foodOrderEntity ) );
+        }
+
+        return set1;
+    }
+
+    protected Customer customerEntityToCustomer(CustomerEntity customerEntity) {
+        if ( customerEntity == null ) {
+            return null;
+        }
+
+        Customer.CustomerBuilder customer = Customer.builder();
+
+        customer.name( customerEntity.getName() );
+        customer.surname( customerEntity.getSurname() );
+        customer.email( customerEntity.getEmail() );
+        customer.phone( customerEntity.getPhone() );
+        customer.userId( customerEntity.getUserId() );
+        customer.customerAddresses( customerAddressEntitySetToCustomerAddressSet( customerEntity.getCustomerAddresses() ) );
+        customer.foodOrders( foodOrderEntitySetToFoodOrderSet( customerEntity.getFoodOrders() ) );
+
+        return customer.build();
+    }
+
+    protected Set<MenuItemFoodOrder> menuItemFoodOrderEntitySetToMenuItemFoodOrderSet(Set<MenuItemFoodOrderEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<MenuItemFoodOrder> set1 = new LinkedHashSet<MenuItemFoodOrder>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( MenuItemFoodOrderEntity menuItemFoodOrderEntity : set ) {
+            set1.add( menuItemFoodOrderEntityToMenuItemFoodOrder( menuItemFoodOrderEntity ) );
+        }
+
+        return set1;
+    }
+
+    protected FoodOrder foodOrderEntityToFoodOrder(FoodOrderEntity foodOrderEntity) {
+        if ( foodOrderEntity == null ) {
+            return null;
+        }
+
+        FoodOrder.FoodOrderBuilder foodOrder = FoodOrder.builder();
+
+        foodOrder.foodOrderId( foodOrderEntity.getFoodOrderId() );
+        foodOrder.foodOrderNumber( foodOrderEntity.getFoodOrderNumber() );
+        foodOrder.receivedDateTime( foodOrderEntity.getReceivedDateTime() );
+        foodOrder.completedDateTime( foodOrderEntity.getCompletedDateTime() );
+        foodOrder.customerComment( foodOrderEntity.getCustomerComment() );
+        foodOrder.totalAmount( foodOrderEntity.getTotalAmount() );
+        foodOrder.customer( customerEntityToCustomer( foodOrderEntity.getCustomer() ) );
+        foodOrder.restaurant( restaurantEntityToRestaurant( foodOrderEntity.getRestaurant() ) );
+        foodOrder.menuItemFoodOrders( menuItemFoodOrderEntitySetToMenuItemFoodOrderSet( foodOrderEntity.getMenuItemFoodOrders() ) );
+
+        return foodOrder.build();
+    }
+
+    protected MenuItemFoodOrder menuItemFoodOrderEntityToMenuItemFoodOrder(MenuItemFoodOrderEntity menuItemFoodOrderEntity) {
+        if ( menuItemFoodOrderEntity == null ) {
+            return null;
+        }
+
+        MenuItemFoodOrder.MenuItemFoodOrderBuilder menuItemFoodOrder = MenuItemFoodOrder.builder();
+
+        menuItemFoodOrder.menuItemFoodOrderId( menuItemFoodOrderEntity.getMenuItemFoodOrderId() );
+        menuItemFoodOrder.quantity( menuItemFoodOrderEntity.getQuantity() );
+        menuItemFoodOrder.menuItem( mapFromEntity( menuItemFoodOrderEntity.getMenuItem() ) );
+        menuItemFoodOrder.foodOrder( foodOrderEntityToFoodOrder( menuItemFoodOrderEntity.getFoodOrder() ) );
+
+        return menuItemFoodOrder.build();
+    }
+
+    protected RestaurantEntity restaurantToRestaurantEntity(Restaurant restaurant) {
+        if ( restaurant == null ) {
+            return null;
+        }
+
+        RestaurantEntity.RestaurantEntityBuilder restaurantEntity = RestaurantEntity.builder();
+
+        restaurantEntity.restaurantName( restaurant.getRestaurantName() );
+        restaurantEntity.description( restaurant.getDescription() );
+        restaurantEntity.userId( restaurant.getUserId() );
+
+        return restaurantEntity.build();
     }
 
     protected Set<AddressExtendedEntity> addressExtendedSetToAddressExtendedEntitySet(Set<AddressExtended> set) {
@@ -157,19 +351,64 @@ public class MenuItemEntityMapperImpl implements MenuItemEntityMapper {
         return set1;
     }
 
-    protected MenuItemFoodOrderEntity menuItemFoodOrderToMenuItemFoodOrderEntity(MenuItemFoodOrder menuItemFoodOrder) {
-        if ( menuItemFoodOrder == null ) {
+    protected AddressExtendedEntity addressExtendedToAddressExtendedEntity(AddressExtended addressExtended) {
+        if ( addressExtended == null ) {
             return null;
         }
 
-        MenuItemFoodOrderEntity.MenuItemFoodOrderEntityBuilder menuItemFoodOrderEntity = MenuItemFoodOrderEntity.builder();
+        AddressExtendedEntity.AddressExtendedEntityBuilder addressExtendedEntity = AddressExtendedEntity.builder();
 
-        menuItemFoodOrderEntity.menuItemFoodOrderId( menuItemFoodOrder.getMenuItemFoodOrderId() );
-        menuItemFoodOrderEntity.quantity( menuItemFoodOrder.getQuantity() );
-        menuItemFoodOrderEntity.menuItem( mapToEntity( menuItemFoodOrder.getMenuItem() ) );
-        menuItemFoodOrderEntity.foodOrder( foodOrderToFoodOrderEntity( menuItemFoodOrder.getFoodOrder() ) );
+        addressExtendedEntity.addressExtendedId( addressExtended.getAddressExtendedId() );
+        addressExtendedEntity.streetNumber( addressExtended.getStreetNumber() );
+        addressExtendedEntity.address( addressToAddressEntity( addressExtended.getAddress() ) );
+        addressExtendedEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( addressExtended.getCustomerAddresses() ) );
 
-        return menuItemFoodOrderEntity.build();
+        return addressExtendedEntity.build();
+    }
+
+    protected CustomerAddressEntity customerAddressToCustomerAddressEntity(CustomerAddress customerAddress) {
+        if ( customerAddress == null ) {
+            return null;
+        }
+
+        CustomerAddressEntity.CustomerAddressEntityBuilder customerAddressEntity = CustomerAddressEntity.builder();
+
+        customerAddressEntity.customerAddressId( customerAddress.getCustomerAddressId() );
+        customerAddressEntity.addressExtended( addressExtendedToAddressExtendedEntity( customerAddress.getAddressExtended() ) );
+        customerAddressEntity.customer( customerToCustomerEntity( customerAddress.getCustomer() ) );
+
+        return customerAddressEntity.build();
+    }
+
+    protected Set<FoodOrderEntity> foodOrderSetToFoodOrderEntitySet(Set<FoodOrder> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<FoodOrderEntity> set1 = new LinkedHashSet<FoodOrderEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( FoodOrder foodOrder : set ) {
+            set1.add( foodOrderToFoodOrderEntity( foodOrder ) );
+        }
+
+        return set1;
+    }
+
+    protected CustomerEntity customerToCustomerEntity(Customer customer) {
+        if ( customer == null ) {
+            return null;
+        }
+
+        CustomerEntity.CustomerEntityBuilder customerEntity = CustomerEntity.builder();
+
+        customerEntity.name( customer.getName() );
+        customerEntity.surname( customer.getSurname() );
+        customerEntity.email( customer.getEmail() );
+        customerEntity.phone( customer.getPhone() );
+        customerEntity.userId( customer.getUserId() );
+        customerEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( customer.getCustomerAddresses() ) );
+        customerEntity.foodOrders( foodOrderSetToFoodOrderEntitySet( customer.getFoodOrders() ) );
+
+        return customerEntity.build();
     }
 
     protected Set<MenuItemFoodOrderEntity> menuItemFoodOrderSetToMenuItemFoodOrderEntitySet(Set<MenuItemFoodOrder> set) {
@@ -205,95 +444,18 @@ public class MenuItemEntityMapperImpl implements MenuItemEntityMapper {
         return foodOrderEntity.build();
     }
 
-    protected Set<FoodOrderEntity> foodOrderSetToFoodOrderEntitySet(Set<FoodOrder> set) {
-        if ( set == null ) {
+    protected MenuItemFoodOrderEntity menuItemFoodOrderToMenuItemFoodOrderEntity(MenuItemFoodOrder menuItemFoodOrder) {
+        if ( menuItemFoodOrder == null ) {
             return null;
         }
 
-        Set<FoodOrderEntity> set1 = new LinkedHashSet<FoodOrderEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( FoodOrder foodOrder : set ) {
-            set1.add( foodOrderToFoodOrderEntity( foodOrder ) );
-        }
+        MenuItemFoodOrderEntity.MenuItemFoodOrderEntityBuilder menuItemFoodOrderEntity = MenuItemFoodOrderEntity.builder();
 
-        return set1;
-    }
+        menuItemFoodOrderEntity.menuItemFoodOrderId( menuItemFoodOrder.getMenuItemFoodOrderId() );
+        menuItemFoodOrderEntity.quantity( menuItemFoodOrder.getQuantity() );
+        menuItemFoodOrderEntity.menuItem( mapToEntity( menuItemFoodOrder.getMenuItem() ) );
+        menuItemFoodOrderEntity.foodOrder( foodOrderToFoodOrderEntity( menuItemFoodOrder.getFoodOrder() ) );
 
-    protected CustomerEntity customerToCustomerEntity(Customer customer) {
-        if ( customer == null ) {
-            return null;
-        }
-
-        CustomerEntity.CustomerEntityBuilder customerEntity = CustomerEntity.builder();
-
-        customerEntity.customerId( customer.getCustomerId() );
-        customerEntity.name( customer.getName() );
-        customerEntity.surname( customer.getSurname() );
-        customerEntity.email( customer.getEmail() );
-        customerEntity.phone( customer.getPhone() );
-        customerEntity.userId( customer.getUserId() );
-        customerEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( customer.getCustomerAddresses() ) );
-        customerEntity.foodOrders( foodOrderSetToFoodOrderEntitySet( customer.getFoodOrders() ) );
-
-        return customerEntity.build();
-    }
-
-    protected CustomerAddressEntity customerAddressToCustomerAddressEntity(CustomerAddress customerAddress) {
-        if ( customerAddress == null ) {
-            return null;
-        }
-
-        CustomerAddressEntity.CustomerAddressEntityBuilder customerAddressEntity = CustomerAddressEntity.builder();
-
-        customerAddressEntity.customerAddressId( customerAddress.getCustomerAddressId() );
-        customerAddressEntity.addressExtended( addressExtendedToAddressExtendedEntity( customerAddress.getAddressExtended() ) );
-        customerAddressEntity.customer( customerToCustomerEntity( customerAddress.getCustomer() ) );
-
-        return customerAddressEntity.build();
-    }
-
-    protected AddressExtendedEntity addressExtendedToAddressExtendedEntity(AddressExtended addressExtended) {
-        if ( addressExtended == null ) {
-            return null;
-        }
-
-        AddressExtendedEntity.AddressExtendedEntityBuilder addressExtendedEntity = AddressExtendedEntity.builder();
-
-        addressExtendedEntity.addressExtendedId( addressExtended.getAddressExtendedId() );
-        addressExtendedEntity.streetNumber( addressExtended.getStreetNumber() );
-        addressExtendedEntity.address( addressToAddressEntity( addressExtended.getAddress() ) );
-        addressExtendedEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( addressExtended.getCustomerAddresses() ) );
-
-        return addressExtendedEntity.build();
-    }
-
-    protected Set<MenuItemEntity> menuItemSetToMenuItemEntitySet(Set<MenuItem> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<MenuItemEntity> set1 = new LinkedHashSet<MenuItemEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( MenuItem menuItem : set ) {
-            set1.add( mapToEntity( menuItem ) );
-        }
-
-        return set1;
-    }
-
-    protected RestaurantEntity restaurantToRestaurantEntity(Restaurant restaurant) {
-        if ( restaurant == null ) {
-            return null;
-        }
-
-        RestaurantEntity.RestaurantEntityBuilder restaurantEntity = RestaurantEntity.builder();
-
-        restaurantEntity.restaurantId( restaurant.getRestaurantId() );
-        restaurantEntity.restaurantName( restaurant.getRestaurantName() );
-        restaurantEntity.description( restaurant.getDescription() );
-        restaurantEntity.addressExtended( addressExtendedToAddressExtendedEntity( restaurant.getAddressExtended() ) );
-        restaurantEntity.restaurantDeliveryAddresses( restaurantDeliveryAddressSetToRestaurantDeliveryAddressEntitySet( restaurant.getRestaurantDeliveryAddresses() ) );
-        restaurantEntity.menuItems( menuItemSetToMenuItemEntitySet( restaurant.getMenuItems() ) );
-        restaurantEntity.foodOrders( foodOrderSetToFoodOrderEntitySet( restaurant.getFoodOrders() ) );
-
-        return restaurantEntity.build();
+        return menuItemFoodOrderEntity.build();
     }
 }

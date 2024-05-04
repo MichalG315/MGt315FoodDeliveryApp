@@ -2,32 +2,44 @@ package pl.zajavka.api.dto.mapper;
 
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import pl.zajavka.api.dto.UserDTO;
+import pl.zajavka.api.dto.UserCustomerDTO;
+import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.domain.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-04T13:06:50+0200",
+    date = "2024-05-04T17:04:47+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public User map(UserDTO userDTO) {
-        if ( userDTO == null ) {
+    public User map(UserCustomerDTO userCustomerDTO) {
+        if ( userCustomerDTO == null ) {
             return null;
         }
 
         User.UserBuilder user = User.builder();
 
-        user.userName( userDTO.getUserName() );
-        user.email( userDTO.getEmail() );
-        user.password( userDTO.getPassword() );
-        user.role( userDTO.getRole() );
-        user.name( userDTO.getName() );
-        user.surname( userDTO.getSurname() );
-        user.phone( userDTO.getPhone() );
+        user.userName( userCustomerDTO.getUserName() );
+        user.email( userCustomerDTO.getEmail() );
+        user.password( userCustomerDTO.getPassword() );
+
+        return user.build();
+    }
+
+    @Override
+    public User map(UserRestaurantDTO userRestaurantDTO) {
+        if ( userRestaurantDTO == null ) {
+            return null;
+        }
+
+        User.UserBuilder user = User.builder();
+
+        user.userName( userRestaurantDTO.getUserName() );
+        user.email( userRestaurantDTO.getEmail() );
+        user.password( userRestaurantDTO.getPassword() );
 
         return user.build();
     }

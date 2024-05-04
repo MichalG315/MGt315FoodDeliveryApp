@@ -4,8 +4,8 @@ import pl.zajavka.domain.User;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 
 public interface UserDAO {
-    UserEntity saveUser(User user);
+    void saveUser(User user);
 
-    UserEntity findByUserName(String username);
+    User findByUserName(String username);
 
 }

@@ -13,18 +13,6 @@ public class CustomerService {
 
     private final CustomerDAO customerDAO;
 
-
-
-    public Customer buildCustomer(User user, UserEntity saved) {
-        return Customer.builder()
-                .name(user.getName())
-                .surname(user.getSurname())
-                .email(user.getEmail())
-                .phone(user.getPhone())
-                .userId(saved.getId())
-                .build();
-    }
-
     public void saveCustomer(Customer customer) {
         customerDAO.saveCustomer(customer);
     }

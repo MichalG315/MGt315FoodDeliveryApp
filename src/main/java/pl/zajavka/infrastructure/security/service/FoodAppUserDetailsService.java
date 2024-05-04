@@ -6,9 +6,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import pl.zajavka.business.dao.UserDAO;
 import pl.zajavka.infrastructure.security.entity.RoleEntity;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
-import pl.zajavka.infrastructure.security.repository.UserRepository;
+import pl.zajavka.infrastructure.security.mapper.UserEntityMapper;
 
 import java.util.List;
 import java.util.Set;
@@ -17,12 +18,13 @@ import java.util.Set;
 @Service
 public class FoodAppUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserDAO userDAO;
+    private final UserEntityMapper userEntityMapper;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) {
-        UserEntity user = userRepository.findByUserName(username);
+        UserEntity user = userEntityMapper.mapToEntity(userDAO.findByUserName(username));
         List<SimpleGrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }

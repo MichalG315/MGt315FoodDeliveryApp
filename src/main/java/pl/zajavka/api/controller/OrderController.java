@@ -31,15 +31,15 @@ public class OrderController {
     @GetMapping(RESTAURANTS + RESTAURANT_NAME)
     public String showRestaurantPage(@PathVariable String restaurantName, Model model) {
 
-        RestaurantDTO restaurantDTO = restaurantMapper.map(restaurantService.findByRestaurantName(restaurantName));
-        List<MenuItemDTO> menuItemsByRestaurantName =
-                menuItemService.findAvailableMenuItemsByRestaurantName(restaurantName).stream()
-                        .map(menuItemMapper::map)
-                        .toList();
-
-
-        model.addAttribute("restaurantDTO", restaurantDTO);
-        model.addAttribute("menuItemDTOs", menuItemsByRestaurantName);
+//        RestaurantDTO restaurantDTO = restaurantMapper.map(restaurantService.findByRestaurantName(restaurantName));
+//        List<MenuItemDTO> menuItemsByRestaurantName =
+//                menuItemService.findAvailableMenuItemsByRestaurantName(restaurantName).stream()
+//                        .map(menuItemMapper::map)
+//                        .toList();
+//
+//
+//        model.addAttribute("restaurantDTO", restaurantDTO);
+//        model.addAttribute("menuItemDTOs", menuItemsByRestaurantName);
 
         return "order";
     }

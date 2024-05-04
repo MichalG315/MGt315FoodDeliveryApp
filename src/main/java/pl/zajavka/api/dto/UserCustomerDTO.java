@@ -9,22 +9,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-
+public class UserCustomerDTO {
     private String userName;
     private String email;
     private String password;
-    private Integer role;
     private String name;
     private String surname;
     private String phone;
 
-    public static UserDTO buildDefault() {
-        return UserDTO.builder()
+    public static UserCustomerDTO buildDefault() {
+        return UserCustomerDTO.builder()
                 .userName("michal")
                 .email("michal@gmail.com")
                 .password("test")
-                .role(1)
                 .name("michal")
                 .surname("michal")
                 .phone("+48 235 987 692")

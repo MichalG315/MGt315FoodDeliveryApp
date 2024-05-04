@@ -4,18 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.zajavka.domain.Restaurant;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestaurantDTO {
-
+public class UserRestaurantDTO {
     private String userName;
     private String email;
     private String password;
-    private Integer role;
     private String restaurantName;
     private String description;
     private String addressCountry;
@@ -24,8 +21,8 @@ public class RestaurantDTO {
     private String addressStreetName;
     private String addressStreetNumber;
 
-    public static RestaurantDTO buildDefault() {
-        return RestaurantDTO.builder()
+    public static UserRestaurantDTO buildDefault() {
+        return UserRestaurantDTO.builder()
                 .userName("restaurant")
                 .email("restaurant@gmail.com")
                 .password("test")
@@ -38,4 +35,6 @@ public class RestaurantDTO {
                 .addressStreetNumber("10C/89")
                 .build();
     }
+
+
 }

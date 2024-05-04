@@ -58,6 +58,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/login", "/register/**", "/error", "/images/logo.png").permitAll()
                         .requestMatchers("/customerPage/**", "/order/**", "/images/**")
                         .hasAnyAuthority("CUSTOMER")
+                        .requestMatchers("/restaurantPage/**", "/images/**")
+                        .hasAnyAuthority("RESTAURANT")
+
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(logout -> logout

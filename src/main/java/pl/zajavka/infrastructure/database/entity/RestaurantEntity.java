@@ -27,6 +27,9 @@ public class RestaurantEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_extended_id")
     private AddressExtendedEntity addressExtended;

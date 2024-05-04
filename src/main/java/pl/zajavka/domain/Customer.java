@@ -8,10 +8,8 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode(of = "email")
-@ToString(of = {"customerId", "name", "surname", "email", "phone"})
+@ToString(of = {"name", "surname", "email", "phone"})
 public class Customer {
-
-    Integer customerId;
     String name;
     String surname;
     String email;
@@ -19,5 +17,4 @@ public class Customer {
     Integer userId;
     Set<CustomerAddress> customerAddresses;
     Set<FoodOrder> foodOrders;
-
 }

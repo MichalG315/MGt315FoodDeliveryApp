@@ -16,9 +16,6 @@ public class User {
     String password;
     Boolean active;
     Integer role;
-    String name;
-    String surname;
-    String phone;
     Integer userId;
     Set<Role> roles;
 }

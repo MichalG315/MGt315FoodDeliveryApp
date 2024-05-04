@@ -12,7 +12,7 @@ public class OrderService {
 
     private final RestaurantService restaurantService;
 
-    public List<Restaurant> availableRestaurants() {
-        return restaurantService.findAvailable();
-    }
+//    public List<Restaurant> availableRestaurants() {
+//        return restaurantService.findAvailable();
+//    }
 }

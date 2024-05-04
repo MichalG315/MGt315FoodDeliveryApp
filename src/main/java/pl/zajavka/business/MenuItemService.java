@@ -13,12 +13,12 @@ public class MenuItemService {
 
     private final MenuItemDAO menuItemDAO;
 
-    public List<MenuItem> findAvailableMenuItemsByRestaurantName(String restaurantName) {
-        return menuItemDAO.findAvailableMenuItemsByRestaurantName(restaurantName);
-    }
-
-    public String assignNumber(String restaurantName) {
-        List<MenuItem> availableMenuItems = findAvailableMenuItemsByRestaurantName(restaurantName);
-        return restaurantName + ": " + (availableMenuItems.size() + 1);
-    }
+//    public List<MenuItem> findAvailableMenuItemsByRestaurantName(String restaurantName) {
+//        return menuItemDAO.findAvailableMenuItemsByRestaurantName(restaurantName);
+//    }
+//
+//    public String assignNumber(String restaurantName) {
+//        List<MenuItem> availableMenuItems = findAvailableMenuItemsByRestaurantName(restaurantName);
+//        return restaurantName + ": " + (availableMenuItems.size() + 1);
+//    }
 }

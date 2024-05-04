@@ -11,7 +11,7 @@ import pl.zajavka.infrastructure.security.entity.UserEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-04T13:06:50+0200",
+    date = "2024-05-04T16:54:48+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -32,6 +32,24 @@ public class UserEntityMapperImpl implements UserEntityMapper {
         userEntity.roles( roleSetToRoleEntitySet( user.getRoles() ) );
 
         return userEntity.build();
+    }
+
+    @Override
+    public User mapFromEntity(UserEntity saved) {
+        if ( saved == null ) {
+            return null;
+        }
+
+        User.UserBuilder user = User.builder();
+
+        user.userId( saved.getId() );
+        user.userName( saved.getUserName() );
+        user.email( saved.getEmail() );
+        user.password( saved.getPassword() );
+        user.active( saved.getActive() );
+        user.roles( roleEntitySetToRoleSet( saved.getRoles() ) );
+
+        return user.build();
     }
 
     protected RoleEntity roleToRoleEntity(Role role) {
@@ -55,6 +73,32 @@ public class UserEntityMapperImpl implements UserEntityMapper {
         Set<RoleEntity> set1 = new LinkedHashSet<RoleEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
         for ( Role role : set ) {
             set1.add( roleToRoleEntity( role ) );
+        }
+
+        return set1;
+    }
+
+    protected Role roleEntityToRole(RoleEntity roleEntity) {
+        if ( roleEntity == null ) {
+            return null;
+        }
+
+        Role.RoleBuilder role = Role.builder();
+
+        role.id( roleEntity.getId() );
+        role.role( roleEntity.getRole() );
+
+        return role.build();
+    }
+
+    protected Set<Role> roleEntitySetToRoleSet(Set<RoleEntity> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<Role> set1 = new LinkedHashSet<Role>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( RoleEntity roleEntity : set ) {
+            set1.add( roleEntityToRole( roleEntity ) );
         }
 
         return set1;
