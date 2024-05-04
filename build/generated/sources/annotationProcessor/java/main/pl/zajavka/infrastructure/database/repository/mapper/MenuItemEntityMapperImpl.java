@@ -25,7 +25,7 @@ import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-03T11:42:17+0200",
+    date = "2024-05-04T12:40:01+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -230,6 +230,7 @@ public class MenuItemEntityMapperImpl implements MenuItemEntityMapper {
         customerEntity.surname( customer.getSurname() );
         customerEntity.email( customer.getEmail() );
         customerEntity.phone( customer.getPhone() );
+        customerEntity.userId( customer.getUserId() );
         customerEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( customer.getCustomerAddresses() ) );
         customerEntity.foodOrders( foodOrderSetToFoodOrderEntitySet( customer.getFoodOrders() ) );
 

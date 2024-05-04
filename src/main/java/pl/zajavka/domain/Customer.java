@@ -16,6 +16,7 @@ public class Customer {
     String surname;
     String email;
     String phone;
+    Integer userId;
     Set<CustomerAddress> customerAddresses;
     Set<FoodOrder> foodOrders;
 

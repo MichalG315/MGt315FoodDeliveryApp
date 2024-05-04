@@ -49,7 +49,7 @@
     <br>
     <div class="container">
         <h1>MGt315 Food Delivery Application</h1>
-        <p>Are you a customer or restaurant?</p>
+        <p>If you already have an account, please select whether you want to log in as a customer or as a restaurant.</p>
         <div class="row mt-3">
             <div class="col-md-6">
                 <a th:href="@{/customerPage}" class="btn btn-info" role="button">Customer</a>
@@ -57,6 +57,11 @@
             <div class="col-md-6">
                 <a th:href="@{/restaurantPage}" class="btn btn-info" role="button">Restaurant</a>
             </div>
+        </div>
+        <br>
+        <p>If you do not have account, please click button below to register</p>
+        <div class="col-md-1">
+            <a th:href="@{/register/customer}" class="btn btn-info" role="button">Customer registration</a>
         </div>
     </div>
 

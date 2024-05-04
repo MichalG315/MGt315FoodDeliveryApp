@@ -9,6 +9,7 @@ import pl.zajavka.business.MenuItemService;
 import pl.zajavka.business.RestaurantService;
 import pl.zajavka.domain.MenuItem;
 import pl.zajavka.infrastructure.database.repository.MenuItemRepository;
+import pl.zajavka.infrastructure.security.repository.UserRepository;
 
 import java.math.BigDecimal;
 
@@ -18,6 +19,8 @@ import java.math.BigDecimal;
 public class BootstrapApplicationComponent implements ApplicationListener<ContextRefreshedEvent> {
 
     MenuItemRepository menuItemRepository;
+    UserRepository userRepository;
+
     MenuItemService menuItemService;
     RestaurantService restaurantService;
 

@@ -33,6 +33,9 @@ public class CustomerEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<CustomerAddressEntity> customerAddresses;
 
