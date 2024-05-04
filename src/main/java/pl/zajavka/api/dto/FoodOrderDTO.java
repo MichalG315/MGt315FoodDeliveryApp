@@ -1,6 +1,9 @@
 package pl.zajavka.api.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.zajavka.domain.Customer;
 import pl.zajavka.domain.MenuItemFoodOrder;
 import pl.zajavka.domain.Restaurant;

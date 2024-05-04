@@ -16,4 +16,5 @@ public class Restaurant {
     String addressPostalCode;
     String addressStreetName;
     String addressStreetNumber;
+    String completeAddress;
 }

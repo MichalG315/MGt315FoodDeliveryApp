@@ -9,6 +9,7 @@ CREATE TABLE menu_item
     image_path          VARCHAR(64),
     restaurant_id       INT             NOT NULL,
     PRIMARY KEY(menu_item_id),
+    UNIQUE(menu_item_number),
     CONSTRAINT fk_menu_item_restaurant
         FOREIGN KEY (restaurant_id)
             REFERENCES restaurant (restaurant_id)

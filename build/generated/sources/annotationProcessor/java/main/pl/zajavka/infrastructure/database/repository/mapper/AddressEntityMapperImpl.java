@@ -25,7 +25,7 @@ import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-04T18:13:49+0200",
+    date = "2024-05-04T23:34:43+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -123,7 +123,6 @@ public class AddressEntityMapperImpl implements AddressEntityMapper {
         menuItemEntity.price( menuItem.getPrice() );
         menuItemEntity.category( menuItem.getCategory() );
         menuItemEntity.imagePath( menuItem.getImagePath() );
-        menuItemEntity.restaurant( restaurantToRestaurantEntity( menuItem.getRestaurant() ) );
         menuItemEntity.menuItemFoodOrders( menuItemFoodOrderSetToMenuItemFoodOrderEntitySet( menuItem.getMenuItemFoodOrders() ) );
 
         return menuItemEntity.build();
@@ -318,7 +317,6 @@ public class AddressEntityMapperImpl implements AddressEntityMapper {
         menuItem.price( menuItemEntity.getPrice() );
         menuItem.category( menuItemEntity.getCategory() );
         menuItem.imagePath( menuItemEntity.getImagePath() );
-        menuItem.restaurant( restaurantEntityToRestaurant( menuItemEntity.getRestaurant() ) );
         menuItem.menuItemFoodOrders( menuItemFoodOrderEntitySetToMenuItemFoodOrderSet( menuItemEntity.getMenuItemFoodOrders() ) );
 
         return menuItem.build();

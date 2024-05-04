@@ -2,7 +2,6 @@ package pl.zajavka.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.zajavka.api.dto.mapper.AddressMapper;
 import pl.zajavka.business.dao.AddressDAO;
 import pl.zajavka.domain.Address;
 import pl.zajavka.infrastructure.database.entity.AddressEntity;

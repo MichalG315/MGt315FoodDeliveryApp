@@ -9,12 +9,8 @@ import pl.zajavka.infrastructure.database.entity.MenuItemEntity;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MenuItemEntityMapper {
 
-//    @Mapping(target = "menuItemFoodOrders", ignore = true)
-//    @Mapping(target = "restaurant.addressExtended", ignore = true)
-//    @Mapping(target = "restaurant.restaurantDeliveryAddresses", ignore = true)
-//    @Mapping(target = "restaurant.menuItems", ignore = true)
-//    @Mapping(target = "restaurant.foodOrders", ignore = true)
-
+    @Mapping(target = "menuItemFoodOrders", ignore = true)
+    @Mapping(source = "restaurant.restaurantName", target = "restaurantName")
     MenuItem mapFromEntity(MenuItemEntity menuItemEntity);
 
     MenuItemEntity mapToEntity(MenuItem menuItem);

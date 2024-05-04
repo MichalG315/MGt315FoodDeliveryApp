@@ -7,7 +7,6 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
-<!--    <link th:href="@{/styles.css}" rel="stylesheet">-->
 
     <title>Restaurants page</title>
 
@@ -54,7 +53,7 @@
                 <tr th:each="restaurant : ${availableRestaurantDTOs}">
                     <td th:text="${restaurant.restaurantName}"></td>
                     <td th:text="${restaurant.description}"></td>
-                    <td th:text="${restaurant.address}"></td>
+                    <td th:text="${restaurant.completeAddress}"></td>
                     <td>
                         <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
                               method="GET">

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.UserCustomerDTO;
 import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.api.dto.mapper.CustomerMapper;
@@ -67,7 +66,7 @@ public class RegisterController {
             @Valid @ModelAttribute("userRestaurantDTO") UserRestaurantDTO userRestaurantDTO
     ) {
         User user = userMapper.map(userRestaurantDTO).withRole(2);
-        Restaurant restaurant = restaurantMapper.map(userRestaurantDTO);
+        Restaurant restaurant = restaurantMapper.mapFromDTO(userRestaurantDTO);
         userService.saveUser(user, restaurant);
         return "redirect:/";
     }

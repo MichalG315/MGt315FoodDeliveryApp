@@ -17,11 +17,11 @@ public class CustomerController {
 
     @GetMapping(value = RESTAURANTS)
     public String getOrder(Model model) {
-//        var availableRestaurants = orderService.availableRestaurants().stream()
-//                .map(restaurantMapper::map)
-//                .toList();
-//
-//        model.addAttribute("availableRestaurantDTOs", availableRestaurants);
+        var availableRestaurants = orderService.availableRestaurants().stream()
+                .map(restaurantMapper::mapToDTO)
+                .toList();
+
+        model.addAttribute("availableRestaurantDTOs", availableRestaurants);
 
 
         return "customer_page";

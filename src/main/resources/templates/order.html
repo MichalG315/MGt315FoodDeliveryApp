@@ -7,7 +7,6 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
-<!--    <link th:href="@{/styles.css}" rel="stylesheet">-->
     <title>MGt315 Food Delivery Application</title>
 
 </head>
@@ -34,6 +33,16 @@
                     <a class="nav-link" th:href="@{/restaurantPage}">Restaurant page</a>
                 </li>
             </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" >
+                        <span th:text ="${#authentication.getName()}"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -49,26 +58,54 @@
         <thead class="table-dark">
         <tr>
             <th>Meals/ Beverages</th>
+            <th>Number</th>
             <th>Description</th>
             <th>Category</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="menuItem : ${menuItemDTOs}">
             <td th:text="${menuItem.itemName}"></td>
+            <td th:text="${menuItem.menuItemNumber}"></td>
             <td th:text="${menuItem.description}"></td>
             <td th:text="${menuItem.price}"></td>
             <td th:text="${menuItem.category}"></td>
             <td>
-<!--                <div class="col-md-3">-->
-<!--                    <input type="text" id="quantity" th:field="${quantity}"/>-->
-<!--                </div>-->
+                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber})}" method="POST">
+                    <button type="submit" class="btn btn-info">Add to order</button>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
+<br>
+<br>
+
+    <b><p>Your order: </p></b>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>Meal/ Beverage</th>
+            <th>Menu item number</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderDTO : ${orderDTOs}">
+            <td th:text="${orderDTO.itemName}"></td>
+            <td th:text="${orderDTO.menuItemNumber}"></td>
+            <td th:text="${orderDTO.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/order/{restaurantName}/submit/{userName}(restaurantName=${restaurantDTO.restaurantName}, userName=${#authentication.getName()})}" method="POST">
+        <button type="submit" class="btn btn-info">Submit your order</button>
+    </form>
+
+
 </div>
 
 

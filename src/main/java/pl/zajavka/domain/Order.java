@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 @With
@@ -11,18 +13,12 @@ import java.util.Map;
 @Builder
 public class Order {
 
-    String existingCustomerEmail;
-    String customerName;
-    String customerSurname;
-    String customerPhone;
-    String customerEmail;
-    String customerAddressCountry;
-    String customerAddressCity;
-    String customerAddressPostalCode;
-    String customerAddressStreetName;
-    String customerAddressStreetNumber;
-    String customerComment;
-    Map<String, Integer> foodItemNumberAndQuantity;
+    String userName;
+    String restaurantName;
+    String orderNumber;
+    Map<MenuItem, Integer> menuItemMap;
+    OffsetDateTime receivedDateTime;
+    BigDecimal totalAmount;
 
 
 }

@@ -19,6 +19,6 @@ public class MenuItem {
     BigDecimal price;
     String category;
     String imagePath;
-    Restaurant restaurant;
+    String restaurantName;
     Set<MenuItemFoodOrder> menuItemFoodOrders;
 }
