@@ -19,6 +19,8 @@ public class OrderDTO {
     private String restaurantName;
     private String orderNumber;
     private List<MenuItemDTO> menuItemList;
-    private OffsetDateTime receivedDateTime;
+    private String receivedDateTime;
+    private String completedDateTime;
     private BigDecimal totalAmount;
+    private String status;
 }

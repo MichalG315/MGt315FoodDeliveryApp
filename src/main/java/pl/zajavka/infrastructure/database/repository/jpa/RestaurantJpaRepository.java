@@ -18,4 +18,6 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
             }
     )
     Optional<RestaurantEntity> findByRestaurantName(String restaurantName);
+
+    RestaurantEntity findByUserId(Integer userId);
 }

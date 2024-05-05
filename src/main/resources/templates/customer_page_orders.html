@@ -7,15 +7,14 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
-    <title>MGt315 Food Delivery Application</title>
+
+    <title>Restaurants page</title>
 
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand">
-<!--            /images/allPermitImages/logo.png-->
             <img th:src="@{/images/allPermitImages/logo.png}" alt="logo" width="30" height="30" class="d-inline-block align-middle">
             Food App :)
         </a>
@@ -50,75 +49,37 @@
 
 
 <br>
-<p class="text-center">
-    Welcome in
-    <b><span th:if="${restaurantDTO}" th:text="${restaurantDTO.restaurantName}">RestaurantName</span></b>
-    restaurant!
-</p>
+<p class="text-center">There is a list of your orders!</p>
 <br>
 <div class="container">
     <table class="table">
         <thead class="table-dark">
         <tr>
-            <th>Meals/ Beverages</th>
-            <th>Number</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Image</th>
+            <th>Order number</th>
+            <th>Date and time of the order</th>
+            <th>Date and time of delivery</th>
+            <th>Total amount</th>
+            <th>Status</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="menuItem : ${menuItemDTOs}">
-            <td th:text="${menuItem.itemName}"></td>
-            <td th:text="${menuItem.menuItemNumber}"></td>
-            <td th:text="${menuItem.description}"></td>
-            <td th:text="${menuItem.category}"></td>
-            <td th:text="${menuItem.price}"></td>
+        <tr th:each="order : ${availableCustomerOrderDTOs}">
+            <td th:text="${order.orderNumber}"></td>
+            <td th:text="${order.receivedDateTime}"></td>
+            <td th:text="${order.completedDateTime}"></td>
+            <td th:text="${order.totalAmount}"></td>
+            <td th:text="${order.status}"></td>
             <td>
-                <img th:src="@{${menuItem.imagePath}}" style="width: 100px; height: 100px;">
-            </td>
-            <td>
-                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber})}" method="POST">
-                    <button type="submit" class="btn btn-info">Add to order</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-<br>
-<br>
-
-    <b><p>Your order: </p></b>
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>Meal/ Beverage</th>
-            <th>Menu item number</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="orderDTO : ${orderDTOs}">
-            <td th:text="${orderDTO.itemName}"></td>
-            <td th:text="${orderDTO.menuItemNumber}"></td>
-            <td th:text="${orderDTO.price}"></td>
-            <td>
-                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${orderDTO.menuItemNumber})}" th:method="DELETE">
+                <form action="#" th:action="@{/customerPage/orders/delete/{orderNumber}/{userName}(orderNumber=${order.orderNumber}, userName=${#authentication.getName()})}" th:method="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <form action="#" th:action="@{/order/{restaurantName}/submit/{userName}(restaurantName=${restaurantDTO.restaurantName}, userName=${#authentication.getName()})}" method="POST">
-        <button type="submit" class="btn btn-info">Submit your order</button>
-    </form>
-
-
 </div>
+
 </body>
+
 </html>

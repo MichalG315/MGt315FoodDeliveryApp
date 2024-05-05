@@ -8,25 +8,19 @@ import pl.zajavka.domain.Address;
 import pl.zajavka.domain.AddressExtended;
 import pl.zajavka.domain.Customer;
 import pl.zajavka.domain.CustomerAddress;
-import pl.zajavka.domain.FoodOrder;
-import pl.zajavka.domain.MenuItem;
-import pl.zajavka.domain.MenuItemFoodOrder;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.RestaurantDeliveryAddress;
 import pl.zajavka.infrastructure.database.entity.AddressEntity;
 import pl.zajavka.infrastructure.database.entity.AddressExtendedEntity;
 import pl.zajavka.infrastructure.database.entity.CustomerAddressEntity;
 import pl.zajavka.infrastructure.database.entity.CustomerEntity;
-import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
-import pl.zajavka.infrastructure.database.entity.MenuItemEntity;
-import pl.zajavka.infrastructure.database.entity.MenuItemFoodOrderEntity;
 import pl.zajavka.infrastructure.database.entity.RestaurantDeliveryAddressEntity;
 import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-05T08:14:22+0200",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-05-05T19:36:31+0200",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class AddressExtendedEntityMapperImpl implements AddressExtendedEntityMapper {
@@ -148,85 +142,6 @@ public class AddressExtendedEntityMapperImpl implements AddressExtendedEntityMap
         return set1;
     }
 
-    protected Set<MenuItemFoodOrderEntity> menuItemFoodOrderSetToMenuItemFoodOrderEntitySet(Set<MenuItemFoodOrder> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<MenuItemFoodOrderEntity> set1 = new LinkedHashSet<MenuItemFoodOrderEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( MenuItemFoodOrder menuItemFoodOrder : set ) {
-            set1.add( menuItemFoodOrderToMenuItemFoodOrderEntity( menuItemFoodOrder ) );
-        }
-
-        return set1;
-    }
-
-    protected MenuItemEntity menuItemToMenuItemEntity(MenuItem menuItem) {
-        if ( menuItem == null ) {
-            return null;
-        }
-
-        MenuItemEntity.MenuItemEntityBuilder menuItemEntity = MenuItemEntity.builder();
-
-        menuItemEntity.menuItemId( menuItem.getMenuItemId() );
-        menuItemEntity.menuItemNumber( menuItem.getMenuItemNumber() );
-        menuItemEntity.itemName( menuItem.getItemName() );
-        menuItemEntity.description( menuItem.getDescription() );
-        menuItemEntity.price( menuItem.getPrice() );
-        menuItemEntity.category( menuItem.getCategory() );
-        menuItemEntity.imagePath( menuItem.getImagePath() );
-        menuItemEntity.menuItemFoodOrders( menuItemFoodOrderSetToMenuItemFoodOrderEntitySet( menuItem.getMenuItemFoodOrders() ) );
-
-        return menuItemEntity.build();
-    }
-
-    protected MenuItemFoodOrderEntity menuItemFoodOrderToMenuItemFoodOrderEntity(MenuItemFoodOrder menuItemFoodOrder) {
-        if ( menuItemFoodOrder == null ) {
-            return null;
-        }
-
-        MenuItemFoodOrderEntity.MenuItemFoodOrderEntityBuilder menuItemFoodOrderEntity = MenuItemFoodOrderEntity.builder();
-
-        menuItemFoodOrderEntity.menuItemFoodOrderId( menuItemFoodOrder.getMenuItemFoodOrderId() );
-        menuItemFoodOrderEntity.quantity( menuItemFoodOrder.getQuantity() );
-        menuItemFoodOrderEntity.menuItem( menuItemToMenuItemEntity( menuItemFoodOrder.getMenuItem() ) );
-        menuItemFoodOrderEntity.foodOrder( foodOrderToFoodOrderEntity( menuItemFoodOrder.getFoodOrder() ) );
-
-        return menuItemFoodOrderEntity.build();
-    }
-
-    protected FoodOrderEntity foodOrderToFoodOrderEntity(FoodOrder foodOrder) {
-        if ( foodOrder == null ) {
-            return null;
-        }
-
-        FoodOrderEntity.FoodOrderEntityBuilder foodOrderEntity = FoodOrderEntity.builder();
-
-        foodOrderEntity.foodOrderId( foodOrder.getFoodOrderId() );
-        foodOrderEntity.foodOrderNumber( foodOrder.getFoodOrderNumber() );
-        foodOrderEntity.receivedDateTime( foodOrder.getReceivedDateTime() );
-        foodOrderEntity.completedDateTime( foodOrder.getCompletedDateTime() );
-        foodOrderEntity.totalAmount( foodOrder.getTotalAmount() );
-        foodOrderEntity.customer( customerToCustomerEntity( foodOrder.getCustomer() ) );
-        foodOrderEntity.restaurant( restaurantToRestaurantEntity( foodOrder.getRestaurant() ) );
-        foodOrderEntity.menuItemFoodOrders( menuItemFoodOrderSetToMenuItemFoodOrderEntitySet( foodOrder.getMenuItemFoodOrders() ) );
-
-        return foodOrderEntity.build();
-    }
-
-    protected Set<FoodOrderEntity> foodOrderSetToFoodOrderEntitySet(Set<FoodOrder> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<FoodOrderEntity> set1 = new LinkedHashSet<FoodOrderEntity>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( FoodOrder foodOrder : set ) {
-            set1.add( foodOrderToFoodOrderEntity( foodOrder ) );
-        }
-
-        return set1;
-    }
-
     protected CustomerEntity customerToCustomerEntity(Customer customer) {
         if ( customer == null ) {
             return null;
@@ -240,7 +155,6 @@ public class AddressExtendedEntityMapperImpl implements AddressExtendedEntityMap
         customerEntity.phone( customer.getPhone() );
         customerEntity.userId( customer.getUserId() );
         customerEntity.customerAddresses( customerAddressSetToCustomerAddressEntitySet( customer.getCustomerAddresses() ) );
-        customerEntity.foodOrders( foodOrderSetToFoodOrderEntitySet( customer.getFoodOrders() ) );
 
         return customerEntity.build();
     }
@@ -344,85 +258,6 @@ public class AddressExtendedEntityMapperImpl implements AddressExtendedEntityMap
         return set1;
     }
 
-    protected Set<MenuItemFoodOrder> menuItemFoodOrderEntitySetToMenuItemFoodOrderSet(Set<MenuItemFoodOrderEntity> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<MenuItemFoodOrder> set1 = new LinkedHashSet<MenuItemFoodOrder>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( MenuItemFoodOrderEntity menuItemFoodOrderEntity : set ) {
-            set1.add( menuItemFoodOrderEntityToMenuItemFoodOrder( menuItemFoodOrderEntity ) );
-        }
-
-        return set1;
-    }
-
-    protected MenuItem menuItemEntityToMenuItem(MenuItemEntity menuItemEntity) {
-        if ( menuItemEntity == null ) {
-            return null;
-        }
-
-        MenuItem.MenuItemBuilder menuItem = MenuItem.builder();
-
-        menuItem.menuItemId( menuItemEntity.getMenuItemId() );
-        menuItem.menuItemNumber( menuItemEntity.getMenuItemNumber() );
-        menuItem.itemName( menuItemEntity.getItemName() );
-        menuItem.description( menuItemEntity.getDescription() );
-        menuItem.price( menuItemEntity.getPrice() );
-        menuItem.category( menuItemEntity.getCategory() );
-        menuItem.imagePath( menuItemEntity.getImagePath() );
-        menuItem.menuItemFoodOrders( menuItemFoodOrderEntitySetToMenuItemFoodOrderSet( menuItemEntity.getMenuItemFoodOrders() ) );
-
-        return menuItem.build();
-    }
-
-    protected MenuItemFoodOrder menuItemFoodOrderEntityToMenuItemFoodOrder(MenuItemFoodOrderEntity menuItemFoodOrderEntity) {
-        if ( menuItemFoodOrderEntity == null ) {
-            return null;
-        }
-
-        MenuItemFoodOrder.MenuItemFoodOrderBuilder menuItemFoodOrder = MenuItemFoodOrder.builder();
-
-        menuItemFoodOrder.menuItemFoodOrderId( menuItemFoodOrderEntity.getMenuItemFoodOrderId() );
-        menuItemFoodOrder.quantity( menuItemFoodOrderEntity.getQuantity() );
-        menuItemFoodOrder.menuItem( menuItemEntityToMenuItem( menuItemFoodOrderEntity.getMenuItem() ) );
-        menuItemFoodOrder.foodOrder( foodOrderEntityToFoodOrder( menuItemFoodOrderEntity.getFoodOrder() ) );
-
-        return menuItemFoodOrder.build();
-    }
-
-    protected FoodOrder foodOrderEntityToFoodOrder(FoodOrderEntity foodOrderEntity) {
-        if ( foodOrderEntity == null ) {
-            return null;
-        }
-
-        FoodOrder.FoodOrderBuilder foodOrder = FoodOrder.builder();
-
-        foodOrder.foodOrderId( foodOrderEntity.getFoodOrderId() );
-        foodOrder.foodOrderNumber( foodOrderEntity.getFoodOrderNumber() );
-        foodOrder.receivedDateTime( foodOrderEntity.getReceivedDateTime() );
-        foodOrder.completedDateTime( foodOrderEntity.getCompletedDateTime() );
-        foodOrder.totalAmount( foodOrderEntity.getTotalAmount() );
-        foodOrder.customer( customerEntityToCustomer( foodOrderEntity.getCustomer() ) );
-        foodOrder.restaurant( restaurantEntityToRestaurant( foodOrderEntity.getRestaurant() ) );
-        foodOrder.menuItemFoodOrders( menuItemFoodOrderEntitySetToMenuItemFoodOrderSet( foodOrderEntity.getMenuItemFoodOrders() ) );
-
-        return foodOrder.build();
-    }
-
-    protected Set<FoodOrder> foodOrderEntitySetToFoodOrderSet(Set<FoodOrderEntity> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<FoodOrder> set1 = new LinkedHashSet<FoodOrder>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( FoodOrderEntity foodOrderEntity : set ) {
-            set1.add( foodOrderEntityToFoodOrder( foodOrderEntity ) );
-        }
-
-        return set1;
-    }
-
     protected Customer customerEntityToCustomer(CustomerEntity customerEntity) {
         if ( customerEntity == null ) {
             return null;
@@ -436,7 +271,6 @@ public class AddressExtendedEntityMapperImpl implements AddressExtendedEntityMap
         customer.phone( customerEntity.getPhone() );
         customer.userId( customerEntity.getUserId() );
         customer.customerAddresses( customerAddressEntitySetToCustomerAddressSet( customerEntity.getCustomerAddresses() ) );
-        customer.foodOrders( foodOrderEntitySetToFoodOrderSet( customerEntity.getFoodOrders() ) );
 
         return customer.build();
     }

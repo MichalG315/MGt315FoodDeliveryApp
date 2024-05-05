@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -27,12 +26,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/customerPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/customerPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>-->
+<!--                </li>-->
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" >
@@ -49,34 +48,27 @@
 </nav>
 
 <br>
-<p class="text-center">There is a list of restaurants!</p>
+<p class="text-center">This is the website to manage your restaurant</p>
 <br>
-    <div class="container">
-            <table class="table">
-                <thead class="table-dark">
-                <tr>
-                    <th>Restaurant name</th>
-                    <th>Description</th>
-                    <th>Restaurant address</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="restaurant : ${availableRestaurantDTOs}">
-                    <td th:text="${restaurant.restaurantName}"></td>
-                    <td th:text="${restaurant.description}"></td>
-                    <td th:text="${restaurant.completeAddress}"></td>
-                    <td>
-                        <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
-                              method="GET">
-                            <button type="submit" class="btn btn-info">Check out our meals</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <a th:href="@{/restaurantPage/orders/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Your orders</a>
+        </div>
+        <div class="col-2">
+            <a th:href="@{/restaurantPage/menu/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Menu items</a>
+        </div>
+        <div class="col-2">
+            <a th:href="@{/restaurantPage/add/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Add menu item</a>
+        </div>
+        <div class="col-2">
+            <a th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Menage addresses</a>
+        </div>
     </div>
 
-</body>
 
+</div>
+</body>
 </html>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import pl.zajavka.business.MenuItemService;
 import pl.zajavka.business.RestaurantService;
 import pl.zajavka.domain.MenuItem;
+import pl.zajavka.infrastructure.database.repository.FoodOrderRepository;
+import pl.zajavka.infrastructure.database.repository.MenuItemFoodOrderRepository;
 import pl.zajavka.infrastructure.database.repository.MenuItemRepository;
 import pl.zajavka.infrastructure.security.repository.UserRepository;
 
@@ -18,15 +20,16 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class BootstrapApplicationComponent implements ApplicationListener<ContextRefreshedEvent> {
 
-    MenuItemRepository menuItemRepository;
-    UserRepository userRepository;
+    private MenuItemRepository menuItemRepository;
+    private MenuItemFoodOrderRepository menuItemFoodOrderRepository;
+    private FoodOrderRepository foodOrderRepository;
 
-    MenuItemService menuItemService;
-    RestaurantService restaurantService;
+    private MenuItemService menuItemService;
 
     @Override
     public void onApplicationEvent(final @NonNull ContextRefreshedEvent event) {
-
+        menuItemFoodOrderRepository.deleteAll();
+        foodOrderRepository.deleteAll();
         menuItemRepository.deleteAll();
 
         String restaurantName = "Chicken";
@@ -40,6 +43,7 @@ public class BootstrapApplicationComponent implements ApplicationListener<Contex
                         """)
                 .price(new BigDecimal(10))
                 .category("Meat")
+                .imagePath("/images/foodImages/logo2.png")
                 .build(), restaurantName);
 
         menuItemRepository.saveMenuItem(MenuItem.builder()

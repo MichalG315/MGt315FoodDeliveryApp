@@ -10,12 +10,12 @@ import pl.zajavka.business.OrderService;
 @Controller
 @RequiredArgsConstructor
 public class CustomerController {
-    static final String RESTAURANTS = "/customerPage";
+    static final String CUSTOMER_PAGE = "/customerPage";
 
     private final OrderService orderService;
     private final RestaurantMapper restaurantMapper;
 
-    @GetMapping(value = RESTAURANTS)
+    @GetMapping(value = CUSTOMER_PAGE)
     public String getOrder(Model model) {
         var availableRestaurants = orderService.availableRestaurants().stream()
                 .map(restaurantMapper::mapToDTO)

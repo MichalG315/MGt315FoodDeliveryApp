@@ -7,8 +7,8 @@ import pl.zajavka.domain.MenuItem;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-05T08:14:22+0200",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-05-05T20:24:23+0200",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class MenuItemMapperImpl implements MenuItemMapper {
@@ -27,6 +27,7 @@ public class MenuItemMapperImpl implements MenuItemMapper {
         menuItemDTO.price( menuItem.getPrice() );
         menuItemDTO.category( menuItem.getCategory() );
         menuItemDTO.restaurantName( menuItem.getRestaurantName() );
+        menuItemDTO.imagePath( menuItem.getImagePath() );
 
         return menuItemDTO.build();
     }
@@ -44,6 +45,7 @@ public class MenuItemMapperImpl implements MenuItemMapper {
         menuItem.description( menuItemDTO.getDescription() );
         menuItem.price( menuItemDTO.getPrice() );
         menuItem.category( menuItemDTO.getCategory() );
+        menuItem.imagePath( menuItemDTO.getImagePath() );
         menuItem.restaurantName( menuItemDTO.getRestaurantName() );
 
         return menuItem.build();

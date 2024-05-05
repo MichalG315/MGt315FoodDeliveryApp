@@ -12,5 +12,5 @@ public class MenuItemFoodOrder {
     Integer menuItemFoodOrderId;
     Integer quantity;
     MenuItem menuItem;
-    FoodOrder foodOrder;
+    Order Order;
 }

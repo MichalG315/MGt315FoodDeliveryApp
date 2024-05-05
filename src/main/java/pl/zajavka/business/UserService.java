@@ -44,11 +44,15 @@ public class UserService {
                 .withRoles(Set.of(role));
     }
 
-    private Integer findUserId(User user) {
+    public Integer findUserId(User user) {
         return userDAO.findByUserName(user.getUserName()).getUserId();
     }
 
     private Role findRole(User user) {
         return roleService.findRoleByRoleId(user.getRole());
+    }
+
+    public Integer findUserId(String restaurantUserName) {
+        return userDAO.findUserId(restaurantUserName);
     }
 }

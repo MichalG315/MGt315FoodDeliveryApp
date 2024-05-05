@@ -7,12 +7,18 @@ import pl.zajavka.domain.Order;
 import pl.zajavka.exception.NotFoundException;
 import pl.zajavka.infrastructure.database.entity.CustomerEntity;
 import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
+import pl.zajavka.infrastructure.database.entity.MenuItemFoodOrderEntity;
 import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
+import pl.zajavka.infrastructure.database.repository.jpa.MenuItemFoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.FoodOrderEntityMapper;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -23,6 +29,7 @@ public class FoodOrderRepository implements FoodOrderDAO {
     private final CustomerJpaRepository customerJpaRepository;
     private final RestaurantJpaRepository restaurantJpaRepository;
     private final MenuItemFoodOrderRepository menuItemFoodOrderRepository;
+    private final MenuItemFoodOrderJpaRepository menuItemFoodOrderJpaRepository;
 
 
     private final FoodOrderEntityMapper foodOrderEntityMapper;
@@ -43,5 +50,38 @@ public class FoodOrderRepository implements FoodOrderDAO {
         menuItemFoodOrderRepository.saveMenuItemFoodOrder(order, savedfoodOrderEntity);
 
 
+    }
+
+    @Override
+    public void deleteAll() {
+        foodOrderJpaRepository.deleteAll();
+    }
+
+    @Override
+    public List<Order> availableFoodOrdersByUserName(String userName) {
+        String customerEmail = userJpaRepository.findByUserName(userName).getEmail();
+        CustomerEntity customer = customerJpaRepository.findByEmail(customerEmail)
+                .orElseThrow(() ->
+                        new NotFoundException("Could not find customer with email: %s".formatted(customerEmail)));
+
+        return foodOrderJpaRepository.findAllByCustomer(customer).stream()
+                .map(foodOrderEntity -> foodOrderEntityMapper.mapFromEntity(foodOrderEntity, userName))
+                .toList();
+
+    }
+
+    @Override
+    public void deleteOrder(String orderNumber) {
+        FoodOrderEntity foodOrderEntity = foodOrderJpaRepository.findByFoodOrderNumber(orderNumber);
+        List<MenuItemFoodOrderEntity> menuItemFoodOrderEntities = foodOrderEntity.getMenuItemFoodOrders()
+                .stream().toList();
+        menuItemFoodOrderJpaRepository.deleteAll(menuItemFoodOrderEntities);
+        foodOrderJpaRepository.delete(foodOrderEntity);
+    }
+
+
+    @Override
+    public Order findFoodOrder(String orderNumber) {
+        return foodOrderEntityMapper.mapFromEntity(foodOrderJpaRepository.findByFoodOrderNumber(orderNumber));
     }
 }

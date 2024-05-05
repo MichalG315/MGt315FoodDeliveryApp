@@ -14,4 +14,6 @@ public interface RestaurantDAO {
 
 
     void saveRestaurant(Restaurant restaurant, Address address, AddressExtended addressExtended, Integer userId);
+
+    Restaurant findRestaurantByUserId(Integer userId);
 }

@@ -10,8 +10,6 @@ import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
 import pl.zajavka.infrastructure.database.entity.MenuItemFoodOrderEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemFoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemJpaRepository;
-import pl.zajavka.infrastructure.database.repository.mapper.MenuItemFoodOrderEntityMapper;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +20,6 @@ public class MenuItemFoodOrderRepository implements MenuItemFoodOrderDAO {
 
     private final MenuItemFoodOrderJpaRepository menuItemFoodOrderJpaRepository;
     private final MenuItemJpaRepository menuItemJpaRepository;
-
-    private final MenuItemFoodOrderEntityMapper menuItemFoodOrderEntityMapper;
 
     @Override
     public void saveMenuItemFoodOrder(Order order, FoodOrderEntity savedfoodOrderEntity) {
@@ -48,4 +44,11 @@ public class MenuItemFoodOrderRepository implements MenuItemFoodOrderDAO {
         }
         menuItemFoodOrderJpaRepository.saveAllAndFlush(toSaveList);
     }
+
+    @Override
+    public void deleteAll() {
+        menuItemFoodOrderJpaRepository.deleteAll();
+    }
+
+
 }

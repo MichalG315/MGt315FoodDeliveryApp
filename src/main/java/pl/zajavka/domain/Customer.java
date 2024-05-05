@@ -16,5 +16,5 @@ public class Customer {
     String phone;
     Integer userId;
     Set<CustomerAddress> customerAddresses;
-    Set<FoodOrder> foodOrders;
+    Set<Order> orders;
 }

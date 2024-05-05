@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,10 +7,10 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
-
-    <title>Restaurants page</title>
+    <title>MGt315 Food Delivery Application</title>
 
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -49,34 +48,21 @@
 </nav>
 
 <br>
-<p class="text-center">There is a list of restaurants!</p>
 <br>
-    <div class="container">
-            <table class="table">
-                <thead class="table-dark">
-                <tr>
-                    <th>Restaurant name</th>
-                    <th>Description</th>
-                    <th>Restaurant address</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="restaurant : ${availableRestaurantDTOs}">
-                    <td th:text="${restaurant.restaurantName}"></td>
-                    <td th:text="${restaurant.description}"></td>
-                    <td th:text="${restaurant.completeAddress}"></td>
-                    <td>
-                        <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
-                              method="GET">
-                            <button type="submit" class="btn btn-info">Check out our meals</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<div class="container">
+
+    <p><b>Unfortunately, it is not possible to delete this order. It's been 20 minutes since it was submitted.</b></p>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <a th:href="@{/}" class="btn btn-info" role="button">Home</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/customerPage}" class="btn btn-info" role="button">Customer</a>
+        </div>
     </div>
 
-</body>
 
+</div>
+</body>
 </html>

@@ -22,7 +22,6 @@ public class OrderService {
 
     private final RestaurantService restaurantService;
     private final FoodOrderService foodOrderService;
-    private final MenuItemFoodOrderService menuItemFoodOrderService;
 
     private final MenuItemMapper menuItemMapper;
 
@@ -31,7 +30,7 @@ public class OrderService {
     }
 
 
-    public Order buildAndSaveOrder(String restaurantName, String userName, List<MenuItemDTO> cart) {
+    public void buildAndSaveOrder(String restaurantName, String userName, List<MenuItemDTO> cart) {
         Order order = Order.builder()
                 .userName(userName)
                 .restaurantName(restaurantName)
@@ -39,11 +38,10 @@ public class OrderService {
                 .menuItemMap(menuItemListToMenuItemMap(cart))
                 .receivedDateTime(OffsetDateTime.now())
                 .totalAmount(calculateTotalAmount(cart))
+                .status("In progress")
                 .build();
 
         foodOrderService.saveFoodOrder(order, restaurantName, userName);
-
-        return order;
     }
 
     private Map<MenuItem, Long> menuItemListToMenuItemMap(List<MenuItemDTO> list) {

@@ -61,4 +61,9 @@ public class RestaurantRepository implements RestaurantDAO {
                 .build();
         restaurantJpaRepository.saveAndFlush(restaurantToSave);
     }
+
+    @Override
+    public Restaurant findRestaurantByUserId(Integer userId) {
+        return restaurantEntityMapper.mapFromEntity(restaurantJpaRepository.findByUserId(userId));
+    }
 }

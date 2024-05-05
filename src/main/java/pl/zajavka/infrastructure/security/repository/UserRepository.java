@@ -24,5 +24,10 @@ public class UserRepository implements UserDAO {
         return userEntityMapper.mapFromEntity(userJpaRepository.findByUserName(username));
     }
 
+    @Override
+    public Integer findUserId(String restaurantUserName) {
+        return findByUserName(restaurantUserName).getUserId();
+    }
+
 
 }

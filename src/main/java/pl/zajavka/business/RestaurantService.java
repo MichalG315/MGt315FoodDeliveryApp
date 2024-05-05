@@ -32,4 +32,8 @@ public class RestaurantService {
         }
         return restaurant.get();
     }
+
+    public String findRestaurantNameByUserId(Integer userId) {
+        return restaurantDAO.findRestaurantByUserId(userId).getRestaurantName();
+    }
 }

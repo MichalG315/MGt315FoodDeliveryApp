@@ -5,6 +5,7 @@ CREATE TABLE food_order
     received_date_time      TIMESTAMP WITH TIME ZONE    NOT NULL,
     completed_date_time     TIMESTAMP WITH TIME ZONE,
     total_amount            NUMERIC(7,2)                NOT NULL,
+    status                  VARCHAR(32),
     customer_id             INT                         NOT NULL,
     restaurant_id           INT                         NOT NULL,
     PRIMARY KEY (food_order_id),

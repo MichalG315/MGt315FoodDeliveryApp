@@ -8,15 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.zajavka.api.dto.MenuItemDTO;
+import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
+import pl.zajavka.business.FoodOrderService;
 import pl.zajavka.business.MenuItemService;
 import pl.zajavka.business.OrderService;
 import pl.zajavka.business.RestaurantService;
-import pl.zajavka.domain.Order;
 
+import java.time.Duration;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +32,14 @@ public class OrderController {
     static final String RESTAURANT_NAME = "/{restaurantName}";
     static final String MENU_ITEM_NUMBER = "/{menuItemNumber}";
     static final String USER_NAME = "/{userName}";
+    static final String CUSTOMER_ORDERS = "/customerPage/orders";
+    static final String DELETE = "/delete";
+    static final String ORDER_NUMBER = "/{orderNumber}";
 
     private final RestaurantService restaurantService;
     private final MenuItemService menuItemService;
     private final OrderService orderService;
+    private final FoodOrderService foodOrderService;
 
     private final RestaurantMapper restaurantMapper;
     private final MenuItemMapper menuItemMapper;
@@ -84,11 +91,38 @@ public class OrderController {
     public String submitOrder(
             @PathVariable String restaurantName,
             @PathVariable String userName) {
-
-        Order order = orderService.buildAndSaveOrder(restaurantName, userName, cart);
+        orderService.buildAndSaveOrder(restaurantName, userName, cart);
         cart.clear();
-        return "redirect:/";
+        return "redirect:" + CUSTOMER_ORDERS + "/" + userName;
     }
 
+    @GetMapping(value = CUSTOMER_ORDERS + USER_NAME)
+    public String getCustomerOrders(
+            @PathVariable String userName,
+            Model model
+    ) {
+        List<OrderDTO> availableCustomerOrders = foodOrderService.availableFoodOrdersByUserName(userName)
+                .stream().map(orderMapper::mapToDTO)
+                .toList();
 
+        model.addAttribute("availableCustomerOrderDTOs", availableCustomerOrders);
+
+        return "customer_page_orders";
+    }
+
+    @DeleteMapping(value = CUSTOMER_ORDERS + DELETE + ORDER_NUMBER + USER_NAME)
+    public String deleteMenuItem(
+            @PathVariable String orderNumber,
+            @PathVariable String userName
+    ) {
+        OffsetDateTime foodOrderReceivedDateTime = foodOrderService.findFoodOrderReceivedDateTime(orderNumber);
+
+        if (Duration.between(foodOrderReceivedDateTime, OffsetDateTime.now()).toMinutes() < 1) {
+            foodOrderService.deleteFoodOrder(orderNumber);
+        } else {
+            return "error_delete_order";
+        }
+
+        return "redirect:/customerPage/orders/" + userName;
+    }
 }

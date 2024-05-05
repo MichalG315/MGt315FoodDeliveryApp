@@ -5,4 +5,6 @@ import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
 
 public interface MenuItemFoodOrderDAO {
     void saveMenuItemFoodOrder(Order order, FoodOrderEntity savedfoodOrderEntity);
+
+    void deleteAll();
 }

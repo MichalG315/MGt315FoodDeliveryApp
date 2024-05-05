@@ -18,7 +18,9 @@ public class Order {
     String orderNumber;
     Map<MenuItem, Long> menuItemMap;
     OffsetDateTime receivedDateTime;
+    OffsetDateTime completedDateTime;
     BigDecimal totalAmount;
+    String status;
 
 
 }
