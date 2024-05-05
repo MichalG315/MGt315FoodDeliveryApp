@@ -5,7 +5,7 @@ import lombok.*;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "menuItemFoodOrderId")
+@EqualsAndHashCode(of = {"menuItemFoodOrderId", "quantity", "menuItem"})
 @ToString(of = {"menuItemFoodOrderId", "quantity"})
 public class MenuItemFoodOrder {
 

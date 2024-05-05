@@ -16,7 +16,7 @@ public class Order {
     String userName;
     String restaurantName;
     String orderNumber;
-    Map<MenuItem, Integer> menuItemMap;
+    Map<MenuItem, Long> menuItemMap;
     OffsetDateTime receivedDateTime;
     BigDecimal totalAmount;
 

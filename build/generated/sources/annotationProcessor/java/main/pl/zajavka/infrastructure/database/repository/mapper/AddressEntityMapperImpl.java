@@ -25,7 +25,7 @@ import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-04T23:34:43+0200",
+    date = "2024-05-05T08:14:22+0200",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -154,7 +154,6 @@ public class AddressEntityMapperImpl implements AddressEntityMapper {
         foodOrderEntity.foodOrderNumber( foodOrder.getFoodOrderNumber() );
         foodOrderEntity.receivedDateTime( foodOrder.getReceivedDateTime() );
         foodOrderEntity.completedDateTime( foodOrder.getCompletedDateTime() );
-        foodOrderEntity.customerComment( foodOrder.getCustomerComment() );
         foodOrderEntity.totalAmount( foodOrder.getTotalAmount() );
         foodOrderEntity.customer( customerToCustomerEntity( foodOrder.getCustomer() ) );
         foodOrderEntity.restaurant( restaurantToRestaurantEntity( foodOrder.getRestaurant() ) );
@@ -348,7 +347,6 @@ public class AddressEntityMapperImpl implements AddressEntityMapper {
         foodOrder.foodOrderNumber( foodOrderEntity.getFoodOrderNumber() );
         foodOrder.receivedDateTime( foodOrderEntity.getReceivedDateTime() );
         foodOrder.completedDateTime( foodOrderEntity.getCompletedDateTime() );
-        foodOrder.customerComment( foodOrderEntity.getCustomerComment() );
         foodOrder.totalAmount( foodOrderEntity.getTotalAmount() );
         foodOrder.customer( customerEntityToCustomer( foodOrderEntity.getCustomer() ) );
         foodOrder.restaurant( restaurantEntityToRestaurant( foodOrderEntity.getRestaurant() ) );

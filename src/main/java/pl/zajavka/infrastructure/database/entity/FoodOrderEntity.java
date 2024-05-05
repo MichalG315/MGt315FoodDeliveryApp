@@ -32,9 +32,6 @@ public class FoodOrderEntity {
     @Column(name = "completed_date_time")
     private OffsetDateTime completedDateTime;
 
-    @Column(name = "customer_comment")
-    private String customerComment;
-
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 

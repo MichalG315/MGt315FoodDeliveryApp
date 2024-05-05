@@ -90,6 +90,7 @@
             <th>Meal/ Beverage</th>
             <th>Menu item number</th>
             <th>Price</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -97,6 +98,11 @@
             <td th:text="${orderDTO.itemName}"></td>
             <td th:text="${orderDTO.menuItemNumber}"></td>
             <td th:text="${orderDTO.price}"></td>
+            <td>
+                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${orderDTO.menuItemNumber})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
-public class AddressMapperImpl implements AddressMapper {
+public class OrderMapperImpl implements OrderMapper {
 }

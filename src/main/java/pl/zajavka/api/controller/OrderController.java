@@ -3,17 +3,19 @@ package pl.zajavka.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.zajavka.api.dto.MenuItemDTO;
-import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
+import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
 import pl.zajavka.business.MenuItemService;
 import pl.zajavka.business.OrderService;
 import pl.zajavka.business.RestaurantService;
+import pl.zajavka.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class OrderController {
 
     private final RestaurantMapper restaurantMapper;
     private final MenuItemMapper menuItemMapper;
+    private final OrderMapper orderMapper;
 
     private final List<MenuItemDTO> cart = new ArrayList<>();
 
@@ -44,7 +47,7 @@ public class OrderController {
 
         List<MenuItemDTO> menuItemsByRestaurantName =
                 menuItemService.findAvailableMenuItemsByRestaurantName(restaurantName).stream()
-                        .map(menuItemMapper::map)
+                        .map(menuItemMapper::mapToDTO)
                         .toList();
 
 
@@ -60,10 +63,19 @@ public class OrderController {
             @PathVariable String restaurantName,
             @PathVariable String menuItemNumber
     ) {
-        MenuItemDTO menuItemDTO = menuItemMapper.map(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber));
+        MenuItemDTO menuItemDTO = menuItemMapper.mapToDTO(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber));
         cart.add(menuItemDTO);
 
-        //TODO Dodać możliwość usuwania itemków z koszyka!!!
+        return "redirect:/order/" + restaurantName;
+    }
+
+    @DeleteMapping(ORDER + RESTAURANT_NAME + MENU_ITEM_NUMBER)
+    public String deleteFromCart(
+            @PathVariable String restaurantName,
+            @PathVariable String menuItemNumber
+    ) {
+        MenuItemDTO menuItemDTO = menuItemMapper.mapToDTO(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber));
+        cart.remove(menuItemDTO);
 
         return "redirect:/order/" + restaurantName;
     }
@@ -72,8 +84,10 @@ public class OrderController {
     public String submitOrder(
             @PathVariable String restaurantName,
             @PathVariable String userName) {
-//        OrderDTO orderDTO = orderService.buildAndSaveOrder(restaurantName, userName, cart);
-        return "";
+
+        Order order = orderService.buildAndSaveOrder(restaurantName, userName, cart);
+        cart.clear();
+        return "redirect:/";
     }
 
 

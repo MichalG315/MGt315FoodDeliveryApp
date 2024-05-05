@@ -8,5 +8,7 @@ import pl.zajavka.domain.MenuItem;
 public interface MenuItemMapper {
 
 
-    MenuItemDTO map(MenuItem menuItem);
+    MenuItemDTO mapToDTO(MenuItem menuItem);
+
+    MenuItem mapFromDTO(MenuItemDTO menuItemDTO);
 }

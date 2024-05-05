@@ -4,7 +4,6 @@ CREATE TABLE food_order
     food_order_number            VARCHAR(32)                 NOT NULL,
     received_date_time      TIMESTAMP WITH TIME ZONE    NOT NULL,
     completed_date_time     TIMESTAMP WITH TIME ZONE,
-    customer_comment        TEXT,
     total_amount            NUMERIC(7,2)                NOT NULL,
     customer_id             INT                         NOT NULL,
     restaurant_id           INT                         NOT NULL,
