@@ -15,7 +15,7 @@ UPDATE customer SET user_id = 1 WHERE email = 'customer_testowy@gmail.com';
 
 UPDATE restaurant SET user_id = 2 WHERE restaurant_name = 'Chicken';
 
-insert into food_app_role (role_id, role) values (1, 'CUSTOMER'), (2, 'RESTAURANT'), (3, 'ADMIN');
+insert into food_app_role (role_id, role) values (1, 'CUSTOMER'), (2, 'RESTAURANT');
 
 insert into food_app_user_role (user_id, role_id) values (1, 1);
 insert into food_app_user_role (user_id, role_id) values (2, 2);

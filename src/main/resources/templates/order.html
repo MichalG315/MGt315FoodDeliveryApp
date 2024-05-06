@@ -80,9 +80,11 @@
                 <img th:src="@{${menuItem.imagePath}}" style="width: 100px; height: 100px;">
             </td>
             <td>
-                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber})}" method="POST">
-                    <button type="submit" class="btn btn-info">Add to order</button>
-                </form>
+
+                    <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber})}" method="POST">
+                        <button type="submit" class="btn btn-info">Add to order</button>
+                    </form>
+
             </td>
         </tr>
         </tbody>

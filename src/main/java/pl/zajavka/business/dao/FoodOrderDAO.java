@@ -2,6 +2,7 @@ package pl.zajavka.business.dao;
 
 import pl.zajavka.domain.Order;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public interface FoodOrderDAO {
@@ -11,7 +12,11 @@ public interface FoodOrderDAO {
 
     List<Order> availableFoodOrdersByUserName(String userName);
 
+    List<Order> availableFoodOrdersByRestaurantName(String restaurantUserName);
+
     void deleteOrder(String orderNumber);
 
     Order findFoodOrder(String orderNumber);
+
+    void setCompletedDateTime(String orderNumber, OffsetDateTime completedDateTime);
 }

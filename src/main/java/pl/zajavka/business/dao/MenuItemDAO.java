@@ -15,4 +15,5 @@ public interface MenuItemDAO {
     void deleteAll();
 
     Optional<MenuItem> findMenuItemByMenuItemNumber(String menuItemNumber);
+
 }

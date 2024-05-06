@@ -71,9 +71,11 @@
             <td th:text="${order.totalAmount}"></td>
             <td th:text="${order.status}"></td>
             <td>
-                <form action="#" th:action="@{/customerPage/orders/delete/{orderNumber}/{userName}(orderNumber=${order.orderNumber}, userName=${#authentication.getName()})}" th:method="DELETE">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <span th:unless="${order?.completedDateTime}">
+                    <form action="#" th:action="@{/customerPage/orders/delete/{orderNumber}/{userName}(orderNumber=${order.orderNumber}, userName=${#authentication.getName()})}" th:method="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </span>
             </td>
         </tr>
         </tbody>

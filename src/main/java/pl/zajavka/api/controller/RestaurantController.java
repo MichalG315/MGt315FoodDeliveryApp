@@ -3,29 +3,42 @@ package pl.zajavka.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import pl.zajavka.api.dto.MenuItemDTO;
+import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
-import pl.zajavka.business.MenuItemService;
-import pl.zajavka.business.RestaurantService;
-import pl.zajavka.business.UserService;
+import pl.zajavka.api.dto.mapper.OrderMapper;
+import pl.zajavka.business.*;
+import pl.zajavka.domain.MenuItem;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
 @RequiredArgsConstructor
 public class RestaurantController {
     static final String RESTAURANT_PAGE = "/restaurantPage";
-    static final String RESTAURANT_NAME = "/{restaurantUserName}";
+    static final String RESTAURANT_USER_NAME = "/{restaurantUserName}";
     static final String ORDERS = "/orders";
+    static final String MENU = "/menu";
+    static final String ORDER_NUMBER = "/{orderNumber}";
+    static final String DELIVERED = "/delivered";
+    static final String ADD = "/add";
+
+    static final String DIRECTORY = System.getProperty("user.dir") + "/src/main/java/pl/zajavka/uploads";
+
 
     private final UserService userService;
     private final RestaurantService restaurantService;
     private final MenuItemService menuItemService;
+    private final FoodOrderService foodOrderService;
+    private final ImageService imageService;
 
     private final MenuItemMapper menuItemMapper;
+    private final OrderMapper orderMapper;
 
     @GetMapping(value = RESTAURANT_PAGE)
     public String getRestaurantPage() {
@@ -33,8 +46,8 @@ public class RestaurantController {
     }
 
 
-    @GetMapping(value = RESTAURANT_PAGE + ORDERS + RESTAURANT_NAME)
-    public String menuItemsPage(
+    @GetMapping(value = RESTAURANT_PAGE + MENU + RESTAURANT_USER_NAME)
+    public String getMenuItemsPage(
             @PathVariable String restaurantUserName,
             Model model
     ) {
@@ -48,8 +61,53 @@ public class RestaurantController {
 
         model.addAttribute("menuItemDTOs", menuItemsByRestaurantName);
 
-        return "restaurant_orders";
+        return "restaurant_menu_items";
     }
 
+    @GetMapping(value = RESTAURANT_PAGE + ORDERS + RESTAURANT_USER_NAME)
+    public String getYourOrders(
+            @PathVariable String restaurantUserName,
+            Model model
+    ) {
+        List<OrderDTO> availableRestaurantOrders = foodOrderService.availableFoodOrdersByRestaurantName(restaurantUserName)
+                .stream().map(orderMapper::mapToDTO)
+                .toList();
+
+        model.addAttribute("availableCustomerOrderDTOs", availableRestaurantOrders);
+
+        return "restaurant_your_orders";
+    }
+
+    @PatchMapping(value = RESTAURANT_PAGE + ORDERS + DELIVERED + RESTAURANT_USER_NAME + ORDER_NUMBER)
+    public String patchOrderCompletedDateTime(
+            @PathVariable String restaurantUserName,
+            @PathVariable String orderNumber
+    ) {
+        foodOrderService.setCompletedDateTime(orderNumber);
+
+        return "redirect:" + RESTAURANT_PAGE + ORDERS + "/" + restaurantUserName;
+    }
+
+    @GetMapping(value = RESTAURANT_PAGE + ADD)
+    public ModelAndView getAddMenuItem() {
+
+        Map<String, ?> model = Map.of("menuItemDTO", new MenuItemDTO());
+
+        return new ModelAndView("restaurant_add_menu_item", model);
+    }
+
+    @PostMapping(value = RESTAURANT_PAGE + ADD + RESTAURANT_USER_NAME)
+    public String addMenuItem(
+            @PathVariable String restaurantUserName,
+            @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
+            @RequestParam("image") MultipartFile file
+    ) {
+        String imagePath = imageService.saveImage(file);
+        menuItemDTO.setImagePath(imagePath);
+        MenuItem menuItem = menuItemMapper.mapFromDTO(menuItemDTO);
+        menuItemService.saveNewMenuItem(menuItem, restaurantUserName);
+
+        return "redirect:/";
+    }
 
 }

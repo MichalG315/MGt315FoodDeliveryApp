@@ -27,12 +27,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" th:href="@{/customerPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>-->
-<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/menu/{userName}(userName=${#authentication.getName()})}">Menu items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/add}">Add menu item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}">Menage addresses</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" >
@@ -47,36 +53,41 @@
         </div>
     </div>
 </nav>
+
+<br>
+<p class="text-center">There is a list of your orders!</p>
 <br>
 <div class="container">
     <table class="table">
         <thead class="table-dark">
         <tr>
-            <th>Meals/ Beverages</th>
-            <th>Number</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Image</th>
+            <th>Order number</th>
+            <th>Date and time of the order</th>
+            <th>Date and time of delivery</th>
+            <th>Total amount</th>
+            <th>Status</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="menuItem : ${menuItemDTOs}">
-            <td th:text="${menuItem.itemName}"></td>
-            <td th:text="${menuItem.menuItemNumber}"></td>
-            <td th:text="${menuItem.description}"></td>
-            <td th:text="${menuItem.category}"></td>
-            <td th:text="${menuItem.price}"></td>
+        <tr th:each="order : ${availableCustomerOrderDTOs}">
+            <td th:text="${order.orderNumber}"></td>
+            <td th:text="${order.receivedDateTime}"></td>
+            <td th:text="${order.completedDateTime}"></td>
+            <td th:text="${order.totalAmount}"></td>
+            <td th:text="${order.status}"></td>
             <td>
-                <img th:src="@{${menuItem.imagePath}}" style="width: 100px; height: 100px;">
+                <span th:unless="${order?.completedDateTime}">
+                    <form action="#" th:action="@{/restaurantPage/orders/delivered/{userName}/{orderNumber}(userName=${#authentication.getName()}, orderNumber=${order.orderNumber})}" th:method="PATCH">
+                        <button type="submit" class="btn btn-info">Delivered</button>
+                    </form>
+                </span>
             </td>
         </tr>
         </tbody>
     </table>
-    <br>
-    <br>
-
 
 </div>
+
 </body>
 </html>

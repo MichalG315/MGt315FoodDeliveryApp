@@ -16,9 +16,8 @@ import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository
 import pl.zajavka.infrastructure.database.repository.mapper.FoodOrderEntityMapper;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
 
-import java.util.ArrayList;
+import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -71,6 +70,15 @@ public class FoodOrderRepository implements FoodOrderDAO {
     }
 
     @Override
+    public List<Order> availableFoodOrdersByRestaurantName(String restaurantUserName) {
+        int restaurantUserId = userJpaRepository.findByUserName(restaurantUserName).getId();
+        RestaurantEntity restaurant = restaurantJpaRepository.findByUserId(restaurantUserId);
+        return foodOrderJpaRepository.findAllByRestaurant(restaurant).stream()
+                .map(foodOrderEntityMapper::mapFromEntity)
+                .toList();
+    }
+
+    @Override
     public void deleteOrder(String orderNumber) {
         FoodOrderEntity foodOrderEntity = foodOrderJpaRepository.findByFoodOrderNumber(orderNumber);
         List<MenuItemFoodOrderEntity> menuItemFoodOrderEntities = foodOrderEntity.getMenuItemFoodOrders()
@@ -83,5 +91,13 @@ public class FoodOrderRepository implements FoodOrderDAO {
     @Override
     public Order findFoodOrder(String orderNumber) {
         return foodOrderEntityMapper.mapFromEntity(foodOrderJpaRepository.findByFoodOrderNumber(orderNumber));
+    }
+
+    @Override
+    public void setCompletedDateTime(String orderNumber, OffsetDateTime completedDateTime) {
+        FoodOrderEntity foodOrderEntity = foodOrderJpaRepository.findByFoodOrderNumber(orderNumber);
+        foodOrderEntity.setCompletedDateTime(completedDateTime);
+        foodOrderEntity.setStatus("Delivered");
+        foodOrderJpaRepository.saveAndFlush(foodOrderEntity);
     }
 }

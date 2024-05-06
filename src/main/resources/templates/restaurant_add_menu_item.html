@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+
+    <title>Restaurants page</title>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <!--            /images/allPermitImages/logo.png-->
+            <img th:src="@{/images/allPermitImages/logo.png}" alt="logo" width="30" height="30" class="d-inline-block align-middle">
+            Food App :)
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/menu/{userName}(userName=${#authentication.getName()})}">Menu items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/add}">Add menu item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}">Menage addresses</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" >
+                        <span th:text ="${#authentication.getName()}"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<p class="text-center">This is the website to add your new menu item</p>
+<br>
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Add your menu item</h2>
+            </div>
+            <!--            <div th:if="${param.success}">-->
+            <!--                <div class="alert alert-info">-->
+            <!--                    You have successfully registered our app!-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/restaurantPage/add/{userName}(userName=${#authentication.getName()})}"
+                        th:object="${menuItemDTO}"
+                        enctype="multipart/form-data"
+                >
+                    <div class="form-group mb-3">
+                        <label class="form-label">Menu item name</label>
+                        <input
+                                class="form-control"
+                                id="itemName"
+                                name="itemName"
+                                placeholder="Enter menu item name"
+                                th:field="*{itemName}"
+                                type="text"
+                        />
+                        <!--                        <p th:errors = "*{firstName}" class="text-danger"-->
+                        <!--                           th:if="${#fields.hasErrors('firstName')}"></p>-->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Description</label>
+                        <input
+                                class="form-control"
+                                id="description"
+                                name="description"
+                                placeholder="Enter description"
+                                th:field="*{description}"
+                                type="text"
+                        />
+                        <!--                        <p th:errors = "*{email}" class="text-danger"-->
+                        <!--                           th:if="${#fields.hasErrors('email')}"></p>-->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Price</label>
+                        <input
+                                class="form-control"
+                                id="price"
+                                name="price"
+                                placeholder="Enter price"
+                                th:field="*{price}"
+                                type="text"
+                        />
+                        <!--                        <p th:errors = "*{password}" class="text-danger"-->
+                        <!--                           th:if="${#fields.hasErrors('password')}"></p>-->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Category</label>
+                        <input
+                                class="form-control"
+                                id="category"
+                                name="category"
+                                placeholder="Enter category"
+                                th:field="*{category}"
+                                type="text"
+                        />
+                        <!--                        <p th:errors = "*{password}" class="text-danger"-->
+                        <!--                           th:if="${#fields.hasErrors('password')}"></p>-->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="fileImage">Photo</label>
+                        <input
+                                class="form-control-file"
+                                id="image"
+                                name="image"
+                                th:field="*{image}"
+                                type="file"
+                                accept="image/png"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Save menu item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

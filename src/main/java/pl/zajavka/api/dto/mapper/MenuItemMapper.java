@@ -11,4 +11,5 @@ public interface MenuItemMapper {
     MenuItemDTO mapToDTO(MenuItem menuItem);
 
     MenuItem mapFromDTO(MenuItemDTO menuItemDTO);
+
 }

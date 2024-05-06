@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.zajavka.domain.Restaurant;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -19,5 +19,7 @@ public class MenuItemDTO {
     private BigDecimal price;
     private String category;
     private String restaurantName;
+    private MultipartFile image;
     private String imagePath;
+
 }

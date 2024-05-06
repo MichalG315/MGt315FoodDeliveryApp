@@ -40,6 +40,7 @@ public interface FoodOrderEntityMapper {
                 .receivedDateTime(foodOrderEntity.getReceivedDateTime())
                 .completedDateTime(foodOrderEntity.getCompletedDateTime())
                 .totalAmount(foodOrderEntity.getTotalAmount())
+                .status(foodOrderEntity.getStatus())
                 .build();
     }
 }

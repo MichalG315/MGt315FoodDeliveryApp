@@ -6,6 +6,7 @@ import pl.zajavka.business.dao.FoodOrderDAO;
 import pl.zajavka.domain.Order;
 
 import java.time.OffsetDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -16,6 +17,10 @@ public class FoodOrderService {
 
     public List<Order> availableFoodOrdersByUserName(String userName) {
         return foodOrderDAO.availableFoodOrdersByUserName(userName);
+    }
+
+    public List<Order> availableFoodOrdersByRestaurantName(String restaurantUserName) {
+        return foodOrderDAO.availableFoodOrdersByRestaurantName(restaurantUserName);
     }
 
     public void saveFoodOrder(Order order, String restaurantName, String userName) {
@@ -33,5 +38,10 @@ public class FoodOrderService {
 
     public Order findFoodOrder(String orderNumber) {
         return foodOrderDAO.findFoodOrder(orderNumber);
+    }
+
+    public void setCompletedDateTime(String orderNumber) {
+        OffsetDateTime completedDateTime = OffsetDateTime.now();
+        foodOrderDAO.setCompletedDateTime(orderNumber,completedDateTime);
     }
 }
