@@ -57,6 +57,7 @@
 </p>
 <br>
 <div class="container">
+    <div class="row">
     <table class="table">
         <thead class="table-dark">
         <tr>
@@ -89,10 +90,22 @@
         </tr>
         </tbody>
     </table>
-<br>
-<br>
 
-    <b><p>Your order: </p></b>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <a>Streets:</a>
+        </div>
+        <div class="col-sm-6">
+            <div th:text="${#strings.listJoin(streetNames, ', ')}"></div>
+        </div>
+    </div>
+</div>
+        <br>
+
+    <p><b>Your order: </b></p>
     <table class="table">
         <thead class="table-dark">
         <tr>
@@ -119,7 +132,7 @@
     <form action="#" th:action="@{/order/{restaurantName}/submit/{userName}(restaurantName=${restaurantDTO.restaurantName}, userName=${#authentication.getName()})}" method="POST">
         <button type="submit" class="btn btn-info">Submit your order</button>
     </form>
-
+</div>
 
 </div>
 </body>

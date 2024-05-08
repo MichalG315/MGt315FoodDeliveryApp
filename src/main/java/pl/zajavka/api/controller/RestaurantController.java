@@ -1,5 +1,6 @@
 package pl.zajavka.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.business.*;
 import pl.zajavka.domain.MenuItem;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +93,10 @@ public class RestaurantController {
     @GetMapping(value = RESTAURANT_PAGE + ADD)
     public ModelAndView getAddMenuItem() {
 
-        Map<String, ?> model = Map.of("menuItemDTO", new MenuItemDTO());
+        Map<String, ?> model = Map.of("menuItemDTO", new MenuItemDTO(),
+                "CategoriesDTO", Arrays.stream(MenuItemCategories.values())
+                        .map(MenuItemCategories::getToPrint).toList());
+
 
         return new ModelAndView("restaurant_add_menu_item", model);
     }
@@ -99,7 +104,7 @@ public class RestaurantController {
     @PostMapping(value = RESTAURANT_PAGE + ADD + RESTAURANT_USER_NAME)
     public String addMenuItem(
             @PathVariable String restaurantUserName,
-            @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
+           @Valid @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
             @RequestParam("image") MultipartFile file
     ) {
         String imagePath = imageService.saveImage(file);

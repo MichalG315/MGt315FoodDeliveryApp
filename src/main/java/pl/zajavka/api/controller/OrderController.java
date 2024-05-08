@@ -13,15 +13,13 @@ import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
-import pl.zajavka.business.FoodOrderService;
-import pl.zajavka.business.MenuItemService;
-import pl.zajavka.business.OrderService;
-import pl.zajavka.business.RestaurantService;
+import pl.zajavka.business.*;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,6 +38,7 @@ public class OrderController {
     private final MenuItemService menuItemService;
     private final OrderService orderService;
     private final FoodOrderService foodOrderService;
+    private final RestaurantDeliveryAddressesService restaurantDeliveryAddressesService;
 
     private final RestaurantMapper restaurantMapper;
     private final MenuItemMapper menuItemMapper;
@@ -57,9 +56,13 @@ public class OrderController {
                         .map(menuItemMapper::mapToDTO)
                         .toList();
 
+        Set<String> streetNames = restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName);
+        Set<String> cities = restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName);
 
         model.addAttribute("restaurantDTO", restaurantDTO);
         model.addAttribute("menuItemDTOs", menuItemsByRestaurantName);
+        model.addAttribute("streetNames", streetNames);
+        model.addAttribute("cities", cities);
         model.addAttribute("orderDTOs", cart);
 
         return "order";

@@ -1,6 +1,9 @@
 package pl.zajavka.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.RestaurantDAO;
 import pl.zajavka.domain.Address;
@@ -33,10 +36,26 @@ public class RestaurantRepository implements RestaurantDAO {
     private final AddressExtendedEntityMapper addressExtendedEntityMapper;
 
     @Override
-    public List<Restaurant> findAvailable() {
-        return restaurantJpaRepository.findAll().stream()
-                .map(restaurantEntityMapper::mapFromEntity)
-                .toList();
+    public Page<Restaurant> findAvailable(Pageable pageable) {
+        return restaurantJpaRepository.findAll(pageable).map(restaurantEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public Page<Restaurant> findAvailableWithStreetName(Pageable pageable, String streetName) {
+        return restaurantJpaRepository.findAllByRestaurantDeliveryAddresses_Address_StreetName(pageable, streetName)
+                .map(restaurantEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public Page<Restaurant> findAvailableWithCity(Pageable pageable, String city) {
+        return restaurantJpaRepository.findAllByRestaurantDeliveryAddresses_Address_City(pageable, city)
+                .map(restaurantEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public Page<Restaurant> findAvailableWithStreetNameAndCity(Pageable pageable, String streetName, String city) {
+        return restaurantJpaRepository.findAllByRestaurantDeliveryAddresses_Address_StreetNameAndRestaurantDeliveryAddresses_Address_City(pageable, streetName, city)
+                .map(restaurantEntityMapper::mapFromEntity);
     }
 
     @Override

@@ -20,15 +20,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class OrderService {
 
-    private final RestaurantService restaurantService;
     private final FoodOrderService foodOrderService;
 
     private final MenuItemMapper menuItemMapper;
-
-    public List<Restaurant> availableRestaurants() {
-        return restaurantService.findAvailable();
-    }
-
 
     public void buildAndSaveOrder(String restaurantName, String userName, List<MenuItemDTO> cart) {
         Order order = Order.builder()

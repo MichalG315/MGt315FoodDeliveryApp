@@ -51,11 +51,114 @@
 <br>
 <p class="text-center">There is a list of restaurants!</p>
 <br>
+
+<div class="container">
+    <div class="row col-sm-8">
+        <div class="col-sm-2">
+            Total records: [[${totalItems}]]
+        </div>
+
+        <div class="col-sm-1">
+            <a th:if="${currentPage > 1}" th:href="@{/customerPage(currentPage=1, pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">First</a>
+            <span th:unless="${currentPage > 1}">First</span>
+        </div>
+
+        <div class="col-sm-1">
+            <a th:if="${currentPage > 1}" th:href="@{/customerPage(currentPage=${currentPage - 1}, pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">Previous</a>
+            <span th:unless="${currentPage > 1}">Previous</span>
+        </div>
+
+        <div class="col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{/customerPage(currentPage=${currentPage + 1}, pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+
+        <div class="col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{/customerPage(currentPage=${totalPages}, pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">Last</a>
+            <span th:unless="${currentPage < totalPages}">Last</span>
+        </div>
+
+        <div class="col-sm-2">
+            Page number:
+        </div>
+
+        <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+              <a th:if="${currentPage != i}" th:href="@{/customerPage(currentPage=${i}, pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">[[${i}]]</a>
+              <span th:unless="${currentPage != i}">[[${i}]]</span>
+            </span>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row col-sm-3">
+            <div class="col-sm-6">
+                Records per page:
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${pageSize != 1}" th:href="@{/customerPage(currentPage=${currentPage},pageSize='1', sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">1</a>
+                <span th:unless="${pageSize != 1}">1</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${pageSize != 2}" th:href="@{/customerPage(currentPage=${currentPage},pageSize='2', sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">2</a>
+                <span th:unless="${pageSize != 2}">2</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${pageSize != 3}" th:href="@{/customerPage(currentPage=${currentPage},pageSize='3', sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">3</a>
+                <span th:unless="${pageSize != 3}">3</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${pageSize != 4}" th:href="@{/customerPage(currentPage=${currentPage},pageSize='4', sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">4</a>
+                <span th:unless="${pageSize != 4}">4</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${pageSize != 5}" th:href="@{/customerPage(currentPage=${currentPage},pageSize='5', sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">5</a>
+                <span th:unless="${pageSize != 5}">5</span>
+            </div>
+    </div>
+</div>
+<div class="container">
+        <form
+                class="form-inline"
+                method="get"
+                th:action="@{/customerPage(currentPage=${currentPage},pageSize=${pageSize}, sortField=${restaurantName},sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}"
+        >
+                <div class="form-group mb-2">
+                    <label for="Cities" class="sr-only">City</label>
+                            <select id="Cities" th:name="city" th:object="${citiesDTO}">
+                                <option th:each="city : ${citiesDTO}" th:value="${city}" th:text="${city}"></option>
+                            </select>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="StreetNames" class="sr-only">Street name</label>
+                            <select id="StreetNames" th:name="streetName" th:object="${streetNamesDTO}">
+                                <option th:each="streetName : ${streetNamesDTO}" th:value="${streetName}" th:text="${streetName}"></option>
+                            </select>
+                </div>
+
+                    <button class="btn btn-primary mb-2" type="submit">Filter</button>
+
+        </form>
+</div>
+
+<div class="container">
+    <div class="col-sm-6">
+        Results are filtered by city: <b>[[${city}]]</b> and street: <b>[[${streetName}]]</b>
+    </div>
+</div>
+
+<br>
     <div class="container">
             <table class="table">
                 <thead class="table-dark">
                 <tr>
-                    <th>Restaurant name</th>
+                    <th>
+                        <a th:href="@{/customerPage(currentPage=${currentPage},pageSize=${pageSize},sortField='restaurantName',sortDirection=${reverseSortDirection}, city=${city}, streetName=${streetName})}">
+                            Restaurant name
+                        </a>
+                    </th>
                     <th>Description</th>
                     <th>Restaurant address</th>
                     <th></th>
@@ -75,6 +178,7 @@
                 </tr>
                 </tbody>
             </table>
+        <br>
     </div>
 
 </body>

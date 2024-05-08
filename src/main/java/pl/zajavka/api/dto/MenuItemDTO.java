@@ -1,9 +1,14 @@
 package pl.zajavka.api.dto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -13,9 +18,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuItemDTO {
+
+
     private String menuItemNumber;
+    @Length(max = 64)
     private String itemName;
     private String description;
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal price;
     private String category;
     private String restaurantName;

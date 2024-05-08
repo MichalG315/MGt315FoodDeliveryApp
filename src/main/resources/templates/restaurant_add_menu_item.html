@@ -83,7 +83,7 @@
                                 class="form-control"
                                 id="itemName"
                                 name="itemName"
-                                placeholder="Enter menu item name"
+                                placeholder="Please enter up to 64 characters"
                                 th:field="*{itemName}"
                                 type="text"
                         />
@@ -111,26 +111,19 @@
                                 class="form-control"
                                 id="price"
                                 name="price"
-                                placeholder="Enter price"
+                                placeholder="Please enter price with two decimal places (separate numbers with dot)"
                                 th:field="*{price}"
                                 type="text"
                         />
-                        <!--                        <p th:errors = "*{password}" class="text-danger"-->
-                        <!--                           th:if="${#fields.hasErrors('password')}"></p>-->
+<!--                                                <p th:errors = "*{price}" class="text-danger"-->
+<!--                                                   th:if="${#fields.hasErrors('[price]')}"></p>-->
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Category</label>
-                        <input
-                                class="form-control"
-                                id="category"
-                                name="category"
-                                placeholder="Enter category"
-                                th:field="*{category}"
-                                type="text"
-                        />
-                        <!--                        <p th:errors = "*{password}" class="text-danger"-->
-                        <!--                           th:if="${#fields.hasErrors('password')}"></p>-->
+                        <label for="Categories" class="form-label">Category</label>
+                        <select id="Categories" th:name="category">
+                            <option th:each="category : ${CategoriesDTO}" th:value="${category}" th:text="${category}"></option>
+                        </select>
                     </div>
 
                     <div class="form-group mb-3">

@@ -20,11 +20,6 @@
             <div class="card-header">
                 <h2 class="text-center">Restaurant registration</h2>
             </div>
-<!--            <div th:if="${param.success}">-->
-<!--                <div class="alert alert-info">-->
-<!--                    You have successfully registered our app!-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="card-body">
                 <form
                         method="post"
@@ -38,7 +33,7 @@
                                 class="form-control"
                                 id="userName"
                                 name="userName"
-                                placeholder="Enter user name"
+                                placeholder="Please enter between 5 to 64 characters"
                                 th:field="*{userName}"
                                 type="text"
                         />
@@ -52,7 +47,7 @@
                                 class="form-control"
                                 id="email"
                                 name="email"
-                                placeholder="Enter email address"
+                                placeholder="Please enter email like identifier@domain.com"
                                 th:field="*{email}"
                                 type="text"
                         />
@@ -66,7 +61,7 @@
                                 class="form-control"
                                 id="password"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Please enter between 8 to 128 characters"
                                 th:field="*{password}"
                                 type="text"
                         />
@@ -80,7 +75,7 @@
                                 class="form-control"
                                 id="restaurantName"
                                 name="restaurantName"
-                                placeholder="Enter restaurantName"
+                                placeholder="Please enter between 1 to 32 characters"
                                 th:field="*{restaurantName}"
                                 type="text"
                         />
