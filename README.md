@@ -15,4 +15,4 @@ The aim of the project was to create an application in the MVC architecture that
 - The customer can see the confirmation of the placed order based on the generated order number.
 - The customer may cancel the order if less than 20 minutes have passed since it was placed.
 - The owner of the restaurant can see the orders, divided into pending and completed.
-- The owner of the premises indicates that the order has been completed.
+- The owner of the premises indicates that the order has been completed. 

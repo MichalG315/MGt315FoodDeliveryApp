@@ -3,10 +3,8 @@ package pl.zajavka.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
@@ -47,7 +45,10 @@ public class OrderController {
     private final List<MenuItemDTO> cart = new ArrayList<>();
 
     @GetMapping(ORDER + RESTAURANT_NAME)
-    public String showRestaurantPage(@PathVariable String restaurantName, Model model) {
+    public String showRestaurantPage(
+            @PathVariable String restaurantName,
+            Model model
+    ) {
 
         RestaurantDTO restaurantDTO = restaurantMapper.mapToDTO(restaurantService.findByRestaurantName(restaurantName));
 
@@ -64,6 +65,7 @@ public class OrderController {
         model.addAttribute("streetNames", streetNames);
         model.addAttribute("cities", cities);
         model.addAttribute("orderDTOs", cart);
+        model.addAttribute("addressDTO", new AddressDTO());
 
         return "order";
     }
@@ -93,7 +95,9 @@ public class OrderController {
     @PostMapping(ORDER + RESTAURANT_NAME + SUBMIT + USER_NAME)
     public String submitOrder(
             @PathVariable String restaurantName,
-            @PathVariable String userName) {
+            @PathVariable String userName,
+            @ModelAttribute("addressDTO") AddressDTO addressDTO
+    ) {
         orderService.buildAndSaveOrder(restaurantName, userName, cart);
         cart.clear();
         return "redirect:" + CUSTOMER_ORDERS + "/" + userName;
