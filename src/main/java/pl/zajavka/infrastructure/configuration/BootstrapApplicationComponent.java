@@ -32,42 +32,39 @@ public class BootstrapApplicationComponent implements ApplicationListener<Contex
         foodOrderRepository.deleteAll();
         menuItemRepository.deleteAll();
 
-        String restaurantName = "Chicken";
+        String restaurantName = "Pizza center";
 
         menuItemRepository.saveMenuItem(MenuItem.builder()
-                .itemName("Chicken nuggets")
+                .itemName("Everyday pizza")
                 .menuItemNumber(menuItemService.assignNumber(restaurantName))
                 .description("""
-                        A chicken nugget is a food product consisting of a small piece of deboned chicken meat that
-                        is breaded or battered, then deep-fried or baked.
+                        Pizza with tomato sauce, mozzarella and ham.
                         """)
-                .price(new BigDecimal(10))
-                .category("Meat")
-                .imagePath("/images/foodImages/logo2.png")
+                .price(new BigDecimal(20))
+                .category("Pizza")
+                .imagePath("/images/foodImages/everyday_pizza.png")
                 .build(), restaurantName);
 
         menuItemRepository.saveMenuItem(MenuItem.builder()
-                .itemName("Chicken & Broccoli")
+                .itemName("Pepperoni pizza")
                 .menuItemNumber(menuItemService.assignNumber(restaurantName))
                 .description("""
-                        This fast and easy one-pot chicken and broccoli recipe is coated in a sweet and savory
-                        sauce with plenty of ginger and garlic for a weeknight dinner that beats take-out.
-                        This dish comes together in 20 minutes with minimal prep work too. Win win!
+                        Pizza with tomato sauce, mozzarella and pepperoni.
                         """)
-                .price(new BigDecimal(12))
-                .category("Meat")
+                .price(new BigDecimal(25))
+                .category("Pizza")
+                .imagePath("/images/foodImages/pepperoni_pizza.png")
                 .build(), restaurantName);
 
         menuItemRepository.saveMenuItem(MenuItem.builder()
-                .itemName("Chicken, Spinach, & Artichoke Lasagna")
+                .itemName("Vegetariana pizza")
                 .menuItemNumber(menuItemService.assignNumber(restaurantName))
                 .description("""
-                        We love spinach–artichoke anything—the cheesy and veggie-packed combo is always a hit.
-                        While we’ve already paired these flavors with gnocchi, tortellini, pasta shells, and more,
-                        making a super-cheesy chicken, spinach, and artichoke lasagna just had to happen.
+                        Pizza with tomato sauce, mozzarella, corn, pepper and onion.
                         """)
-                .price(new BigDecimal(15))
-                .category("Meat")
+                .price(new BigDecimal(23))
+                .category("Pizza")
+                .imagePath("/images/foodImages/vegetariana_pizza.png")
                 .build(), restaurantName);
     }
 }

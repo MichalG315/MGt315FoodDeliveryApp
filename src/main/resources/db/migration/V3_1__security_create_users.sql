@@ -17,7 +17,7 @@ insert into food_app_user (user_name, email, password, active) values ('restaura
 
 UPDATE customer SET user_id = 1 WHERE email = 'customer_testowy@gmail.com';
 
-UPDATE restaurant SET user_id = 2 WHERE restaurant_name = 'Chicken';
+UPDATE restaurant SET user_id = 2 WHERE restaurant_name = 'Pizza center';
 UPDATE restaurant SET user_id = 3 WHERE restaurant_name = 'VegeWorld';
 UPDATE restaurant SET user_id = 4 WHERE restaurant_name = 'SoupHarbor';
 UPDATE restaurant SET user_id = 5 WHERE restaurant_name = 'Coffee and sweets';

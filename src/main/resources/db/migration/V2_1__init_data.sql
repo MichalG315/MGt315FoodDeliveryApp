@@ -16,7 +16,7 @@ VALUES
 
 INSERT INTO restaurant (restaurant_name, description, address_extended_id)
 VALUES
-('Chicken', 'We like chicken', 1),
+('Pizza center', 'Welcome', 1),
 ('VegeWorld', 'We do not like chicken', 2),
 ('SoupHarbor', 'Soup is our world!', 3),
 ('Coffee and sweets', 'Best coffee in the city', 4),
