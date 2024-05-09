@@ -14,7 +14,8 @@ public enum MenuItemCategories {
     SANDWICH("Sandwich"),
     SOUP("Soup"),
     SALAD("Salad"),
-    BEVERAGE("Beverage");
+    BEVERAGE("Beverage"),
+    PIZZA("Pizza");
 
     private final String toPrint;
 
