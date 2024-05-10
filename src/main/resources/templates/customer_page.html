@@ -144,7 +144,7 @@
 
 <div class="container">
     <div class="col-sm-6">
-        Results are filtered by city: <b>[[${city}]]</b> and street: <b>[[${streetName}]]</b>
+        Results are filtered by city: <b>[[${city}]]</b> and delivery street: <b>[[${streetName}]]</b>
     </div>
 </div>
 
@@ -160,6 +160,7 @@
                     </th>
                     <th>Description</th>
                     <th>Restaurant address</th>
+                    <th>Delivery streets</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -168,6 +169,11 @@
                     <td th:text="${restaurant.restaurantName}"></td>
                     <td th:text="${restaurant.description}"></td>
                     <td th:text="${restaurant.completeAddress}"></td>
+                    <td>
+                        <select id="RestaurantStreetNames" th:name="streetName">
+                            <option th:each="streetName : ${restaurant.restaurantDeliveryStreetNames}" th:value="${streetName}" th:text="${streetName}"></option>
+                        </select>
+                    </td>
                     <td>
                         <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
                               method="GET">

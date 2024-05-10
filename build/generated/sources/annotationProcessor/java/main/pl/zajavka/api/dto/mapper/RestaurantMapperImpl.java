@@ -1,5 +1,7 @@
 package pl.zajavka.api.dto.mapper;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import pl.zajavka.api.dto.RestaurantDTO;
@@ -8,7 +10,7 @@ import pl.zajavka.domain.Restaurant;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-07T20:15:30+0200",
+    date = "2024-05-10T21:53:05+0200",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -34,26 +36,6 @@ public class RestaurantMapperImpl implements RestaurantMapper {
     }
 
     @Override
-    public Restaurant mapFromDTO(RestaurantDTO RestaurantDTO) {
-        if ( RestaurantDTO == null ) {
-            return null;
-        }
-
-        Restaurant.RestaurantBuilder restaurant = Restaurant.builder();
-
-        restaurant.restaurantName( RestaurantDTO.getRestaurantName() );
-        restaurant.description( RestaurantDTO.getDescription() );
-        restaurant.addressCountry( RestaurantDTO.getAddressCountry() );
-        restaurant.addressCity( RestaurantDTO.getAddressCity() );
-        restaurant.addressPostalCode( RestaurantDTO.getAddressPostalCode() );
-        restaurant.addressStreetName( RestaurantDTO.getAddressStreetName() );
-        restaurant.addressStreetNumber( RestaurantDTO.getAddressStreetNumber() );
-        restaurant.completeAddress( RestaurantDTO.getCompleteAddress() );
-
-        return restaurant.build();
-    }
-
-    @Override
     public RestaurantDTO mapToDTO(Restaurant restaurant) {
         if ( restaurant == null ) {
             return null;
@@ -69,6 +51,10 @@ public class RestaurantMapperImpl implements RestaurantMapper {
         restaurantDTO.addressStreetName( restaurant.getAddressStreetName() );
         restaurantDTO.addressStreetNumber( restaurant.getAddressStreetNumber() );
         restaurantDTO.completeAddress( restaurant.getCompleteAddress() );
+        Set<String> set = restaurant.getRestaurantDeliveryStreetNames();
+        if ( set != null ) {
+            restaurantDTO.restaurantDeliveryStreetNames( new LinkedHashSet<String>( set ) );
+        }
 
         return restaurantDTO.build();
     }

@@ -55,39 +55,68 @@
 </nav>
 
 <br>
-<p class="text-center">There is a list of your orders!</p>
+<p class="text-center">There is a list of your delivery addresses!</p>
 <br>
 <div class="container">
     <table class="table">
         <thead class="table-dark">
         <tr>
-            <th>Order number</th>
-            <th>Date and time of the order</th>
-            <th>Date and time of delivery</th>
-            <th>Total amount</th>
-            <th>Status</th>
-            <th></th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Postal code</th>
+            <th>Street</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="order : ${availableCustomerOrderDTOs}">
-            <td th:text="${order.orderNumber}"></td>
-            <td th:text="${order.receivedDateTime}"></td>
-            <td th:text="${order.completedDateTime}"></td>
-            <td th:text="${order.totalAmount}"></td>
-            <td th:text="${order.status}"></td>
-            <td>
-                <span th:unless="${order?.completedDateTime}">
-                    <form action="#" th:action="@{/restaurantPage/orders/delivered/{userName}/{orderNumber}(userName=${#authentication.getName()}, orderNumber=${order.orderNumber})}" th:method="PATCH">
-                        <button type="submit" class="btn btn-info">Delivered</button>
-                    </form>
-                </span>
-            </td>
+        <tr th:each="address : ${deliveryAddresses}">
+            <td th:text="${address.country}"></td>
+            <td th:text="${address.city}"></td>
+            <td th:text="${address.postalCode}"></td>
+            <td th:text="${address.streetName}"></td>
         </tr>
         </tbody>
     </table>
-
 </div>
+<br>
+<br>
+<br>
+<div class="container">
+<form action="#" th:action="@{/restaurantPage/address/{userName}/add(userName=${#authentication.getName()})}"
+      method="POST"
+      th:object="${addressDTO}"
+>
+
+    <div class="form-group mb-3">
+        <label for="country" class="col-sm-2 col-form-label">Country</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{country}" class="form-control" id="country" placeholder="Country">
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <label for="city" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{city}" class="form-control" id="city" placeholder="City">
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <label for="postalCode" class="col-sm-2 col-form-label">Postal code</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{postalCode}" class="form-control" id="postalCode" placeholder="Postal code">
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <label for="streetName" class="col-sm-2 col-form-label">Street name</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{streetName}" class="form-control" id="streetName" placeholder="Street name">
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-info">Add delivery address</button>
+</form>
+</div>
+<br>
+<br>
+<br>
 
 </body>
 </html>

@@ -5,6 +5,9 @@ import org.mapstruct.ReportingPolicy;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestaurantEntityMapper {
 
@@ -19,6 +22,9 @@ public interface RestaurantEntityMapper {
                 .addressStreetName(restaurantEntity.getAddressExtended().getAddress().getStreetName())
                 .addressStreetNumber(restaurantEntity.getAddressExtended().getStreetNumber())
                 .completeAddress(buildCompleteAddress(restaurantEntity))
+                .restaurantDeliveryStreetNames(restaurantEntity.getRestaurantDeliveryAddresses().stream()
+                        .map(a -> a.getAddress().getStreetName())
+                        .collect(Collectors.toCollection(TreeSet::new)))
                 .build();
     }
 

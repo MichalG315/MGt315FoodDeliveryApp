@@ -7,11 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
+import pl.zajavka.api.dto.mapper.AddressMapper;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.business.*;
+import pl.zajavka.domain.Address;
 import pl.zajavka.domain.MenuItem;
 
 import java.util.Arrays;
@@ -29,24 +32,23 @@ public class RestaurantController {
     static final String ORDER_NUMBER = "/{orderNumber}";
     static final String DELIVERED = "/delivered";
     static final String ADD = "/add";
-
-    static final String DIRECTORY = System.getProperty("user.dir") + "/src/main/java/pl/zajavka/uploads";
-
+    static final String ADDRESS = "/address";
 
     private final UserService userService;
     private final RestaurantService restaurantService;
     private final MenuItemService menuItemService;
     private final FoodOrderService foodOrderService;
     private final ImageService imageService;
+    private final RestaurantDeliveryAddressesService restaurantDeliveryAddressesService;
 
     private final MenuItemMapper menuItemMapper;
     private final OrderMapper orderMapper;
+    private final AddressMapper addressMapper;
 
     @GetMapping(value = RESTAURANT_PAGE)
     public String getRestaurantPage() {
         return "restaurant_page";
     }
-
 
     @GetMapping(value = RESTAURANT_PAGE + MENU + RESTAURANT_USER_NAME)
     public String getMenuItemsPage(
@@ -104,7 +106,7 @@ public class RestaurantController {
     @PostMapping(value = RESTAURANT_PAGE + ADD + RESTAURANT_USER_NAME)
     public String addMenuItem(
             @PathVariable String restaurantUserName,
-           @Valid @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
+            @Valid @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
             @RequestParam("image") MultipartFile file
     ) {
         String imagePath = imageService.saveImage(file);
@@ -115,4 +117,29 @@ public class RestaurantController {
         return "redirect:/";
     }
 
+    @GetMapping(value = RESTAURANT_PAGE + ADDRESS + RESTAURANT_USER_NAME)
+    public String getAddAddress(
+            @PathVariable String restaurantUserName,
+            Model model
+    ) {
+        List<AddressDTO> deliveryAddresses = restaurantDeliveryAddressesService
+                .findDeliveryAddresses(restaurantUserName).stream()
+                .map(addressMapper::mapToDTO)
+                .toList();
+
+        model.addAttribute("addressDTO", new AddressDTO());
+        model.addAttribute("deliveryAddresses", deliveryAddresses);
+
+        return "restaurant_add_delivery_address";
+    }
+
+    @PostMapping(value = RESTAURANT_PAGE + ADDRESS + RESTAURANT_USER_NAME + ADD)
+    public String deliveryAddressAdded(
+            @PathVariable String restaurantUserName,
+            @Valid @ModelAttribute("addressDTO") AddressDTO addressDTO
+    ) {
+        Address address = addressMapper.mapFromDTO(addressDTO);
+        restaurantDeliveryAddressesService.saveNewDeliveryAddress(restaurantUserName, address);
+        return "redirect:/restaurantPage/address/" + restaurantUserName;
+    }
 }

@@ -6,12 +6,10 @@ import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.domain.Restaurant;
 
 @Mapper(componentModel = "spring")
-public interface RestaurantMapper extends AddressMapper {
+public interface RestaurantMapper {
 
 
     Restaurant mapFromDTO(UserRestaurantDTO userRestaurantDTO);
-
-    Restaurant mapFromDTO(RestaurantDTO RestaurantDTO);
 
     RestaurantDTO mapToDTO(Restaurant restaurant);
 

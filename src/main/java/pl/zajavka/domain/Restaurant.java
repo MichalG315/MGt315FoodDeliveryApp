@@ -2,6 +2,9 @@ package pl.zajavka.domain;
 
 import lombok.*;
 
+import java.util.List;
+import java.util.Set;
+
 @With
 @Value
 @Builder
@@ -17,4 +20,5 @@ public class Restaurant {
     String addressStreetName;
     String addressStreetNumber;
     String completeAddress;
+    Set<String> restaurantDeliveryStreetNames;
 }

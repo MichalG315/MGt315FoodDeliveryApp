@@ -1,5 +1,6 @@
 package pl.zajavka.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,11 +97,24 @@ public class OrderController {
     public String submitOrder(
             @PathVariable String restaurantName,
             @PathVariable String userName,
-            @ModelAttribute("addressDTO") AddressDTO addressDTO
+            @Valid @ModelAttribute("addressDTO") AddressDTO addressDTO
     ) {
-        orderService.buildAndSaveOrder(restaurantName, userName, cart);
-        cart.clear();
-        return "redirect:" + CUSTOMER_ORDERS + "/" + userName;
+        Set<String> city = restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName);
+        Set<String> street = restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName);
+        if (restaurantDeliveryAddressMatchesCustomerAddress(addressDTO, city, street)) {
+            orderService.buildAndSaveOrder(restaurantName, userName, cart);
+            cart.clear();
+            return "redirect:" + CUSTOMER_ORDERS + "/" + userName;
+        } else {
+            return "error_customer_address";
+        }
+    }
+
+    private boolean restaurantDeliveryAddressMatchesCustomerAddress(AddressDTO addressDTO, Set<String> city, Set<String> street) {
+        if (city.contains(addressDTO.getCity())) {
+            return street.contains(addressDTO.getStreetName());
+        }
+        return false;
     }
 
     @GetMapping(value = CUSTOMER_ORDERS + USER_NAME)

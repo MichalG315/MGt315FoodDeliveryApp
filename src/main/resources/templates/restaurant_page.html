@@ -15,7 +15,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand">
-            <!--            /images/allPermitImages/logo.png-->
             <img th:src="@{/images/allPermitImages/logo.png}" alt="logo" width="40" height="30" class="d-inline-block align-middle">
             Food App
         </a>
@@ -37,7 +36,7 @@
                     <a class="nav-link" th:href="@{/restaurantPage/add}">Add menu item</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}">Menage addresses</a>
+                    <a class="nav-link" th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}">Add delivery addresses</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -71,7 +70,7 @@
             <a th:href="@{/restaurantPage/add}" class="btn btn-info" role="button">Add menu item</a>
         </div>
         <div class="col-2">
-            <a th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Menage addresses</a>
+            <a th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}" class="btn btn-info" role="button">Add delivery addresses</a>
         </div>
     </div>
 

@@ -15,7 +15,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand">
-            <!--            /images/allPermitImages/logo.png-->
             <img th:src="@{/images/allPermitImages/logo.png}" alt="logo" width="40" height="30" class="d-inline-block align-middle">
             Food App
         </a>
@@ -28,16 +27,10 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/restaurantPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>
+                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/restaurantPage/menu/{userName}(userName=${#authentication.getName()})}">Menu items</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/restaurantPage/add}">Add menu item</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/restaurantPage/address/{userName}(userName=${#authentication.getName()})}">Add delivery addresses</a>
+                    <a class="nav-link" th:href="@{/customerPage/orders/{userName}(userName=${#authentication.getName()})}">Your orders</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -53,34 +46,26 @@
         </div>
     </div>
 </nav>
+
+<br>
 <br>
 <div class="container">
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>Meals/ Beverages</th>
-            <th>Number</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Image</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="menuItem : ${menuItemDTOs}">
-            <td th:text="${menuItem.itemName}"></td>
-            <td th:text="${menuItem.menuItemNumber}"></td>
-            <td th:text="${menuItem.description}"></td>
-            <td th:text="${menuItem.category}"></td>
-            <td th:text="${menuItem.price}"></td>
-            <td>
-                <img th:src="@{${menuItem.imagePath}}" style="width: 100px; height: 100px;">
-            </td>
-        </tr>
-        </tbody>
-    </table>
     <br>
     <br>
+    <p><b>Your delivery address is probably not available for this restaurant's delivery address.</b></p>
+    <br>
+    <br>
+    <img th:src="@{/images/allPermitImages/error.png}" alt="ERROR" width="auto" height="300px"/>
+    <br>
+    <br>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <a th:href="@{/}" class="btn btn-info" role="button">Home</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/customerPage}" class="btn btn-info" role="button">Customer</a>
+        </div>
+    </div>
 
 
 </div>
