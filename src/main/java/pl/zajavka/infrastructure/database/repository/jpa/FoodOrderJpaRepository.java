@@ -14,7 +14,6 @@ public interface FoodOrderJpaRepository extends JpaRepository<FoodOrderEntity, I
 
     List<FoodOrderEntity> findAllByCustomer(CustomerEntity customer);
 
-
     FoodOrderEntity findByFoodOrderNumber(String orderNumber);
 
     List<FoodOrderEntity> findAllByRestaurant(RestaurantEntity restaurant);

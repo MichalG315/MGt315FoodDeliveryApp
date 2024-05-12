@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version "${springDependencyVersion}"
 //    id 'org.openapi.generator' version "${openapiGeneratorVersion}"
+    id 'jacoco'
 }
 
 group = 'pl.zajavka'
@@ -91,7 +92,35 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
+    finalizedBy jacocoTestReport
 }
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtmlCustom')
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+//                counter = 'LINE'
+//                value = 'COVEREDRATIO'
+//                minimum = 0.5
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
 
 //compileJava.dependsOn tasks.openApiGenerate
 compileJava.options.encoding = 'UTF-8'
