@@ -101,6 +101,16 @@ jacoco {
 
 jacocoTestReport {
     dependsOn test
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "pl/zajavka/api/dto/mapper",
+                    "pl/zajavka/infrastructure/database/repository/mapper"
+            ])
+        }))
+    }
+
     reports {
         xml.required = false
         csv.required = false

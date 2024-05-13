@@ -22,7 +22,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.AddressJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantDeliveryAddressesJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 
-import static pl.zajavka.infrastructure.database.repository.support.EntityFixtures.*;
+import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yaml")
@@ -70,22 +70,67 @@ class RestaurantRepositoryDataJpaTest {
     @Test
     void canFindAllRestaurantsByStreetName() {
         // given
-//        AddressEntity address = addressJpaRepository.saveAndFlush(someAddress1());
-//        AddressExtendedEntity addressExtended = addressExtendedJpaRepository
-//                .saveAndFlush(someAddressExtended1(address));
-//        RestaurantEntity restaurant = restaurantJpaRepository.saveAndFlush(someRestaurant1(addressExtended));
-//        RestaurantDeliveryAddressEntity restaurantDeliveryAddressEntity = restaurantDeliveryAddressesJpaRepository.saveAndFlush(RestaurantDeliveryAddressEntity.builder()
-//                .address(address)
-//                .restaurant(restaurant)
-//                .build());
-//        Sort sort = Sort.by("restaurantName").ascending();
-//        Pageable pageable = PageRequest.of(1, 3, sort);
-//
-//        // when
-//        Page<RestaurantEntity> result = restaurantJpaRepository
-//                .findAllByRestaurantDeliveryAddresses_Address_StreetName(pageable, address.getStreetName());
-//
-//        // then
-//        Assertions.assertThat(result.getContent().get(0)).isEqualTo(restaurant);
+        AddressEntity address = addressJpaRepository.saveAndFlush(someAddress1());
+        AddressExtendedEntity addressExtended = addressExtendedJpaRepository
+                .saveAndFlush(someAddressExtended1(address));
+        RestaurantEntity restaurant = restaurantJpaRepository.saveAndFlush(someRestaurant1(addressExtended));
+        restaurantDeliveryAddressesJpaRepository.saveAndFlush(RestaurantDeliveryAddressEntity.builder()
+                .address(address)
+                .restaurant(restaurant)
+                .build());
+        Sort sort = Sort.by("restaurantName").ascending();
+        Pageable pageable = PageRequest.of(0, 3, sort);
+
+        // when
+        Page<RestaurantEntity> result = restaurantJpaRepository
+                .findAllByRestaurantDeliveryAddresses_Address_StreetName(pageable, address.getStreetName());
+
+        // then
+        Assertions.assertThat(result.getContent().get(0)).isEqualTo(restaurant);
+    }
+
+    @Test
+    void canFindAllRestaurantsByCity() {
+        // given
+        AddressEntity address = addressJpaRepository.saveAndFlush(someAddress1());
+        AddressExtendedEntity addressExtended = addressExtendedJpaRepository
+                .saveAndFlush(someAddressExtended1(address));
+        RestaurantEntity restaurant = restaurantJpaRepository.saveAndFlush(someRestaurant1(addressExtended));
+        restaurantDeliveryAddressesJpaRepository.saveAndFlush(RestaurantDeliveryAddressEntity.builder()
+                .address(address)
+                .restaurant(restaurant)
+                .build());
+        Sort sort = Sort.by("restaurantName").ascending();
+        Pageable pageable = PageRequest.of(0, 3, sort);
+
+        // when
+        Page<RestaurantEntity> result = restaurantJpaRepository
+                .findAllByRestaurantDeliveryAddresses_Address_City(pageable, address.getCity());
+
+        // then
+        Assertions.assertThat(result.getContent().get(0)).isEqualTo(restaurant);
+    }
+
+    @Test
+    void canFindAllRestaurantsByStreetNameAndCity() {
+        // given
+        AddressEntity address = addressJpaRepository.saveAndFlush(someAddress1());
+        AddressExtendedEntity addressExtended = addressExtendedJpaRepository
+                .saveAndFlush(someAddressExtended1(address));
+        RestaurantEntity restaurant = restaurantJpaRepository.saveAndFlush(someRestaurant1(addressExtended));
+        restaurantDeliveryAddressesJpaRepository.saveAndFlush(RestaurantDeliveryAddressEntity.builder()
+                .address(address)
+                .restaurant(restaurant)
+                .build());
+        Sort sort = Sort.by("restaurantName").ascending();
+        Pageable pageable = PageRequest.of(0, 3, sort);
+
+        // when
+        Page<RestaurantEntity> result = restaurantJpaRepository
+                .findAllByRestaurantDeliveryAddresses_Address_StreetNameAndRestaurantDeliveryAddresses_Address_City
+                        (pageable, address.getStreetName(), address.getCity());
+
+        // then
+        Assertions.assertThat(result.getContent().get(0)).isEqualTo(restaurant);
     }
 }

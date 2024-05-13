@@ -40,7 +40,7 @@ public class MenuItemRepository implements MenuItemDAO {
                 .orElseThrow(() ->
                         new NotFoundException("Could not find restaurant named: %s".formatted(restaurantName))
                 ));
-        menuItemJpaRepository.save(toSave);
+        menuItemJpaRepository.saveAndFlush(toSave);
     }
 
 

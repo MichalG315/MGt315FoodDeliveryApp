@@ -22,5 +22,4 @@ public class Order {
     BigDecimal totalAmount;
     String status;
 
-
 }

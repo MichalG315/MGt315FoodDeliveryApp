@@ -63,8 +63,8 @@ public class RestaurantDeliveryAddressesRepository implements RestaurantDelivery
                 .address(addressEntity)
                 .restaurant(restaurant)
                 .build();
-        addressJpaRepository.save(addressEntity);
-        restaurantDeliveryAddressesJpaRepository.save(deliveryAddressEntity);
+        addressJpaRepository.saveAndFlush(addressEntity);
+        restaurantDeliveryAddressesJpaRepository.saveAndFlush(deliveryAddressEntity);
     }
 
     private static AddressEntity buildAddressEntity(Address address) {

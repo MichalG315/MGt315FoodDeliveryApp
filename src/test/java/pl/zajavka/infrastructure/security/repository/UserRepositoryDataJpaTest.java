@@ -1,4 +1,4 @@
-package pl.zajavka.infrastructure.database.repository;
+package pl.zajavka.infrastructure.security.repository;
 
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
@@ -9,29 +9,28 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import pl.zajavka.configuration.PersistenceContainerTestConfiguration;
-import pl.zajavka.infrastructure.database.entity.CustomerEntity;
-import pl.zajavka.infrastructure.database.repository.jpa.CustomerJpaRepository;
-
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.someCustomer1;
+import pl.zajavka.infrastructure.security.entity.UserEntity;
+import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
+import pl.zajavka.infrastructure.security.repository.util.EntityFixtures;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yaml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class CustomerRepositoryDataJpaTest {
+class UserRepositoryDataJpaTest {
 
-    private final CustomerJpaRepository customerJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
     @Test
-    void canFindCustomerByEmail() {
+    void findByUserNameWorkCorrectly(){
         // given
-        CustomerEntity customer = customerJpaRepository.saveAndFlush(someCustomer1());
+        UserEntity user = userJpaRepository.saveAndFlush(EntityFixtures.someUser1());
 
         // when
-        CustomerEntity result = customerJpaRepository.findByEmail(customer.getEmail()).orElseThrow();
+        UserEntity result = userJpaRepository.findByUserName(user.getUserName());
 
         // then
-        Assertions.assertThat(customer).isEqualTo(result);
+        Assertions.assertThat(result).isEqualTo(user);
     }
 }

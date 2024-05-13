@@ -18,7 +18,7 @@ public class AddressExtendedRepository implements AddressExtendedDAO {
     @Override
     public AddressExtended saveAddressExtended(AddressExtended addressExtended) {
         AddressExtendedEntity toSave = addressExtendedEntityMapper.mapToEntity(addressExtended);
-        AddressExtendedEntity saved = addressExtendedJpaRepository.save(toSave);
+        AddressExtendedEntity saved = addressExtendedJpaRepository.saveAndFlush(toSave);
         return addressExtendedEntityMapper.mapFromEntity(saved);
     }
 }

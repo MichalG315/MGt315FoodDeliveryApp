@@ -17,11 +17,6 @@ public class RoleRepository implements RoleDAO {
     private final RoleJpaRepository roleJpaRepository;
     private final RoleEntityMapper roleEntityMapper;
 
-    RoleEntity findByRole(String role) {
-        return roleJpaRepository.findByRole(role);
-    }
-
-
     @Override
     public Optional<Role> findById(Integer roleId) {
         return roleJpaRepository.findById(roleId).map(roleEntityMapper::map);

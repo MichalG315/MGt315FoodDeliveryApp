@@ -30,7 +30,6 @@ public class FoodOrderRepository implements FoodOrderDAO {
     private final MenuItemFoodOrderRepository menuItemFoodOrderRepository;
     private final MenuItemFoodOrderJpaRepository menuItemFoodOrderJpaRepository;
 
-
     private final FoodOrderEntityMapper foodOrderEntityMapper;
 
     @Override
