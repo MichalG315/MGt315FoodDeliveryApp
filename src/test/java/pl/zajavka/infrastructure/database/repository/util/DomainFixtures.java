@@ -6,7 +6,9 @@ import pl.zajavka.domain.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Map;
+import java.util.Set;
 
 public class DomainFixtures {
     public static Address someAddress1() {
@@ -25,7 +27,7 @@ public class DomainFixtures {
                 .build();
     }
 
-    public static RestaurantDeliveryAddress someRestaurantDeliveryAddress(Address address, Restaurant restaurant){
+    public static RestaurantDeliveryAddress someRestaurantDeliveryAddress(Address address, Restaurant restaurant) {
         return RestaurantDeliveryAddress.builder()
                 .address(address)
                 .restaurant(restaurant)
@@ -48,11 +50,12 @@ public class DomainFixtures {
                 .restaurantName(restaurant.getRestaurantName())
                 .orderNumber("someNumber")
                 .menuItemMap(Map.of(someMenuItem1(restaurant), 2L))
-                .receivedDateTime(OffsetDateTime.now())
+                .receivedDateTime(OffsetDateTime.of(10, 10, 10, 10, 10, 10, 10, ZoneOffset.UTC))
                 .totalAmount(new BigDecimal(1))
                 .status("test status")
                 .build();
     }
+
 
     public static MenuItem someMenuItem1(Restaurant restaurant) {
         return MenuItem.builder()
@@ -65,17 +68,6 @@ public class DomainFixtures {
                 .build();
     }
 
-    public static MenuItem someMenuItem2(Restaurant restaurant) {
-        return MenuItem.builder()
-                .menuItemNumber("test2")
-                .itemName("test2")
-                .description("test2")
-                .price(new BigDecimal(2))
-                .category(MenuItemCategories.BURGER.getToPrint())
-                .restaurantName(restaurant.getRestaurantName())
-                .build();
-    }
-
     public static Restaurant someRestaurant1() {
         return Restaurant.builder()
                 .restaurantName("testowo")
@@ -84,12 +76,62 @@ public class DomainFixtures {
                 .build();
     }
 
+    public static Restaurant someRestaurant2(Address address) {
+        return Restaurant.builder()
+                .restaurantName("testowo")
+                .description("test test")
+                .restaurantDeliveryStreetNames(Set.of(address.getStreetName()))
+                .userId(1)
+                .build();
+    }
+
+    public static Restaurant someRestaurant3(AddressExtended addressExtended) {
+        return Restaurant.builder()
+                .restaurantName("testowo")
+                .description("test test")
+                .addressStreetNumber(addressExtended.getStreetNumber())
+                .userId(1)
+                .build();
+    }
+
+    public static Restaurant someRestaurant4(AddressExtended addressExtended) {
+        return Restaurant.builder()
+                .restaurantName("test")
+                .description("test")
+                .userId(1)
+                .addressCountry("test")
+                .addressCity("test")
+                .addressPostalCode("test")
+                .addressStreetName("test")
+                .addressStreetNumber("test")
+                .build();
+    }
+
     public static User someUser1() {
         return User.builder()
+                .userId(1)
                 .userName("testUserName")
                 .email("test@gmail.com")
                 .password("testtesttest")
                 .active(true)
+                .build();
+    }
+
+    public static User someUser2(Role role) {
+        return User.builder()
+                .userId(1)
+                .userName("testUserName")
+                .email("test@gmail.com")
+                .password("testtesttest")
+                .active(true)
+                .roles(Set.of(role))
+                .build();
+    }
+
+    public static Role someRole1() {
+        return Role.builder()
+                .id(1)
+                .role("TEST")
                 .build();
     }
 }

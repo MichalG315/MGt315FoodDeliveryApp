@@ -106,7 +106,15 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     "pl/zajavka/api/dto/mapper",
-                    "pl/zajavka/infrastructure/database/repository/mapper"
+                    "pl/zajavka/infrastructure/database/repository/mapper",
+                    "pl/zajavka/infrastructure/database/entity",
+                    "pl/zajavka/domain",
+                    "pl/zajavka/api/dto",
+                    "pl/zajavka/infrastructure/configuration",
+                    "pl/zajavka/infrastructure/security/configuration",
+                    "pl/zajavka/infrastructure/security/entity",
+                    "pl/zajavka/infrastructure/security/mapper",
+                    "pl/zajavka/infrastructure/security/service"
             ])
         }))
     }

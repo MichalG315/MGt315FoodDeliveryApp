@@ -36,12 +36,12 @@ public class FoodOrderService {
         return findFoodOrder(orderNumber).getReceivedDateTime();
     }
 
-    public Order findFoodOrder(String orderNumber) {
-        return foodOrderDAO.findFoodOrder(orderNumber);
-    }
-
     public void setCompletedDateTime(String orderNumber) {
         OffsetDateTime completedDateTime = OffsetDateTime.now();
         foodOrderDAO.setCompletedDateTime(orderNumber,completedDateTime);
+    }
+
+    private Order findFoodOrder(String orderNumber) {
+        return foodOrderDAO.findFoodOrder(orderNumber);
     }
 }

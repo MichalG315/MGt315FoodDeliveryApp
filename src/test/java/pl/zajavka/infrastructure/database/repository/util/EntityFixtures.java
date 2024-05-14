@@ -1,7 +1,9 @@
 package pl.zajavka.infrastructure.database.repository.util;
 
 import pl.zajavka.api.controller.MenuItemCategories;
+import pl.zajavka.domain.Role;
 import pl.zajavka.infrastructure.database.entity.*;
+import pl.zajavka.infrastructure.security.entity.RoleEntity;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 
 import java.math.BigDecimal;
@@ -54,15 +56,6 @@ public class EntityFixtures {
         return Optional.of(customer);
     }
 
-    public static Optional<CustomerEntity> someCustomer3() {
-        CustomerEntity customer = CustomerEntity.builder()
-                .name("test")
-                .surname("test")
-                .phone("+48 123 456 789")
-                .userId(1)
-                .build();
-        return Optional.of(customer);
-    }
 
     public static RestaurantEntity someRestaurant1(AddressExtendedEntity addressExtended) {
         return RestaurantEntity.builder()
@@ -144,6 +137,13 @@ public class EntityFixtures {
                 .quantity(1)
                 .menuItem(menuItem)
                 .foodOrder(foodOrder)
+                .build();
+    }
+
+    public static RoleEntity someRole1() {
+        return RoleEntity.builder()
+                .id(1)
+                .role("TEST")
                 .build();
     }
 

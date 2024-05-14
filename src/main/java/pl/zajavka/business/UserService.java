@@ -13,9 +13,7 @@ import java.util.Set;
 public class UserService {
 
     private final UserDAO userDAO;
-
     private final PasswordEncoder passwordEncoder;
-
     private final CustomerService customerService;
     private final RoleService roleService;
     private final RestaurantService restaurantService;
@@ -38,21 +36,21 @@ public class UserService {
         restaurantService.saveRestaurant(restaurant, address, addressExtended, userId);
     }
 
+    public Integer findUserId(User user) {
+        return userDAO.findByUserName(user.getUserName()).getUserId();
+    }
+
+    public Integer findUserId(String restaurantUserName) {
+        return userDAO.findUserId(restaurantUserName);
+    }
+
     private User encodePasswordAndSetRoleAndActive(User user, Role role) {
         return user.withPassword(passwordEncoder.encode(user.getPassword()))
                 .withActive(true)
                 .withRoles(Set.of(role));
     }
 
-    public Integer findUserId(User user) {
-        return userDAO.findByUserName(user.getUserName()).getUserId();
-    }
-
     private Role findRole(User user) {
         return roleService.findRoleByRoleId(user.getRole());
-    }
-
-    public Integer findUserId(String restaurantUserName) {
-        return userDAO.findUserId(restaurantUserName);
     }
 }
