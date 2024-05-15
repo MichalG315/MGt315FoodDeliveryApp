@@ -19,7 +19,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemFoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.FoodOrderEntityMapper;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
 
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
+import static pl.zajavka.util.EntityFixtures.*;
 
 @ExtendWith(MockitoExtension.class)
 class FoodOrderRepositoryMockitoTest {

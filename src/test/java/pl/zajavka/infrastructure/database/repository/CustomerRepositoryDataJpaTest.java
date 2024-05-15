@@ -12,7 +12,7 @@ import pl.zajavka.configuration.PersistenceContainerTestConfiguration;
 import pl.zajavka.infrastructure.database.entity.CustomerEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.CustomerJpaRepository;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.someCustomer1;
+import static pl.zajavka.util.EntityFixtures.someCustomer1;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yaml")

@@ -11,11 +11,10 @@ import pl.zajavka.domain.AddressExtended;
 import pl.zajavka.infrastructure.database.entity.AddressExtendedEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.AddressExtendedJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.AddressExtendedEntityMapper;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
-import pl.zajavka.infrastructure.database.repository.util.EntityFixtures;
+import pl.zajavka.util.EntityFixtures;
 
-import static pl.zajavka.infrastructure.database.repository.util.DomainFixtures.*;
-import static pl.zajavka.infrastructure.database.repository.util.DomainFixtures.someAddressExtended1;
+import static pl.zajavka.util.DomainFixtures.*;
+import static pl.zajavka.util.DomainFixtures.someAddressExtended1;
 
 
 @ExtendWith(MockitoExtension.class)

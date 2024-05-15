@@ -3,9 +3,9 @@ server:
   servlet:
     context-path: /mgt315-food-delivery-app
 
-#api:
-#  cepik:
-#    url:
+api:
+  catFacts:
+    url: https://catfact.ninja/#/
 
 spring:
 #  security:

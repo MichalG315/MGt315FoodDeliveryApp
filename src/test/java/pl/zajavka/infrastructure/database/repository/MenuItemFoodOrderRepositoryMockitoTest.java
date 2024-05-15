@@ -14,11 +14,11 @@ import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
 import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemFoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemJpaRepository;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.Optional;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
+import static pl.zajavka.util.EntityFixtures.*;
 
 @ExtendWith(MockitoExtension.class)
 class MenuItemFoodOrderRepositoryMockitoTest {

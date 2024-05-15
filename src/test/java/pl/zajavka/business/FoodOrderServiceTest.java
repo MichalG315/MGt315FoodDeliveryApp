@@ -11,7 +11,7 @@ import pl.zajavka.business.dao.FoodOrderDAO;
 import pl.zajavka.domain.Order;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.time.OffsetDateTime;
 import java.util.List;

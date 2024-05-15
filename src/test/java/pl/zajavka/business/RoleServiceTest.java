@@ -9,9 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.business.dao.RoleDAO;
 import pl.zajavka.domain.Role;
-import pl.zajavka.domain.User;
 import pl.zajavka.exception.NotFoundException;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.Optional;
 

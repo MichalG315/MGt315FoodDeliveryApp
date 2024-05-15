@@ -20,7 +20,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository
 
 import java.util.List;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
+import static pl.zajavka.util.EntityFixtures.*;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yaml")

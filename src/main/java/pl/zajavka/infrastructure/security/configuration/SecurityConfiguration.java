@@ -57,9 +57,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/login", "/register/**", "/error", "/images/**")
                         .permitAll()
-                        .requestMatchers("/customerPage/**", "/order/**")
+                        .requestMatchers("/api/**", "/swagger-ui/**", "/v3/api-docs/**", "/customerPage/**", "/order/**")
                         .hasAnyAuthority("CUSTOMER")
-                        .requestMatchers("/restaurantPage/**")
+                        .requestMatchers("/api/**", "/swagger-ui/**", "/v3/api-docs/**", "/restaurantPage/**")
                         .hasAnyAuthority("RESTAURANT")
 
                 )

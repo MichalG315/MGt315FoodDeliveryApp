@@ -14,7 +14,7 @@ import pl.zajavka.domain.AddressExtended;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 import pl.zajavka.exception.NotFoundException;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 import java.util.Optional;

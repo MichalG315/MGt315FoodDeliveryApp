@@ -38,6 +38,7 @@ public class OrderController {
     private final OrderService orderService;
     private final FoodOrderService foodOrderService;
     private final RestaurantDeliveryAddressesService restaurantDeliveryAddressesService;
+    private final FactsService factsService;
 
     private final RestaurantMapper restaurantMapper;
     private final MenuItemMapper menuItemMapper;
@@ -126,13 +127,16 @@ public class OrderController {
                 .stream().map(orderMapper::mapToDTO)
                 .toList();
 
+        String randomCatFact = factsService.getRandomCatFact();
+
         model.addAttribute("availableCustomerOrderDTOs", availableCustomerOrders);
+        model.addAttribute("randomCatFact", randomCatFact);
 
         return "customer_page_orders";
     }
 
     @DeleteMapping(value = CUSTOMER_ORDERS + DELETE + ORDER_NUMBER + USER_NAME)
-    public String deleteMenuItem(
+    public String deleteOrder(
             @PathVariable String orderNumber,
             @PathVariable String userName
     ) {

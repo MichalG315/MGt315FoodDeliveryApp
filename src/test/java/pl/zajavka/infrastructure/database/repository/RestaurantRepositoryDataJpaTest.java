@@ -22,7 +22,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.AddressJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantDeliveryAddressesJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
+import static pl.zajavka.util.EntityFixtures.*;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yaml")

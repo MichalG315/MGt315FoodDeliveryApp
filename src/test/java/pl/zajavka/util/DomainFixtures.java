@@ -1,4 +1,4 @@
-package pl.zajavka.infrastructure.database.repository.util;
+package pl.zajavka.util;
 
 
 import pl.zajavka.api.controller.MenuItemCategories;

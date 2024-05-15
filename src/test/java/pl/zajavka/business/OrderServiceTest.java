@@ -14,8 +14,8 @@ import pl.zajavka.domain.MenuItem;
 import pl.zajavka.domain.Order;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
-import pl.zajavka.infrastructure.database.repository.util.DTOFixtures;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DTOFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 

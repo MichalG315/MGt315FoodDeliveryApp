@@ -8,6 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.util.Optional.ofNullable;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -28,10 +33,21 @@ public class UserCustomerDTO {
         return UserCustomerDTO.builder()
                 .userName("michal")
                 .email("michal@gmail.com")
-                .password("test")
+                .password("testpassword")
                 .name("michal")
                 .surname("michal")
                 .phone("+48 235 987 692")
                 .build();
+    }
+
+    public Map<String, String> asMap() {
+        Map<String, String> result = new HashMap<>();
+        ofNullable(userName).ifPresent(value -> result.put("userName", value));
+        ofNullable(email).ifPresent(value -> result.put("email", value));
+        ofNullable(password).ifPresent(value -> result.put("password", value));
+        ofNullable(name).ifPresent(value -> result.put("name", value));
+        ofNullable(surname).ifPresent(value -> result.put("surname", value));
+        ofNullable(phone).ifPresent(value -> result.put("phone", value));
+        return result;
     }
 }

@@ -30,10 +30,9 @@ public class RegisterController {
 
     private final UserMapper userMapper;
     private final UserService userService;
-    private final CustomerMapper customerMapper;
 
+    private final CustomerMapper customerMapper;
     private final RestaurantMapper restaurantMapper;
-    private final RestaurantService restaurantService;
 
     @GetMapping(value = REGISTER_CUSTOMER)
     public ModelAndView registerCustomerPage() {

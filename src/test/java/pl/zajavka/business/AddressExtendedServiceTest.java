@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.domain.Address;
 import pl.zajavka.domain.AddressExtended;
 import pl.zajavka.domain.Restaurant;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 @ExtendWith(MockitoExtension.class)
 class AddressExtendedServiceTest {

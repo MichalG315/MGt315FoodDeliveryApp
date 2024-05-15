@@ -7,6 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.util.Optional.ofNullable;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -31,7 +36,7 @@ public class UserRestaurantDTO {
         return UserRestaurantDTO.builder()
                 .userName("restaurant")
                 .email("restaurant@gmail.com")
-                .password("test")
+                .password("testpassword")
                 .restaurantName("test restaurant")
                 .description("my test restaurant description")
                 .addressCountry("Poland")
@@ -40,6 +45,21 @@ public class UserRestaurantDTO {
                 .addressStreetName("Grunwaldzka")
                 .addressStreetNumber("10C/89")
                 .build();
+    }
+
+    public Map<String, String> asMap() {
+        Map<String, String> result = new HashMap<>();
+        ofNullable(userName).ifPresent(value -> result.put("userName", value));
+        ofNullable(email).ifPresent(value -> result.put("email", value));
+        ofNullable(password).ifPresent(value -> result.put("password", value));
+        ofNullable(restaurantName).ifPresent(value -> result.put("restaurantName", value));
+        ofNullable(description).ifPresent(value -> result.put("description", value));
+        ofNullable(addressCountry).ifPresent(value -> result.put("addressCountry", value));
+        ofNullable(addressCity).ifPresent(value -> result.put("addressCity", value));
+        ofNullable(addressPostalCode).ifPresent(value -> result.put("addressPostalCode", value));
+        ofNullable(addressStreetName).ifPresent(value -> result.put("addressStreetName", value));
+        ofNullable(addressStreetNumber).ifPresent(value -> result.put("addressStreetNumber", value));
+        return result;
     }
 
 

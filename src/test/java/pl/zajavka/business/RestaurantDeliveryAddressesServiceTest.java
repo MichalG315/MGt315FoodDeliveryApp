@@ -12,7 +12,7 @@ import pl.zajavka.domain.Address;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.RestaurantDeliveryAddress;
 import pl.zajavka.domain.User;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 import java.util.Set;

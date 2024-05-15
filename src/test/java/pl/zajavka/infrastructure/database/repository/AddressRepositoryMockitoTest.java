@@ -11,9 +11,9 @@ import pl.zajavka.domain.Address;
 import pl.zajavka.infrastructure.database.entity.AddressEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.AddressJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.AddressEntityMapper;
-import pl.zajavka.infrastructure.database.repository.util.EntityFixtures;
+import pl.zajavka.util.EntityFixtures;
 
-import static pl.zajavka.infrastructure.database.repository.util.DomainFixtures.someAddress1;
+import static pl.zajavka.util.DomainFixtures.someAddress1;
 
 @ExtendWith(MockitoExtension.class)
 class AddressRepositoryMockitoTest {

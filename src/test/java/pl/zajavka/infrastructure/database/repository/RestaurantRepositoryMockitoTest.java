@@ -21,13 +21,12 @@ import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository
 import pl.zajavka.infrastructure.database.repository.mapper.AddressEntityMapper;
 import pl.zajavka.infrastructure.database.repository.mapper.AddressExtendedEntityMapper;
 import pl.zajavka.infrastructure.database.repository.mapper.RestaurantEntityMapper;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
-import pl.zajavka.infrastructure.database.repository.util.EntityFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 import java.util.Optional;
 
-import static pl.zajavka.infrastructure.database.repository.util.EntityFixtures.*;
+import static pl.zajavka.util.EntityFixtures.*;
 
 @ExtendWith(MockitoExtension.class)
 class RestaurantRepositoryMockitoTest {

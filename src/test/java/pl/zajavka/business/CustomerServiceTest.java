@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.business.dao.CustomerDAO;
 import pl.zajavka.domain.Customer;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest {

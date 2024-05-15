@@ -9,8 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.domain.Customer;
 import pl.zajavka.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.CustomerEntityMapper;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
-import pl.zajavka.infrastructure.database.repository.util.EntityFixtures;
+import pl.zajavka.util.DomainFixtures;
+import pl.zajavka.util.EntityFixtures;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerRepositoryMockitoTest {

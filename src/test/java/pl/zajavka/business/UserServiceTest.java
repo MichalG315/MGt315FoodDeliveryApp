@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.zajavka.business.dao.UserDAO;
 import pl.zajavka.domain.*;
-import pl.zajavka.infrastructure.database.repository.util.DomainFixtures;
+import pl.zajavka.util.DomainFixtures;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
