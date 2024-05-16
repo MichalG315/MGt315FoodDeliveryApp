@@ -142,7 +142,7 @@ public class OrderController {
     ) {
         OffsetDateTime foodOrderReceivedDateTime = foodOrderService.findFoodOrderReceivedDateTime(orderNumber);
 
-        if (Duration.between(foodOrderReceivedDateTime, OffsetDateTime.now()).toMinutes() < 1) {
+        if (Duration.between(foodOrderReceivedDateTime, OffsetDateTime.now()).toMinutes() < 20) {
             foodOrderService.deleteFoodOrder(orderNumber);
         } else {
             return "error_delete_order";

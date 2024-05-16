@@ -35,5 +35,4 @@ class ImageServiceTest {
         Assertions.assertThat(result).contains("/images/foodImages/");
         Assertions.assertThat(result).contains(".png");
     }
-
 }

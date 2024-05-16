@@ -2,6 +2,7 @@ package pl.zajavka.util;
 
 import pl.zajavka.api.controller.MenuItemCategories;
 import pl.zajavka.api.dto.*;
+import pl.zajavka.domain.Address;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 
@@ -72,6 +73,15 @@ public class DTOFixtures {
                 .menuItemList(List.of(someMenuItem1(restaurant)))
                 .totalAmount(new BigDecimal(1))
                 .status("test status")
+                .build();
+    }
+
+    public static AddressDTO someAddress1() {
+        return AddressDTO.builder()
+                .country("test")
+                .city("test")
+                .postalCode("test")
+                .streetName("test")
                 .build();
     }
 }
