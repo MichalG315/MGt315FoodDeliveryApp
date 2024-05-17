@@ -33,7 +33,8 @@ public class CustomerRestController {
 
     ) {
         Page<RestaurantDTO> restaurantDTOPage = restaurantService
-                .findAvailable(pageNo, pageSize, sortField, sortDirection, streetName, city).map(restaurantMapper::mapToDTO);
+                .findAvailable(pageNo, pageSize, sortField, sortDirection, streetName, city)
+                .map(restaurantMapper::mapToDTO);
 
         return restaurantDTOPage.getContent();
     }

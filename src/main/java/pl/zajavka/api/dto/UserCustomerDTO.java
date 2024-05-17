@@ -39,7 +39,6 @@ public class UserCustomerDTO {
                 .phone("+48 235 987 692")
                 .build();
     }
-
     public Map<String, String> asMap() {
         Map<String, String> result = new HashMap<>();
         ofNullable(userName).ifPresent(value -> result.put("userName", value));

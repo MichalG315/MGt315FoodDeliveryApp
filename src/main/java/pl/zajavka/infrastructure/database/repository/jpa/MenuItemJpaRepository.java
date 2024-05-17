@@ -3,7 +3,6 @@ package pl.zajavka.infrastructure.database.repository.jpa;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.infrastructure.database.entity.MenuItemEntity;
 
 import java.util.List;

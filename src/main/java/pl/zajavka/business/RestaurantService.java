@@ -43,8 +43,7 @@ public class RestaurantService {
     private static Pageable pageAndSort(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return pageable;
+        return PageRequest.of(pageNo - 1, pageSize, sort);
     }
 
     public Restaurant findByRestaurantName(String restaurantName) {

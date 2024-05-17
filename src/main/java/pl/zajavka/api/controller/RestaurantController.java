@@ -73,7 +73,8 @@ public class RestaurantController {
             @PathVariable String restaurantUserName,
             Model model
     ) {
-        List<OrderDTO> availableRestaurantOrders = foodOrderService.availableFoodOrdersByRestaurantName(restaurantUserName)
+        List<OrderDTO> availableRestaurantOrders = foodOrderService
+                .availableFoodOrdersByRestaurantName(restaurantUserName)
                 .stream().map(orderMapper::mapToDTO)
                 .toList();
 

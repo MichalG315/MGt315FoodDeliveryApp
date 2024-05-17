@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.RoleDAO;
 import pl.zajavka.domain.Role;
-import pl.zajavka.infrastructure.security.entity.RoleEntity;
 import pl.zajavka.infrastructure.security.jpa.RoleJpaRepository;
 import pl.zajavka.infrastructure.security.mapper.RoleEntityMapper;
 

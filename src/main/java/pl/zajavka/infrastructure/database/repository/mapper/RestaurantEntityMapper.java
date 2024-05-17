@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestaurantEntityMapper {
 
-
     default Restaurant mapFromEntity(RestaurantEntity restaurantEntity) {
         return Restaurant.builder()
                 .restaurantName(restaurantEntity.getRestaurantName())

@@ -10,7 +10,6 @@ import java.util.Set;
 @EqualsAndHashCode(of = "email")
 @ToString(of = {"userName", "email"})
 public class User {
-
     String userName;
     String email;
     String password;

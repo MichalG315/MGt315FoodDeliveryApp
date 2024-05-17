@@ -8,9 +8,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "restaurantDeliveryAddressId")
 @ToString(of = {"restaurantDeliveryAddressId"})
 public class RestaurantDeliveryAddress {
-
     Integer restaurantDeliveryAddressId;
     Address address;
     Restaurant restaurant;
-
 }

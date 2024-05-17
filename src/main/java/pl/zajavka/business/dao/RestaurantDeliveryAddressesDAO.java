@@ -1,6 +1,5 @@
 package pl.zajavka.business.dao;
 
-import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.domain.Address;
 import pl.zajavka.domain.RestaurantDeliveryAddress;
 

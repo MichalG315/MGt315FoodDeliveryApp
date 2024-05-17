@@ -61,6 +61,4 @@ public class UserRestaurantDTO {
         ofNullable(addressStreetNumber).ifPresent(value -> result.put("addressStreetNumber", value));
         return result;
     }
-
-
 }

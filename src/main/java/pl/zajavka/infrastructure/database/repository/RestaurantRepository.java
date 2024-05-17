@@ -2,7 +2,6 @@ package pl.zajavka.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.RestaurantDAO;
@@ -19,7 +18,6 @@ import pl.zajavka.infrastructure.database.repository.mapper.AddressEntityMapper;
 import pl.zajavka.infrastructure.database.repository.mapper.AddressExtendedEntityMapper;
 import pl.zajavka.infrastructure.database.repository.mapper.RestaurantEntityMapper;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

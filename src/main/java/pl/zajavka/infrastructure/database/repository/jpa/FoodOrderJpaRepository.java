@@ -6,7 +6,6 @@ import pl.zajavka.infrastructure.database.entity.CustomerEntity;
 import pl.zajavka.infrastructure.database.entity.FoodOrderEntity;
 import pl.zajavka.infrastructure.database.entity.RestaurantEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 @Repository

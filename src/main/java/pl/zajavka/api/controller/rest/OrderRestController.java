@@ -84,7 +84,11 @@ public class OrderRestController {
         }
     }
 
-    private boolean restaurantDeliveryAddressMatchesCustomerAddress(AddressDTO addressDTO, Set<String> city, Set<String> street) {
+    private boolean restaurantDeliveryAddressMatchesCustomerAddress(
+            AddressDTO addressDTO,
+            Set<String> city,
+            Set<String> street
+    ) {
         if (city.contains(addressDTO.getCity())) {
             return street.contains(addressDTO.getStreetName());
         }
@@ -121,7 +125,8 @@ public class OrderRestController {
         } else {
             return ResponseEntity.
                     status(HttpStatus.BAD_REQUEST)
-                    .body("Unfortunately, it is not possible to delete this order. It's been 20 minutes since it was submitted.");
+                    .body("Unfortunately, it is not possible to delete this order." +
+                            " It's been 20 minutes since it was submitted.");
         }
     }
 

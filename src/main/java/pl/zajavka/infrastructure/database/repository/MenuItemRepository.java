@@ -2,7 +2,6 @@ package pl.zajavka.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.zajavka.business.MenuItemService;
 import pl.zajavka.business.dao.MenuItemDAO;
 import pl.zajavka.domain.MenuItem;
 import pl.zajavka.exception.NotFoundException;
@@ -10,7 +9,6 @@ import pl.zajavka.infrastructure.database.entity.MenuItemEntity;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.MenuItemEntityMapper;
-import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
 
 import java.util.List;
 import java.util.Optional;

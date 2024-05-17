@@ -2,7 +2,6 @@ package pl.zajavka.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.business.dao.RestaurantDeliveryAddressesDAO;
 import pl.zajavka.domain.Address;
 import pl.zajavka.domain.RestaurantDeliveryAddress;

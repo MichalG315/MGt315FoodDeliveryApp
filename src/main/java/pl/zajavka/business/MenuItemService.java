@@ -35,7 +35,6 @@ public class MenuItemService {
         return restaurantName.substring(0, 3) + (availableMenuItems.size() + 1);
     }
 
-
     public void saveNewMenuItem(MenuItem menuItem, String restaurantUserName) {
         Integer userId = userService.findUserId(restaurantUserName);
         String restaurantName = restaurantService.findRestaurantNameByUserId(userId);

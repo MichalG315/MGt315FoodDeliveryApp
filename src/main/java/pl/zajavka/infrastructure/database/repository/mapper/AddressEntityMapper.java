@@ -8,7 +8,6 @@ import pl.zajavka.infrastructure.database.entity.AddressEntity;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AddressEntityMapper {
 
-
     AddressEntity mapToEntity(Address address);
 
     Address mapFromEntity(AddressEntity addressEntity);

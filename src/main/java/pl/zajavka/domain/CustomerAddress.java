@@ -8,9 +8,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "customerAddressId")
 @ToString(of = {"customerAddressId"})
 public class CustomerAddress {
-
     Integer customerAddressId;
     AddressExtended addressExtended;
     Customer customer;
-
 }

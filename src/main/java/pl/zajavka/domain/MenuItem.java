@@ -11,7 +11,6 @@ import java.util.Set;
 @EqualsAndHashCode(of = "menuItemNumber")
 @ToString(of = {"menuItemId", "itemName", "description", "price", "category"})
 public class MenuItem {
-
     Integer menuItemId;
     String menuItemNumber;
     String itemName;

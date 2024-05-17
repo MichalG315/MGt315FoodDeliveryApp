@@ -12,7 +12,6 @@ import java.util.Map;
 @Value
 @Builder
 public class Order {
-
     String userName;
     String restaurantName;
     String orderNumber;
@@ -21,5 +20,4 @@ public class Order {
     OffsetDateTime completedDateTime;
     BigDecimal totalAmount;
     String status;
-
 }

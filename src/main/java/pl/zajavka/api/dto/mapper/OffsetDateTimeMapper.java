@@ -6,7 +6,6 @@ import org.mapstruct.ReportingPolicy;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 

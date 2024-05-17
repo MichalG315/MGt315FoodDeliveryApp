@@ -1,6 +1,5 @@
 package pl.zajavka.business.dao;
 
-import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.domain.MenuItem;
 
 import java.util.List;

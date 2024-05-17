@@ -12,7 +12,6 @@ import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.api.dto.mapper.CustomerMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
 import pl.zajavka.api.dto.mapper.UserMapper;
-import pl.zajavka.business.RestaurantService;
 import pl.zajavka.business.UserService;
 import pl.zajavka.domain.Customer;
 import pl.zajavka.domain.Restaurant;
@@ -42,6 +41,7 @@ public class RegisterController {
         return new ModelAndView("register_customer_page", model);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     @PostMapping(REGISTER_CUSTOMER_DONE)
     public String successfulCustomerRegistration(
             @Valid @ModelAttribute("userCustomerDTO") UserCustomerDTO userCustomerDTO
@@ -60,6 +60,7 @@ public class RegisterController {
         return new ModelAndView("register_restaurant_page", model);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     @PostMapping(REGISTER_RESTAURANT_DONE)
     public String successfulRestaurantRegistration(
             @Valid @ModelAttribute("userRestaurantDTO") UserRestaurantDTO userRestaurantDTO

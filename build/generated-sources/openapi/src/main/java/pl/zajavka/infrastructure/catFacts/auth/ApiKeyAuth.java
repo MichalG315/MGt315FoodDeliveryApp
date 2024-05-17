@@ -3,7 +3,7 @@ package pl.zajavka.infrastructure.catFacts.auth;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-16T21:17:38.124590300+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-17T22:33:15.865163500+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class ApiKeyAuth implements Authentication {
     private final String location;
     private final String paramName;

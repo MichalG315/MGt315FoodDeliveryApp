@@ -11,7 +11,6 @@ import java.util.Set;
 @ToString(of = {"addressId", "country", "city", "postalCode", "streetName"})
 
 public class Address {
-
     Integer addressId;
     String country;
     String city;
@@ -19,5 +18,4 @@ public class Address {
     String streetName;
     Set<AddressExtended> addressesExtended;
     Set<RestaurantDeliveryAddress> restaurantDeliveryAddresses;
-
 }

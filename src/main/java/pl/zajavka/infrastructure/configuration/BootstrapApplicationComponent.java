@@ -6,12 +6,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import pl.zajavka.business.MenuItemService;
-import pl.zajavka.business.RestaurantService;
 import pl.zajavka.domain.MenuItem;
 import pl.zajavka.infrastructure.database.repository.FoodOrderRepository;
 import pl.zajavka.infrastructure.database.repository.MenuItemFoodOrderRepository;
 import pl.zajavka.infrastructure.database.repository.MenuItemRepository;
-import pl.zajavka.infrastructure.security.repository.UserRepository;
 
 import java.math.BigDecimal;
 

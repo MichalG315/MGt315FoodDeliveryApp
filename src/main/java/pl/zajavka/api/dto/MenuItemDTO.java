@@ -15,8 +15,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuItemDTO {
-
-
     private String menuItemNumber;
     @Length(max = 64)
     private String itemName;
@@ -27,5 +25,4 @@ public class MenuItemDTO {
     private String restaurantName;
     private MultipartFile image;
     private String imagePath;
-
 }

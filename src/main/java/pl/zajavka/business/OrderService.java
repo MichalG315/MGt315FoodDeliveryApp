@@ -7,7 +7,6 @@ import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.domain.MenuItem;
 import pl.zajavka.domain.Order;
-import pl.zajavka.domain.Restaurant;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

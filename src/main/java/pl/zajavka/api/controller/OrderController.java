@@ -111,7 +111,10 @@ public class OrderController {
         }
     }
 
-    private boolean restaurantDeliveryAddressMatchesCustomerAddress(AddressDTO addressDTO, Set<String> city, Set<String> street) {
+    private boolean restaurantDeliveryAddressMatchesCustomerAddress(
+            AddressDTO addressDTO,
+            Set<String> city, Set<String> street)
+    {
         if (city.contains(addressDTO.getCity())) {
             return street.contains(addressDTO.getStreetName());
         }

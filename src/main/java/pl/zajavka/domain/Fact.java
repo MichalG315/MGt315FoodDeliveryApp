@@ -8,7 +8,5 @@ import lombok.*;
 @EqualsAndHashCode(of = "fact")
 @ToString(of = {"fact"})
 public class Fact {
-
     String fact;
-
 }

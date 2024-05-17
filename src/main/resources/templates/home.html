@@ -7,8 +7,16 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
-
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
     <title>MGt315 Food Delivery Application</title>
+
+    <style>
+        .home-card img {
+          width: 100%;
+          height: 300px;
+          border-radius: 10px;
+        }
+    </style>
 
 </head>
 
@@ -35,35 +43,80 @@
                         <a class="nav-link" th:href="@{/restaurantPage}">Restaurant page</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" >
+                        <a class="nav-link" >
+                        <span th:unless="${#authentication.getName() == 'anonymousUser'}">
+                            <span th:text ="${#authentication.getName()}"></span>
+                        </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <span th:unless="${#authentication.getName() == 'anonymousUser'}">
+                            <a class="nav-link" th:href="@{/logout}">Logout</a>
+                        </span>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
     <br>
     <br>
     <br>
-    <div class="container">
-        <h1>MGt315 Food Delivery Application</h1>
-        <p>If you already have an account, please select whether you want to log in as a customer or as a restaurant.</p>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <a th:href="@{/customerPage}" class="btn btn-info" role="button">Customer</a>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">MGt315 Food Delivery Application</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card home-card">
+                    <img th:src="@{/images/allPermitImages/customerPage.png}" class="card-img-top" alt="customer page">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer page</h5>
+                        <p class="card-text">Check the list of available restaurants!</p>
+                        <a th:href="@{/customerPage}" class="btn btn-primary" role="button">Check</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <a th:href="@{/restaurantPage}" class="btn btn-info" role="button">Restaurant</a>
+            <div class="col-md-6 mb-4">
+                <div class="card home-card">
+                    <img th:src="@{/images/allPermitImages/restaurantPage.png}" class="card-img-top" alt="restaurant page">
+                    <div class="card-body">
+                        <h5 class="card-title">Restaurant page</h5>
+                        <p class="card-text">Control your restaurant!</p>
+                        <a th:href="@{/restaurantPage}" class="btn btn-primary" role="button">Manage</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <br>
-        <p>If you do not have account, please click button below to register</p>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <a th:href="@{/register/customer}" class="btn btn-info" role="button">Customer registration</a>
+        <h2 class="text-center mb-4">Create your account</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card home-card">
+                    <img th:src="@{/images/allPermitImages/customerRegistration.png}" class="card-img-top" alt="customer registration">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer registration</h5>
+                        <p class="card-text">Create your customer account</p>
+                        <a th:href="@{/register/customer}" class="btn btn-primary" role="button">Register</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <a th:href="@{/register/restaurant}" class="btn btn-info" role="button">Restaurant registration</a>
+            <div class="col-md-6 mb-4">
+                <div class="card home-card">
+                    <img th:src="@{/images/allPermitImages/restaurantRegistration.png}" class="card-img-top" alt="restaurant registration">
+                    <div class="card-body">
+                        <h5 class="card-title">Restaurant registration</h5>
+                        <p class="card-text">Create your restaurant account</p>
+                        <a th:href="@{/register/restaurant}" class="btn btn-primary" role="button">Register</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+
+    <br>
+    <br>
+    <br>
 
 </body>
 

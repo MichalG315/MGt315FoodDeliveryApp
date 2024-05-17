@@ -3,7 +3,6 @@ package pl.zajavka.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +34,8 @@ public class CustomerController {
             Model model
     ) {
         Page<RestaurantDTO> restaurantDTOPage = restaurantService
-                .findAvailable(pageNo, pageSize, sortField, sortDirection, streetName, city).map(restaurantMapper::mapToDTO);
+                .findAvailable(pageNo, pageSize, sortField, sortDirection, streetName, city)
+                .map(restaurantMapper::mapToDTO);
 
         List<RestaurantDTO> availableRestaurants = restaurantDTOPage.getContent();
         Set<String> cities = restaurantDeliveryAddressesService.findAvailableCities();
