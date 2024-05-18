@@ -29,5 +29,10 @@ public class UserRepository implements UserDAO {
         return findByUserName(restaurantUserName).getUserId();
     }
 
+    @Override
+    public String findByEmail(String email) {
+        return userJpaRepository.findByEmail(email).getEmail();
+    }
+
 
 }

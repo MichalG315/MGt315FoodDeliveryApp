@@ -23,7 +23,6 @@ import pl.zajavka.util.DTOFixtures;
 import pl.zajavka.util.DomainFixtures;
 
 import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,6 +56,8 @@ class OrderControllerWebMvcTest {
     @WithMockUser(roles = "CUSTOMER")
     void showRestaurantPage() throws Exception {
         // given
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
         Restaurant restaurant = DomainFixtures.someRestaurant1();
         String restaurantName = restaurant.getRestaurantName();
         RestaurantDTO restaurantDTO = DTOFixtures.someRestaurantDTO1();
@@ -67,9 +68,10 @@ class OrderControllerWebMvcTest {
                 .thenReturn(restaurantDTO);
 
         // when, then
-        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME;
+        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
+                OrderController.USER_NAME;
 
-        mockMvc.perform(MockMvcRequestBuilders.get(endpoint, restaurantName))
+        mockMvc.perform(MockMvcRequestBuilders.get(endpoint, restaurantName, userName))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.model().attributeExists("restaurantDTO"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("menuItemDTOs"))
@@ -82,32 +84,89 @@ class OrderControllerWebMvcTest {
     @Test
     void addToCart() throws Exception {
         // given
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
         Restaurant restaurant = DomainFixtures.someRestaurant1();
         String restaurantName = restaurant.getRestaurantName();
         MenuItemDTO menuItemDTO = DTOFixtures.someMenuItem1(restaurant);
         String menuItemNumber = menuItemDTO.getMenuItemNumber();
+        MenuItem menuItem = DomainFixtures.someMenuItem1(restaurant);
+        Mockito.when(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber))
+                .thenReturn(menuItem);
+        Mockito.when(menuItemMapper.mapToDTO(menuItem)).thenReturn(menuItemDTO);
 
         // when, then
         String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
-                OrderController.MENU_ITEM_NUMBER;
+                OrderController.MENU_ITEM_NUMBER + OrderController.USER_NAME;
 
-        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, menuItemNumber))
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, menuItemNumber, userName))
+                .andExpect(MockMvcResultMatchers.status().isFound());
+    }
+    @Test
+    void addToCartSecond() throws Exception {
+        // given
+        addToCart();
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+        Restaurant restaurant = DomainFixtures.someRestaurant1();
+        String restaurantName = restaurant.getRestaurantName();
+        MenuItemDTO menuItemDTO = DTOFixtures.someMenuItem1(restaurant);
+        String menuItemNumber = menuItemDTO.getMenuItemNumber();
+        MenuItem menuItem = DomainFixtures.someMenuItem1(restaurant);
+        Mockito.when(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber))
+                .thenReturn(menuItem);
+        Mockito.when(menuItemMapper.mapToDTO(menuItem)).thenReturn(menuItemDTO);
+
+        // when, then
+        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
+                OrderController.MENU_ITEM_NUMBER + OrderController.USER_NAME;
+
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, menuItemNumber, userName))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
 
     @Test
     void deleteFromCart() throws Exception {
         // given
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
         Restaurant restaurant = DomainFixtures.someRestaurant1();
         String restaurantName = restaurant.getRestaurantName();
         MenuItemDTO menuItemDTO = DTOFixtures.someMenuItem1(restaurant);
         String menuItemNumber = menuItemDTO.getMenuItemNumber();
+        MenuItem menuItem = DomainFixtures.someMenuItem1(restaurant);
+        Mockito.when(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber))
+                .thenReturn(menuItem);
+        Mockito.when(menuItemMapper.mapToDTO(menuItem)).thenReturn(menuItemDTO);
 
         // when, then
         String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
-                OrderController.MENU_ITEM_NUMBER;
+                OrderController.MENU_ITEM_NUMBER + OrderController.USER_NAME;
 
-        mockMvc.perform(MockMvcRequestBuilders.delete(endpoint, restaurantName, menuItemNumber))
+        mockMvc.perform(MockMvcRequestBuilders.delete(endpoint, restaurantName, menuItemNumber, userName))
+                .andExpect(MockMvcResultMatchers.status().isFound());
+    }
+
+    @Test
+    void deleteFromCartSecond() throws Exception {
+        // given
+        addToCart();
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+        Restaurant restaurant = DomainFixtures.someRestaurant1();
+        String restaurantName = restaurant.getRestaurantName();
+        MenuItemDTO menuItemDTO = DTOFixtures.someMenuItem1(restaurant);
+        String menuItemNumber = menuItemDTO.getMenuItemNumber();
+        MenuItem menuItem = DomainFixtures.someMenuItem1(restaurant);
+        Mockito.when(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber))
+                .thenReturn(menuItem);
+        Mockito.when(menuItemMapper.mapToDTO(menuItem)).thenReturn(menuItemDTO);
+
+        // when, then
+        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
+                OrderController.MENU_ITEM_NUMBER + OrderController.USER_NAME;
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(endpoint, restaurantName, menuItemNumber, userName))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
 
@@ -150,6 +209,11 @@ class OrderControllerWebMvcTest {
         String restaurantName = restaurant.getRestaurantName();
         User user = DomainFixtures.someUser1();
         String userName = user.getUserName();
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("country", "notMatchValue");
+        parameters.add("city", "notMatchValue");
+        parameters.add("postalCode", "notMatchValue");
+        parameters.add("streetName", "notMatchValue");
 
         Mockito.when(restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName))
                 .thenReturn(new HashSet<>(Set.of(address.getCity())));
@@ -160,7 +224,7 @@ class OrderControllerWebMvcTest {
         String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
                 OrderController.SUBMIT + OrderController.USER_NAME;
 
-        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, userName))
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, userName).params(parameters))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("error_customer_address"));
     }

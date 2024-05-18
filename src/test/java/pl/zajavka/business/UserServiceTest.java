@@ -111,4 +111,49 @@ class UserServiceTest {
         // then
         Assertions.assertThat(result).isEqualTo(userId);
     }
+
+    @Test
+    void checkIfUserNameExists(){
+        // given
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+
+        Mockito.when(userDAO.findByUserName(userName)).thenReturn(user);
+
+        // when
+        String result = userService.checkIfUserNameExists(userName);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(userName);
+    }
+
+    @Test
+    void checkIfUserNameExistsSecond(){
+        // given
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+
+        Mockito.when(userDAO.findByUserName(userName)).thenReturn(null);
+
+        // when
+        String result = userService.checkIfUserNameExists(userName);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(null);
+    }
+
+    @Test
+    void checkIfEmailExists(){
+        // given
+        User user = DomainFixtures.someUser1();
+        String email = user.getEmail();
+
+        Mockito.when(userDAO.findByEmail(email)).thenReturn(email);
+
+        // when
+        String result = userService.checkIfEmailExists(email);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(email);
+    }
 }

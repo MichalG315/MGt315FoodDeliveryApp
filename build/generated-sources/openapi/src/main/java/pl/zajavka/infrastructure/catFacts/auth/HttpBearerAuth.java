@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-17T22:33:15.865163500+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-18T19:02:17.932701400+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class HttpBearerAuth implements Authentication {
     private final String scheme;
     private String bearerToken;

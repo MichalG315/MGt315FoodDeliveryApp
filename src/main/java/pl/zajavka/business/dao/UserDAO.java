@@ -8,4 +8,6 @@ public interface UserDAO {
     User findByUserName(String username);
 
     Integer findUserId(String restaurantUserName);
+
+    String findByEmail(String email);
 }

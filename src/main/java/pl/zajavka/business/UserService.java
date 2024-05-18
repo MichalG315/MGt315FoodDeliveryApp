@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.zajavka.business.dao.UserDAO;
 import pl.zajavka.domain.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -52,5 +53,18 @@ public class UserService {
 
     private Role findRole(User user) {
         return roleService.findRoleByRoleId(user.getRole());
+    }
+
+    public String checkIfUserNameExists(String userName) {
+        User user = userDAO.findByUserName(userName);
+        if (Objects.isNull(user)) {
+            return null;
+        } else {
+            return user.getUserName();
+        }
+    }
+
+    public String checkIfEmailExists(String email) {
+        return userDAO.findByEmail(email);
     }
 }

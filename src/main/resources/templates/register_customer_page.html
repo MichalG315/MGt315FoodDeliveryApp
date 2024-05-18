@@ -11,9 +11,49 @@
     <title>MGt315 Food Delivery Application</title>
 
 </head>
-
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img th:src="@{/images/allPermitImages/logo.png}" alt="logo" width="40" height="30" class="d-inline-block align-middle">
+            Food App
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customerPage}">Customer page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurantPage}">Restaurant page</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" >
+                        <span th:unless="${#authentication.getName() == 'anonymousUser'}">
+                            <span th:text ="${#authentication.getName()}"></span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <span th:unless="${#authentication.getName() == 'anonymousUser'}">
+                            <a class="nav-link" th:href="@{/logout}">Logout</a>
+                        </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
+<br>
+<br>
+<br>
 <div class="container">
     <div class="row col-md-8 offset-md-2">
         <div class="card">
@@ -103,6 +143,7 @@
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Register</button>
                         <span>Already registered? <a th:href="@{/customerPage}">Login here</a></span>
+                        <div th:if="${param.error}" class="alert alert-danger">Your credentials do not meet their requirements</div>
                     </div>
                 </form>
             </div>

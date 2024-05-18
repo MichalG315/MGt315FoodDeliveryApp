@@ -81,7 +81,7 @@
             </td>
             <td>
 
-                    <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber})}" method="POST">
+                    <form action="#" th:action="@{/order/{restaurantName}/{menuItemNumber}/{userName}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${menuItem.menuItemNumber}, userName=${#authentication.getName()})}" method="POST">
                         <button type="submit" class="btn btn-info">Add to order</button>
                     </form>
 
@@ -128,7 +128,7 @@
             <td th:text="${orderDTO.menuItemNumber}"></td>
             <td th:text="${orderDTO.price}"></td>
             <td>
-                <form action="#" th:action="@{{restaurantName}/{menuItemNumber}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${orderDTO.menuItemNumber})}" th:method="DELETE">
+                <form action="#" th:action="@{/order/{restaurantName}/{menuItemNumber}/{userName}(restaurantName=${restaurantDTO.restaurantName}, menuItemNumber=${orderDTO.menuItemNumber}, userName=${#authentication.getName()})}" th:method="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>

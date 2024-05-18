@@ -16,9 +16,7 @@ import pl.zajavka.business.*;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,11 +42,12 @@ public class OrderController {
     private final MenuItemMapper menuItemMapper;
     private final OrderMapper orderMapper;
 
-    private final List<MenuItemDTO> cart = new ArrayList<>();
+    private final Map<String, List<MenuItemDTO>> cart = new HashMap<>();
 
-    @GetMapping(ORDER + RESTAURANT_NAME)
+    @GetMapping(ORDER + RESTAURANT_NAME + USER_NAME)
     public String showRestaurantPage(
             @PathVariable String restaurantName,
+            @PathVariable String userName,
             Model model
     ) {
 
@@ -66,32 +65,45 @@ public class OrderController {
         model.addAttribute("menuItemDTOs", menuItemsByRestaurantName);
         model.addAttribute("streetNames", streetNames);
         model.addAttribute("cities", cities);
-        model.addAttribute("orderDTOs", cart);
+        model.addAttribute("orderDTOs", cart.get(userName));
         model.addAttribute("addressDTO", new AddressDTO());
 
         return "order";
     }
 
-    @PostMapping(ORDER + RESTAURANT_NAME + MENU_ITEM_NUMBER)
+    @PostMapping(ORDER + RESTAURANT_NAME + MENU_ITEM_NUMBER + USER_NAME)
     public String addToCart(
             @PathVariable String restaurantName,
-            @PathVariable String menuItemNumber
+            @PathVariable String menuItemNumber,
+            @PathVariable String userName
     ) {
         MenuItemDTO menuItemDTO = menuItemMapper.mapToDTO(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber));
-        cart.add(menuItemDTO);
+        if (!cart.containsKey(userName)) {
+            cart.put(userName, new ArrayList<>(List.of(menuItemDTO)));
+        } else {
+            List<MenuItemDTO> cartMenuItemList = cart.get(userName);
+            cartMenuItemList.add(menuItemDTO);
+            cart.put(userName, cartMenuItemList);
+        }
 
-        return "redirect:/order/" + restaurantName;
+        return "redirect:/order/" + restaurantName + "/" + userName;
     }
 
-    @DeleteMapping(ORDER + RESTAURANT_NAME + MENU_ITEM_NUMBER)
+    @DeleteMapping(ORDER + RESTAURANT_NAME + MENU_ITEM_NUMBER + USER_NAME)
     public String deleteFromCart(
             @PathVariable String restaurantName,
-            @PathVariable String menuItemNumber
+            @PathVariable String menuItemNumber,
+            @PathVariable String userName
     ) {
         MenuItemDTO menuItemDTO = menuItemMapper.mapToDTO(menuItemService.findMenuItemByMenuItemNumber(menuItemNumber));
-        cart.remove(menuItemDTO);
+        List<MenuItemDTO> cartMenuItemList = cart.get(userName);
+        if (Objects.isNull(cartMenuItemList) || cartMenuItemList.isEmpty()) {
+            return "redirect:/order/" + restaurantName + "/" + userName;
+        }
+        cartMenuItemList.remove(menuItemDTO);
+        cart.put(userName, cartMenuItemList);
 
-        return "redirect:/order/" + restaurantName;
+        return "redirect:/order/" + restaurantName + "/" + userName;
     }
 
     @PostMapping(ORDER + RESTAURANT_NAME + SUBMIT + USER_NAME)
@@ -103,8 +115,8 @@ public class OrderController {
         Set<String> city = restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName);
         Set<String> street = restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName);
         if (restaurantDeliveryAddressMatchesCustomerAddress(addressDTO, city, street)) {
-            orderService.buildAndSaveOrder(restaurantName, userName, cart);
-            cart.clear();
+            orderService.buildAndSaveOrder(restaurantName, userName, cart.get(userName));
+            cart.remove(userName);
             return "redirect:" + CUSTOMER_ORDERS + "/" + userName;
         } else {
             return "error_customer_address";
@@ -113,8 +125,7 @@ public class OrderController {
 
     private boolean restaurantDeliveryAddressMatchesCustomerAddress(
             AddressDTO addressDTO,
-            Set<String> city, Set<String> street)
-    {
+            Set<String> city, Set<String> street) {
         if (city.contains(addressDTO.getCity())) {
             return street.contains(addressDTO.getStreetName());
         }

@@ -13,6 +13,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.util.LinkedMultiValueMap;
 import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
@@ -20,10 +21,7 @@ import pl.zajavka.api.dto.mapper.AddressMapper;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.business.*;
-import pl.zajavka.domain.MenuItem;
-import pl.zajavka.domain.Order;
-import pl.zajavka.domain.Restaurant;
-import pl.zajavka.domain.User;
+import pl.zajavka.domain.*;
 import pl.zajavka.util.DTOFixtures;
 import pl.zajavka.util.DomainFixtures;
 
@@ -206,12 +204,20 @@ class RestaurantControllerWebMvcTest {
         User user = DomainFixtures.someUser1();
         String userName = user.getUserName();
         AddressDTO addressDTO = DTOFixtures.someAddress1();
+        Address address = DomainFixtures.someAddress1();
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("country", "test");
+        parameters.add("city", "test");
+        parameters.add("postalCode", "test");
+        parameters.add("streetName", "test");
+
+        Mockito.when(addressMapper.mapFromDTO(addressDTO)).thenReturn(address);
 
         // when, then
         String endpoint = RestaurantController.RESTAURANT_PAGE + RestaurantController.ADDRESS +
                 RestaurantController.RESTAURANT_USER_NAME + RestaurantController.ADD;
 
-        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, userName,addressDTO))
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, userName).params(parameters))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
 }

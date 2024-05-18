@@ -175,7 +175,7 @@
                         </select>
                     </td>
                     <td>
-                        <form action="#" th:action="@{order/{restaurantName}(restaurantName=${restaurant.restaurantName})}"
+                        <form action="#" th:action="@{order/{restaurantName}/{userName}(restaurantName=${restaurant.restaurantName}, userName=${#authentication.getName()})}"
                               method="GET">
                             <button type="submit" class="btn btn-info">Check out our meals</button>
                         </form>
