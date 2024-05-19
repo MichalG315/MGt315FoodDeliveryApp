@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   Breed.JSON_PROPERTY_COAT,
   Breed.JSON_PROPERTY_PATTERN
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-18T19:02:17.932701400+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-19T11:37:24.387651900+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class Breed implements Serializable {
   private static final long serialVersionUID = 1L;
 

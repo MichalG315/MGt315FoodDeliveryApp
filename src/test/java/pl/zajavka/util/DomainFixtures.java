@@ -87,8 +87,8 @@ public class DomainFixtures {
 
     public static Restaurant someRestaurant3(AddressExtended addressExtended) {
         return Restaurant.builder()
-                .restaurantName("testowo")
-                .description("test test")
+                .restaurantName("test")
+                .description("test")
                 .addressStreetNumber(addressExtended.getStreetNumber())
                 .userId(1)
                 .build();
@@ -132,6 +132,12 @@ public class DomainFixtures {
         return Role.builder()
                 .id(1)
                 .role("TEST")
+                .build();
+    }
+
+    public static Fact someFact1(){
+        return Fact.builder()
+                .fact("test fact")
                 .build();
     }
 }

@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.util.Set;
 
-@With
 @Value
 @Builder
 @EqualsAndHashCode(of = "email")
@@ -12,8 +11,10 @@ import java.util.Set;
 public class Customer {
     String name;
     String surname;
+    @With
     String email;
     String phone;
+    @With
     Integer userId;
     Set<CustomerAddress> customerAddresses;
     Set<Order> orders;

@@ -22,15 +22,15 @@ import java.util.List;
 @RequestMapping(RestaurantRestController.API_RESTAURANT_PAGE)
 public class RestaurantRestController {
 
-    static final String API_RESTAURANT_PAGE = "/api/restaurantPage";
+    public static final String API_RESTAURANT_PAGE = "/api/restaurantPage";
 
-    static final String RESTAURANT_USER_NAME = "/{restaurantUserName}";
-    static final String MENU = "/menu";
-    static final String ORDERS = "/orders";
-    static final String ORDER_NUMBER = "/{orderNumber}";
-    static final String DELIVERED = "/delivered";
-    static final String ADD = "/add";
-    static final String ADDRESS = "/address";
+    public static final String RESTAURANT_USER_NAME = "/{restaurantUserName}";
+    public static final String MENU = "/menu";
+    public static final String ORDERS = "/orders";
+    public static final String ORDER_NUMBER = "/{orderNumber}";
+    public static final String DELIVERED = "/delivered";
+    public static final String ADD = "/add";
+    public static final String ADDRESS = "/address";
 
     private final UserService userService;
     private final RestaurantService restaurantService;

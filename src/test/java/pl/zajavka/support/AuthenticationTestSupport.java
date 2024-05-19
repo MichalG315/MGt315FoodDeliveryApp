@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface AuthenticationTestSupport {
 
-    String LOGIN = "/login";
+    String LOGIN = "/login.html";
     String LOGOUT = "/logout";
 
     RequestSpecification requestSpecification();

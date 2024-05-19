@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.util.Set;
 
-@With
 @Value
 @Builder
 @EqualsAndHashCode(of = "email")
@@ -12,9 +11,13 @@ import java.util.Set;
 public class User {
     String userName;
     String email;
+    @With
     String password;
+    @With
     Boolean active;
+    @With
     Integer role;
     Integer userId;
+    @With
     Set<Role> roles;
 }

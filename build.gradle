@@ -116,10 +116,8 @@ jacocoTestReport {
                     "pl/zajavka/infrastructure/security/entity",
                     "pl/zajavka/infrastructure/security/mapper",
                     "pl/zajavka/infrastructure/security/service",
-                    "pl/zajavka/infrastructure/catFacts/api",
-                    "pl/zajavka/infrastructure/catFacts/model",
-                    "pl/zajavka/infrastructure/catFacts/auth",
-                    "pl/zajavka/infrastructure/catFacts"
+                    "pl/zajavka/infrastructure/catFacts",
+                    "pl/zajavka/exception"
             ])
         }))
     }

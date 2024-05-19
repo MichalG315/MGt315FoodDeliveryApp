@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-@With
 @Value
 @Builder
 public class Order {

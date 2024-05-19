@@ -12,8 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.LinkedMultiValueMap;
+import pl.zajavka.api.dto.FactDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
+import pl.zajavka.api.dto.mapper.FactMapper;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
@@ -51,6 +53,8 @@ class OrderControllerWebMvcTest {
     private MenuItemMapper menuItemMapper;
     @MockBean
     private OrderMapper orderMapper;
+    @MockBean
+    private FactMapper factMapper;
 
     @Test
     @WithMockUser(roles = "CUSTOMER")
@@ -102,6 +106,7 @@ class OrderControllerWebMvcTest {
         mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, menuItemNumber, userName))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
+
     @Test
     void addToCartSecond() throws Exception {
         // given
@@ -174,6 +179,7 @@ class OrderControllerWebMvcTest {
     @WithMockUser(roles = "CUSTOMER")
     void submitOrder() throws Exception {
         // given
+        addToCart();
         Address address = DomainFixtures.someAddress1();
         AddressExtended addressExtended = DomainFixtures.someAddressExtended1(address);
         Restaurant restaurant = DomainFixtures.someRestaurant3(addressExtended);
@@ -203,6 +209,7 @@ class OrderControllerWebMvcTest {
     @WithMockUser(roles = "CUSTOMER")
     void submitOrderSecond() throws Exception {
         // given
+        addToCart();
         Address address = DomainFixtures.someAddress1();
         AddressExtended addressExtended = DomainFixtures.someAddressExtended1(address);
         Restaurant restaurant = DomainFixtures.someRestaurant3(addressExtended);
@@ -229,14 +236,79 @@ class OrderControllerWebMvcTest {
                 .andExpect(MockMvcResultMatchers.view().name("error_customer_address"));
     }
 
+
+
+    @Test
+    @WithMockUser(roles = "CUSTOMER")
+    void submitOrderThird() throws Exception {
+        // given
+        Address address = DomainFixtures.someAddress1();
+        AddressExtended addressExtended = DomainFixtures.someAddressExtended1(address);
+        Restaurant restaurant = DomainFixtures.someRestaurant3(addressExtended);
+        String restaurantName = restaurant.getRestaurantName();
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("country", "test");
+        parameters.add("city", "test");
+        parameters.add("postalCode", "test");
+        parameters.add("streetName", "test");
+
+        Mockito.when(restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName))
+                .thenReturn(new HashSet<>(Set.of(address.getCity())));
+        Mockito.when(restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName))
+                .thenReturn(new HashSet<>(Set.of(address.getStreetName())));
+
+        // when, then
+        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
+                OrderController.SUBMIT + OrderController.USER_NAME;
+
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, userName).params(parameters))
+                .andExpect(MockMvcResultMatchers.view().name("error"));
+    }
+
+    @Test
+    @WithMockUser(roles = "CUSTOMER")
+    void submitOrderFourth() throws Exception {
+        // given
+        addToCart();
+        deleteFromCart();
+        Address address = DomainFixtures.someAddress1();
+        AddressExtended addressExtended = DomainFixtures.someAddressExtended1(address);
+        Restaurant restaurant = DomainFixtures.someRestaurant3(addressExtended);
+        String restaurantName = restaurant.getRestaurantName();
+        User user = DomainFixtures.someUser1();
+        String userName = user.getUserName();
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("country", "test");
+        parameters.add("city", "test");
+        parameters.add("postalCode", "test");
+        parameters.add("streetName", "test");
+
+        Mockito.when(restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName))
+                .thenReturn(new HashSet<>(Set.of(address.getCity())));
+        Mockito.when(restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName))
+                .thenReturn(new HashSet<>(Set.of(address.getStreetName())));
+
+        // when, then
+        String endpoint = OrderController.ORDER + OrderController.RESTAURANT_NAME +
+                OrderController.SUBMIT + OrderController.USER_NAME;
+
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, restaurantName, userName).params(parameters))
+                .andExpect(MockMvcResultMatchers.view().name("error"));
+    }
+
     @Test
     @WithMockUser(roles = "CUSTOMER")
     void getCustomerOrders() throws Exception {
         // given
         User user = DomainFixtures.someUser1();
         String userName = user.getUserName();
+        Fact fact = DomainFixtures.someFact1();
+        FactDTO factDTO = DTOFixtures.someFactDTO1();
 
-        Mockito.when(factsService.getRandomCatFact()).thenReturn("test string");
+        Mockito.when(factsService.getRandomCatFact()).thenReturn(fact);
+        Mockito.when(factMapper.mapToDTO(fact)).thenReturn(factDTO);
 
         // when, then
         String endpoint = OrderController.CUSTOMER_ORDERS + OrderController.USER_NAME;

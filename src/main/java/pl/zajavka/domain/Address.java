@@ -1,10 +1,12 @@
 package pl.zajavka.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.Value;
 
 import java.util.Set;
 
-@With
 @Value
 @Builder
 @EqualsAndHashCode(of = "addressId")

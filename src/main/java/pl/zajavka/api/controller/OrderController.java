@@ -9,6 +9,7 @@ import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
+import pl.zajavka.api.dto.mapper.FactMapper;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
@@ -22,14 +23,14 @@ import java.util.*;
 @RequiredArgsConstructor
 public class OrderController {
 
-    static final String ORDER = "/order";
-    static final String SUBMIT = "/submit";
-    static final String RESTAURANT_NAME = "/{restaurantName}";
-    static final String MENU_ITEM_NUMBER = "/{menuItemNumber}";
-    static final String USER_NAME = "/{userName}";
-    static final String CUSTOMER_ORDERS = "/customerPage/orders";
-    static final String DELETE = "/delete";
-    static final String ORDER_NUMBER = "/{orderNumber}";
+    public static final String ORDER = "/order";
+    public static final String SUBMIT = "/submit";
+    public static final String RESTAURANT_NAME = "/{restaurantName}";
+    public static final String MENU_ITEM_NUMBER = "/{menuItemNumber}";
+    public static final String USER_NAME = "/{userName}";
+    public static final String CUSTOMER_ORDERS = "/customerPage/orders";
+    public static final String DELETE = "/delete";
+    public static final String ORDER_NUMBER = "/{orderNumber}";
 
     private final RestaurantService restaurantService;
     private final MenuItemService menuItemService;
@@ -41,6 +42,7 @@ public class OrderController {
     private final RestaurantMapper restaurantMapper;
     private final MenuItemMapper menuItemMapper;
     private final OrderMapper orderMapper;
+    private final FactMapper factMapper;
 
     private final Map<String, List<MenuItemDTO>> cart = new HashMap<>();
 
@@ -112,6 +114,12 @@ public class OrderController {
             @PathVariable String userName,
             @Valid @ModelAttribute("addressDTO") AddressDTO addressDTO
     ) {
+        if (!cart.containsKey(userName)) {
+            throw new RuntimeException("There are no menu items in your shopping list!");
+        }
+        if (cart.get(userName).isEmpty()){
+            throw new RuntimeException("There are no menu items in your shopping list!");
+        }
         Set<String> city = restaurantDeliveryAddressesService.findCitesByRestaurantName(restaurantName);
         Set<String> street = restaurantDeliveryAddressesService.findStreetNamesByRestaurantName(restaurantName);
         if (restaurantDeliveryAddressMatchesCustomerAddress(addressDTO, city, street)) {
@@ -141,7 +149,7 @@ public class OrderController {
                 .stream().map(orderMapper::mapToDTO)
                 .toList();
 
-        String randomCatFact = factsService.getRandomCatFact();
+        String randomCatFact = factMapper.mapToDTO(factsService.getRandomCatFact()).getFact();
 
         model.addAttribute("availableCustomerOrderDTOs", availableCustomerOrders);
         model.addAttribute("randomCatFact", randomCatFact);

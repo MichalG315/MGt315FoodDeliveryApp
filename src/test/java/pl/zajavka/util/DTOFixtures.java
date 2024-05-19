@@ -3,6 +3,7 @@ package pl.zajavka.util;
 import pl.zajavka.api.controller.MenuItemCategories;
 import pl.zajavka.api.dto.*;
 import pl.zajavka.domain.Address;
+import pl.zajavka.domain.Fact;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 
@@ -82,6 +83,12 @@ public class DTOFixtures {
                 .city("test")
                 .postalCode("test")
                 .streetName("test")
+                .build();
+    }
+
+    public static FactDTO someFactDTO1(){
+        return FactDTO.builder()
+                .fact("test fact")
                 .build();
     }
 }

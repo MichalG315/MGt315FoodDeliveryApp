@@ -18,8 +18,8 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class RestAssuredIntegrationTestBase
-    extends AbstractIT
-    implements ControllerTestSupport, AuthenticationTestSupport {
+        extends AbstractIT
+        implements ControllerTestSupport, AuthenticationTestSupport {
 
     protected static WireMockServer wireMockServer;
 
@@ -42,9 +42,9 @@ public abstract class RestAssuredIntegrationTestBase
     @BeforeAll
     static void beforeAll() {
         wireMockServer = new WireMockServer(
-            wireMockConfig()
-                .port(9999)
-                .extensions(new ResponseTemplateTransformer(false))
+                wireMockConfig()
+                        .port(9999)
+                        .extensions(new ResponseTemplateTransformer(false))
         );
         wireMockServer.start();
     }
@@ -56,28 +56,28 @@ public abstract class RestAssuredIntegrationTestBase
 
     @BeforeEach
     void beforeEach() {
-        jSessionIdValue = login("test_user", "test")
-            .and()
-            .cookie("JSESSIONID")
-            .header(HttpHeaders.LOCATION, "http://localhost:%s%s/".formatted(port, basePath))
-            .extract()
-            .cookie("JSESSIONID");
+        jSessionIdValue = login("customer_testowy", "test")
+                .and()
+                .cookie("JSESSIONID")
+                .header(HttpHeaders.LOCATION, "http://localhost:%s%s/".formatted(port, basePath))
+                .extract()
+                .cookie("JSESSIONID");
     }
 
     @AfterEach
     void afterEach() {
         logout()
-            .and()
-            .cookie("JSESSIONID", "");
+                .and()
+                .cookie("JSESSIONID", "");
         jSessionIdValue = null;
         wireMockServer.resetAll();
     }
 
     public RequestSpecification requestSpecification() {
         return restAssuredBase()
-            .accept(ContentType.JSON)
-            .contentType(ContentType.JSON)
-            .cookie("JSESSIONID", jSessionIdValue);
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .cookie("JSESSIONID", jSessionIdValue);
     }
 
     public RequestSpecification requestSpecificationNoAuthentication() {
@@ -86,15 +86,15 @@ public abstract class RestAssuredIntegrationTestBase
 
     private RequestSpecification restAssuredBase() {
         return RestAssured
-            .given()
-            .config(getConfig())
-            .basePath(basePath)
-            .port(port);
+                .given()
+                .config(getConfig())
+                .basePath(basePath)
+                .port(port);
     }
 
     private RestAssuredConfig getConfig() {
         return RestAssuredConfig.config()
-            .objectMapperConfig(new ObjectMapperConfig()
-                .jackson2ObjectMapperFactory((type, s) -> objectMapper));
+                .objectMapperConfig(new ObjectMapperConfig()
+                        .jackson2ObjectMapperFactory((type, s) -> objectMapper));
     }
 }
