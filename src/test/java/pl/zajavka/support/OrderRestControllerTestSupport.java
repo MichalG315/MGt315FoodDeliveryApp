@@ -5,15 +5,16 @@ import org.springframework.http.HttpStatus;
 import pl.zajavka.api.controller.OrderController;
 import pl.zajavka.api.controller.rest.OrderRestController;
 import pl.zajavka.api.dto.AddressDTO;
-import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
 
-public interface OrderControllerTestSupport {
+import java.util.List;
+
+public interface OrderRestControllerTestSupport {
 
     RequestSpecification requestSpecification();
 
-    String orderEndpoint = OrderRestController.API_ORDER + OrderController.RESTAURANT_NAME
-            + OrderController.SUBMIT + OrderController.USER_NAME;
+    String orderEndpoint = OrderRestController.API_ORDER + OrderRestController.RESTAURANT_NAME
+            + OrderRestController.SUBMIT + OrderRestController.USER_NAME;
 
     String addToCartEndpoint = OrderRestController.API_ORDER + OrderRestController.MENU_ITEM_NUMBER +
             OrderRestController.USER_NAME;
@@ -57,24 +58,30 @@ public interface OrderControllerTestSupport {
                 .statusCode(HttpStatus.OK.value());
     }
 
-    default void deleteFromCart(){
+    default void deleteFromCart() {
         requestSpecification()
                 .pathParam("menuItemNumber", "Piz1")
                 .pathParam("userName", "customer_testowy")
                 .delete(deleteFromCartEndpoint)
                 .then()
                 .statusCode(HttpStatus.OK.value());
+
     }
 
-    default void getCustomerOrder(){
-        requestSpecification()
+    default List<OrderDTO> getCustomerOrder() {
+        return requestSpecification()
                 .pathParam("userName", "customer_testowy")
                 .get(getCustomerOrderEndpoint)
                 .then()
-                .statusCode(HttpStatus.OK.value());
+                .statusCode(HttpStatus.OK.value())
+                .and()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", OrderDTO.class);
     }
 
-    default void deleteCustomerOrder(String orderNumber){
+    default void deleteCustomerOrder(String orderNumber) {
         requestSpecification()
                 .pathParam("orderNumber", orderNumber)
                 .delete(deleteOrderEndpoint)

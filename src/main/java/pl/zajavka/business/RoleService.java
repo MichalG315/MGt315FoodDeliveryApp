@@ -2,6 +2,7 @@ package pl.zajavka.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.zajavka.business.dao.RoleDAO;
 import pl.zajavka.domain.Role;
 import pl.zajavka.exception.NotFoundException;
@@ -14,9 +15,10 @@ public class RoleService {
 
     private final RoleDAO roleDAO;
 
+    @Transactional
     public Role findRoleByRoleId(Integer roleId) {
         Optional<Role> role = roleDAO.findById(roleId);
-        if (role.isEmpty()){
+        if (role.isEmpty()) {
             throw new NotFoundException("Could not find role with id: %s".formatted(roleId));
         }
         return role.get();

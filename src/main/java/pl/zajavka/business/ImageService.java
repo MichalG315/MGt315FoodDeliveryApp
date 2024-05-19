@@ -3,6 +3,7 @@ package pl.zajavka.business;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class ImageService {
 
     static final String DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images/foodImages";
 
+    @Transactional
     public String saveImage(MultipartFile file) {
         String newPath = RandomStringUtils.randomAlphabetic(20) + ".png";
         Path fileNameAndPath = Paths.get(DIRECTORY, newPath);

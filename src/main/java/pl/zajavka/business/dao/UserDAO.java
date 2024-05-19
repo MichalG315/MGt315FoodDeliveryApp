@@ -9,5 +9,5 @@ public interface UserDAO {
 
     Integer findUserId(String restaurantUserName);
 
-    String findByEmail(String email);
+    User findByEmail(String email);
 }

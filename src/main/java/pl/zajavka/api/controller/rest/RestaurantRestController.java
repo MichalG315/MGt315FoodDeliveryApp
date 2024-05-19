@@ -16,6 +16,7 @@ import pl.zajavka.domain.Address;
 import pl.zajavka.domain.MenuItem;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @AllArgsConstructor
@@ -64,7 +65,7 @@ public class RestaurantRestController {
                 .toList();
     }
 
-    @PatchMapping(value = ORDERS + DELIVERED + RESTAURANT_USER_NAME + ORDER_NUMBER)
+    @PatchMapping(value = ORDERS + DELIVERED + ORDER_NUMBER)
     public String patchOrderCompletedDateTime(
             @PathVariable String orderNumber
     ) {
@@ -72,24 +73,25 @@ public class RestaurantRestController {
         return "Delivery time has been set";
     }
 
-    @PostMapping(value = ADD + RESTAURANT_USER_NAME, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = ADD + RESTAURANT_USER_NAME, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public String addMenuItem(
             @PathVariable String restaurantUserName,
-            @Valid @ModelAttribute("menuItemDTO") MenuItemDTO menuItemDTO,
-            @RequestParam("image") MultipartFile file
+            @Valid @RequestBody MenuItemDTO menuItemDTO,
+            @RequestParam(value = "image", required = false) MultipartFile file
     ) {
-        String imagePath = imageService.saveImage(file);
-        menuItemDTO.setImagePath(imagePath);
+        if (Objects.nonNull(file)){
+            String imagePath = imageService.saveImage(file);
+            menuItemDTO.setImagePath(imagePath);
+        }
         MenuItem menuItem = menuItemMapper.mapFromDTO(menuItemDTO);
         menuItemService.saveNewMenuItem(menuItem, restaurantUserName);
-
         return "Menu item added";
     }
 
     @PostMapping(value = ADDRESS + RESTAURANT_USER_NAME + ADD)
     public String deliveryAddressAdded(
             @PathVariable String restaurantUserName,
-            @Valid @ModelAttribute("addressDTO") AddressDTO addressDTO
+            @Valid @RequestBody AddressDTO addressDTO
     ) {
         Address address = addressMapper.mapFromDTO(addressDTO);
         restaurantDeliveryAddressesService.saveNewDeliveryAddress(restaurantUserName, address);

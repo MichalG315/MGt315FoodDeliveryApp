@@ -1,6 +1,9 @@
 package pl.zajavka.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.Value;
 
 @Value
 @Builder

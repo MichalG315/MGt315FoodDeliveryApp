@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-19T11:37:24.387651900+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-19T21:26:26.603420+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class BreedsApi {
     private ApiClient apiClient;
 

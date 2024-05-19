@@ -30,8 +30,8 @@ public class UserRepository implements UserDAO {
     }
 
     @Override
-    public String findByEmail(String email) {
-        return userJpaRepository.findByEmail(email).getEmail();
+    public User findByEmail(String email) {
+        return userEntityMapper.mapFromEntity(userJpaRepository.findByEmail(email));
     }
 
 

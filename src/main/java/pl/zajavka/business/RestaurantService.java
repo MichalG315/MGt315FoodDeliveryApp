@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.zajavka.business.dao.RestaurantDAO;
 import pl.zajavka.domain.Address;
 import pl.zajavka.domain.AddressExtended;
@@ -20,10 +21,12 @@ public class RestaurantService {
 
     private final RestaurantDAO restaurantDAO;
 
+    @Transactional
     public void saveRestaurant(Restaurant restaurant, Address address, AddressExtended addressExtended, Integer userId) {
         restaurantDAO.saveRestaurant(restaurant, address, addressExtended, userId);
     }
 
+    @Transactional
     public Page<Restaurant> findAvailable(int pageNo, int pageSize, String sortField, String sortDirection, String streetName, String city) {
         Pageable pageable = pageAndSort(pageNo, pageSize, sortField, sortDirection);
         boolean isCityHere = city.equals("All");
@@ -46,6 +49,7 @@ public class RestaurantService {
         return PageRequest.of(pageNo - 1, pageSize, sort);
     }
 
+    @Transactional
     public Restaurant findByRestaurantName(String restaurantName) {
         Optional<Restaurant> restaurant = restaurantDAO.findByRestaurantName(restaurantName);
         if (restaurant.isEmpty()) {
@@ -54,6 +58,7 @@ public class RestaurantService {
         return restaurant.get();
     }
 
+    @Transactional
     public String findRestaurantNameByUserId(Integer userId) {
         return restaurantDAO.findRestaurantByUserId(userId).getRestaurantName();
     }

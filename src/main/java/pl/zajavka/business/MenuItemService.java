@@ -2,6 +2,7 @@ package pl.zajavka.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.zajavka.business.dao.MenuItemDAO;
 import pl.zajavka.domain.MenuItem;
 import pl.zajavka.exception.NotFoundException;
@@ -18,10 +19,12 @@ public class MenuItemService {
 
     private final MenuItemDAO menuItemDAO;
 
+    @Transactional
     public List<MenuItem> findAvailableMenuItemsByRestaurantName(String restaurantName) {
         return menuItemDAO.findAvailableMenuItemsByRestaurantName(restaurantName);
     }
 
+    @Transactional
     public MenuItem findMenuItemByMenuItemNumber(String menuItemNumber) {
         Optional<MenuItem> menuItem = menuItemDAO.findMenuItemByMenuItemNumber(menuItemNumber);
         if (menuItem.isEmpty()) {
@@ -35,6 +38,7 @@ public class MenuItemService {
         return restaurantName.substring(0, 3) + (availableMenuItems.size() + 1);
     }
 
+    @Transactional
     public void saveNewMenuItem(MenuItem menuItem, String restaurantUserName) {
         Integer userId = userService.findUserId(restaurantUserName);
         String restaurantName = restaurantService.findRestaurantNameByUserId(userId);

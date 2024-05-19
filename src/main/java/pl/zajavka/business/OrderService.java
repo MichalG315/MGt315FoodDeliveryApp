@@ -3,6 +3,7 @@ package pl.zajavka.business;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.domain.MenuItem;
@@ -23,6 +24,7 @@ public class OrderService {
 
     private final MenuItemMapper menuItemMapper;
 
+    @Transactional
     public Order buildAndSaveOrder(String restaurantName, String userName, List<MenuItemDTO> cart) {
         Order order = Order.builder()
                 .userName(userName)

@@ -9,8 +9,6 @@ import pl.zajavka.infrastructure.catFacts.api.FactsApi;
 import pl.zajavka.infrastructure.catFacts.model.CatFact;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service

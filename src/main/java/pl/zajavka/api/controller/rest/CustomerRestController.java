@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping(CustomerRestController.API_CUSTOMER_PAGE)
 public class CustomerRestController {
 
-    static final String API_CUSTOMER_PAGE = "/api/customerPage";
+    public static final String API_CUSTOMER_PAGE = "/api/customerPage";
 
     private final RestaurantService restaurantService;
     private final RestaurantMapper restaurantMapper;

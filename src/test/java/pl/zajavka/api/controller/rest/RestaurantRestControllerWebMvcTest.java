@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -149,18 +150,14 @@ class RestaurantRestControllerWebMvcTest {
         String userName = user.getUserName();
         Restaurant restaurant = DomainFixtures.someRestaurant1();
         MenuItemDTO menuItemDTO = DTOFixtures.someMenuItem1(restaurant);
-        MockMultipartFile file = new MockMultipartFile(
-                "image",
-                "image.txt",
-                ContentType.TEXT_PLAIN.toString(),
-                "test text".getBytes()
-        );
-
+        String requestBody = objectMapper.writeValueAsString(menuItemDTO);
 
         // when, then
         String endpoint = RestaurantRestController.API_RESTAURANT_PAGE +
                 RestaurantRestController.ADD + RestaurantRestController.RESTAURANT_USER_NAME;
-        mockMvc.perform(multipart(endpoint, userName, menuItemDTO).file(file))
+        mockMvc.perform(multipart(endpoint, userName)
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -172,11 +169,7 @@ class RestaurantRestControllerWebMvcTest {
         String userName = user.getUserName();
         AddressDTO addressDTO = DTOFixtures.someAddress1();
         Address address = DomainFixtures.someAddress1();
-        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add("country", "test");
-        parameters.add("city", "test");
-        parameters.add("postalCode", "test");
-        parameters.add("streetName", "test");
+        String requestBody = objectMapper.writeValueAsString(addressDTO);
 
         Mockito.when(addressMapper.mapFromDTO(addressDTO)).thenReturn(address);
 
@@ -185,7 +178,9 @@ class RestaurantRestControllerWebMvcTest {
                 RestaurantRestController.ADDRESS + RestaurantRestController.RESTAURANT_USER_NAME +
                 RestaurantRestController.ADD;
 
-        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, userName).params(parameters))
+        mockMvc.perform(MockMvcRequestBuilders.post(endpoint, userName)
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
