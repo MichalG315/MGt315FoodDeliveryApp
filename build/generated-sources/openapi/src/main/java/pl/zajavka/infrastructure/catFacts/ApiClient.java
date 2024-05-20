@@ -67,7 +67,7 @@ import pl.zajavka.infrastructure.catFacts.auth.HttpBasicAuth;
 import pl.zajavka.infrastructure.catFacts.auth.HttpBearerAuth;
 import pl.zajavka.infrastructure.catFacts.auth.ApiKeyAuth;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-19T21:26:26.603420+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-20T16:36:04.825323200+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class ApiClient extends JavaTimeFormatter {
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);

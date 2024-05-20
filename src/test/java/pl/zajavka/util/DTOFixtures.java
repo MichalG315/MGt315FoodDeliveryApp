@@ -42,11 +42,11 @@ public class DTOFixtures {
 
     public static UserCustomerDTO someUserCustomer1() {
         return UserCustomerDTO.builder()
-                .userName("michal")
-                .email("michal@gmail.com")
+                .userName("tomek")
+                .email("tomek@gmail.com")
                 .password("testpassword")
-                .name("michal")
-                .surname("michal")
+                .name("tomek")
+                .surname("tomek")
                 .phone("+48 235 987 692")
                 .build();
     }

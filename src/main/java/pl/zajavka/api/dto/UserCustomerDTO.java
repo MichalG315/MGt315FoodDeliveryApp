@@ -31,14 +31,15 @@ public class UserCustomerDTO {
 
     public static UserCustomerDTO buildDefault() {
         return UserCustomerDTO.builder()
-                .userName("michal")
-                .email("michal@gmail.com")
+                .userName("tomek")
+                .email("tomek@gmail.com")
                 .password("testpassword")
-                .name("michal")
-                .surname("michal")
+                .name("tomek")
+                .surname("tomek")
                 .phone("+48 235 987 692")
                 .build();
     }
+
     public Map<String, String> asMap() {
         Map<String, String> result = new HashMap<>();
         ofNullable(userName).ifPresent(value -> result.put("userName", value));

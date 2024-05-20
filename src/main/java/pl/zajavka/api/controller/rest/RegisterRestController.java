@@ -4,17 +4,18 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.zajavka.api.dto.UserCustomerDTO;
+import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.api.dto.mapper.CustomerMapper;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
 import pl.zajavka.api.dto.mapper.UserMapper;
 import pl.zajavka.business.UserService;
 import pl.zajavka.domain.Customer;
+import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 
 import java.util.Objects;
@@ -34,7 +35,7 @@ public class RegisterRestController {
     private final CustomerMapper customerMapper;
     private final RestaurantMapper restaurantMapper;
 
-    @PostMapping(API_REGISTER_PAGE + CUSTOMER_DONE)
+    @PostMapping(CUSTOMER_DONE)
     public ResponseEntity<?> successfulCustomerRegistration(
             @Valid @RequestBody UserCustomerDTO userCustomerDTO
     ) {
@@ -52,6 +53,28 @@ public class RegisterRestController {
             User user = userMapper.map(userCustomerDTO).withRole(1);
             Customer customer = customerMapper.map(userCustomerDTO);
             userService.saveUser(user, customer);
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @PostMapping(RESTAURANT_DONE)
+    public ResponseEntity<?> successfulRestaurantRegistration(
+            @Valid @RequestBody UserRestaurantDTO userRestaurantDTO
+    ) {
+        String newUserName = userService.checkIfUserNameExists(userRestaurantDTO.getUserName());
+        String newEmail = userService.checkIfEmailExists(userRestaurantDTO.getEmail());
+        if (!Objects.isNull(newUserName)) {
+            return ResponseEntity.
+                    status(HttpStatus.BAD_REQUEST)
+                    .body("The username you entered already exists. Please choose another one");
+        } else if (!Objects.isNull(newEmail)) {
+            return ResponseEntity.
+                    status(HttpStatus.BAD_REQUEST)
+                    .body("The email you entered already exists. Please choose another one");
+        } else {
+            User user = userMapper.map(userRestaurantDTO).withRole(2);
+            Restaurant restaurant = restaurantMapper.mapFromDTO(userRestaurantDTO);
+            userService.saveUser(user, restaurant);
             return ResponseEntity.ok().build();
         }
     }

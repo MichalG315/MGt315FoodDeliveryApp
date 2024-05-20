@@ -83,11 +83,12 @@ class UserRepositoryMockitoTest {
         UserEntity userEntity = EntityFixtures.someUser1();
 
         Mockito.when(userJpaRepository.findByEmail(email)).thenReturn(userEntity);
+        Mockito.when(userEntityMapper.mapFromEntity(userEntity)).thenReturn(user);
 
         // when
-        String result = userRepository.findByEmail(email);
+        User result = userRepository.findByEmail(email);
 
         // then
-        Assertions.assertThat(result).isEqualTo(email);
+        Assertions.assertThat(result.getEmail()).isEqualTo(email);
     }
 }

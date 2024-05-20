@@ -148,12 +148,27 @@ class UserServiceTest {
         User user = DomainFixtures.someUser1();
         String email = user.getEmail();
 
-        Mockito.when(userDAO.findByEmail(email)).thenReturn(email);
+        Mockito.when(userDAO.findByEmail(email)).thenReturn(user);
 
         // when
         String result = userService.checkIfEmailExists(email);
 
         // then
         Assertions.assertThat(result).isEqualTo(email);
+    }
+
+    @Test
+    void checkIfEmailExistsSecond(){
+        // given
+        User user = DomainFixtures.someUser1();
+        String email = user.getEmail();
+
+        Mockito.when(userDAO.findByEmail(email)).thenReturn(null);
+
+        // when
+        String result = userService.checkIfEmailExists(email);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(null);
     }
 }
