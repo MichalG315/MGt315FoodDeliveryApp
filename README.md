@@ -16,3 +16,25 @@ The aim of the project was to create an application in the MVC architecture that
 - The customer may cancel the order if less than 20 minutes have passed since it was placed.
 - The owner of the restaurant can see the orders, divided into pending and completed.
 - The owner of the premises indicates that the order has been completed. 
+
+To run the application you can use docker and the command: _**docker compose up**_
+
+Application is divided to four parts - customer page, restaurant page, customer registration and restaurant registration.
+
+In customer page you can check available restaurants (sort them and filter), check menu of specific restaurant and make an order. You can also
+check your order history and cancel your order if the time since order does not exceed 20 minutes.
+In order history page you can see random cat fact - from API https://catfact.ninja/#/.
+
+In restaurant page you can check restaurants orders and mark them as delivered, check your menu items, add an item and add delivery address.
+
+Testing credentials: 
+
+Customer login: customer_testowy
+Customer password: test
+
+Restaurant login (Pizza center): restaurant_testowy1
+Restaurant password: test
+
+**Important! Only Pizza center have exemplary menu items!**
+
+You can also register with default prepared date or provide yours.
