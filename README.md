@@ -19,6 +19,9 @@ The aim of the project was to create an application in the MVC architecture that
 
 To run the application you can use docker and the command: _**docker compose up**_
 
+Link to app: http://localhost:8080/mgt315-food-delivery-app/
+Link to swagger: http://localhost:8080/mgt315-food-delivery-app/swagger-ui/index.html
+
 Application is divided to four parts - customer page, restaurant page, customer registration and restaurant registration.
 
 In customer page you can check available restaurants (sort them and filter), check menu of specific restaurant and make an order. You can also
