@@ -1,7 +1,6 @@
 package pl.zajavka.api.controller.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.dockerjava.zerodep.shaded.org.apache.hc.core5.http.ContentType;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,20 +9,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.util.LinkedMultiValueMap;
-import pl.zajavka.api.controller.RestaurantController;
 import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.MenuItemDTO;
 import pl.zajavka.api.dto.OrderDTO;
 import pl.zajavka.api.dto.mapper.AddressMapper;
 import pl.zajavka.api.dto.mapper.MenuItemMapper;
 import pl.zajavka.api.dto.mapper.OrderMapper;
-import pl.zajavka.api.dto.mapper.RestaurantMapper;
 import pl.zajavka.business.*;
 import pl.zajavka.domain.*;
 import pl.zajavka.util.DTOFixtures;
@@ -33,7 +28,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

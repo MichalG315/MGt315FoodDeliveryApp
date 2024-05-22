@@ -2,16 +2,11 @@ package pl.zajavka.util;
 
 import pl.zajavka.api.controller.MenuItemCategories;
 import pl.zajavka.api.dto.*;
-import pl.zajavka.domain.Address;
-import pl.zajavka.domain.Fact;
 import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class DTOFixtures {

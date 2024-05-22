@@ -13,9 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-import pl.zajavka.api.controller.CustomerController;
-import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.mapper.RestaurantMapper;
 import pl.zajavka.business.RestaurantService;
@@ -27,10 +24,7 @@ import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = CustomerRestController.class)

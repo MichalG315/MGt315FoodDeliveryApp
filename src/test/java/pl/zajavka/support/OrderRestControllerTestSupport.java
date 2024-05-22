@@ -2,7 +2,6 @@ package pl.zajavka.support;
 
 import io.restassured.specification.RequestSpecification;
 import org.springframework.http.HttpStatus;
-import pl.zajavka.api.controller.OrderController;
 import pl.zajavka.api.controller.rest.OrderRestController;
 import pl.zajavka.api.dto.AddressDTO;
 import pl.zajavka.api.dto.OrderDTO;

@@ -7,11 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
-import org.testcontainers.shaded.com.google.common.net.MediaType;
-
-import java.nio.file.Files;
-import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class ImageServiceTest {

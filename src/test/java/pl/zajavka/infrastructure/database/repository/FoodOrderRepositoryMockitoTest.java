@@ -19,9 +19,9 @@ import pl.zajavka.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.MenuItemFoodOrderJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.FoodOrderEntityMapper;
-import pl.zajavka.util.DomainFixtures;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
+import pl.zajavka.util.DomainFixtures;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

@@ -8,11 +8,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.domain.User;
-import pl.zajavka.util.DomainFixtures;
-import pl.zajavka.util.EntityFixtures;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
 import pl.zajavka.infrastructure.security.mapper.UserEntityMapper;
+import pl.zajavka.util.DomainFixtures;
+import pl.zajavka.util.EntityFixtures;
 
 @ExtendWith(MockitoExtension.class)
 class UserRepositoryMockitoTest {

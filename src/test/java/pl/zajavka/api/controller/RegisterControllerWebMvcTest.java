@@ -11,7 +11,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.LinkedMultiValueMap;
-import pl.zajavka.api.dto.RestaurantDTO;
 import pl.zajavka.api.dto.UserCustomerDTO;
 import pl.zajavka.api.dto.UserRestaurantDTO;
 import pl.zajavka.api.dto.mapper.CustomerMapper;

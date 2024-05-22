@@ -1,6 +1,5 @@
 package pl.zajavka.api.controller.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -24,8 +23,6 @@ import pl.zajavka.domain.Restaurant;
 import pl.zajavka.domain.User;
 import pl.zajavka.util.DTOFixtures;
 import pl.zajavka.util.DomainFixtures;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(controllers = RegisterRestController.class)
 @AutoConfigureMockMvc(addFilters = false)

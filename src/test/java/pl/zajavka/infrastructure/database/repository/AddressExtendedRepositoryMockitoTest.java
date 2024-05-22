@@ -13,7 +13,7 @@ import pl.zajavka.infrastructure.database.repository.jpa.AddressExtendedJpaRepos
 import pl.zajavka.infrastructure.database.repository.mapper.AddressExtendedEntityMapper;
 import pl.zajavka.util.EntityFixtures;
 
-import static pl.zajavka.util.DomainFixtures.*;
+import static pl.zajavka.util.DomainFixtures.someAddress1;
 import static pl.zajavka.util.DomainFixtures.someAddressExtended1;
 
 

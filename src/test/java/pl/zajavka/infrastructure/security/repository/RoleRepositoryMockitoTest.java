@@ -8,11 +8,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.domain.Role;
-import pl.zajavka.util.DomainFixtures;
-import pl.zajavka.util.EntityFixtures;
 import pl.zajavka.infrastructure.security.entity.RoleEntity;
 import pl.zajavka.infrastructure.security.jpa.RoleJpaRepository;
 import pl.zajavka.infrastructure.security.mapper.RoleEntityMapper;
+import pl.zajavka.util.DomainFixtures;
+import pl.zajavka.util.EntityFixtures;
 
 import java.util.Optional;
 

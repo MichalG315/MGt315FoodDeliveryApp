@@ -17,9 +17,9 @@ import pl.zajavka.infrastructure.database.repository.jpa.AddressJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantDeliveryAddressesJpaRepository;
 import pl.zajavka.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.zajavka.infrastructure.database.repository.mapper.RestaurantDeliveryAddressesEntityMapper;
-import pl.zajavka.util.DomainFixtures;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
 import pl.zajavka.infrastructure.security.jpa.UserJpaRepository;
+import pl.zajavka.util.DomainFixtures;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,6 @@
 package pl.zajavka.util;
 
 import pl.zajavka.api.controller.MenuItemCategories;
-import pl.zajavka.domain.Role;
 import pl.zajavka.infrastructure.database.entity.*;
 import pl.zajavka.infrastructure.security.entity.RoleEntity;
 import pl.zajavka.infrastructure.security.entity.UserEntity;
