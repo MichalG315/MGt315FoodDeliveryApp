@@ -16,7 +16,7 @@ package pl.zajavka.infrastructure.catFacts;
 import java.util.Collection;
 import java.util.Iterator;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-30T11:08:16.838627600+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-22T17:48:01.904767100+02:00[Europe/Warsaw]", comments = "Generator version: 7.5.0")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).
